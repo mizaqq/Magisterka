@@ -1,0 +1,198 @@
+\documentclass{SGGW-thesis-EN}
+
+
+\MASTERtrue
+\WZIMtrue
+
+\title{Automated Extraction and Categorization of Product Information from Receipts Using Tesseract OCR}
+% command \Ptitle{} can be used to give the title in Polish, if this is necessary, and can be deleted if you do not need the title in Polish
+\Ptitle{}
+\author{Michał Zaręba}
+\date{2017}
+\album{196218}
+\thesis{Diploma thesis in the field of}
+\course{Information Science}
+\promotor{dr hab.\ inż.\ Leszek Chmielewski, prof.\ SGGW}
+\pworkplace{Institute of Information Technology\\Department of Artificial Intelligence}
+
+\usepackage{hyperref}
+
+\begin{document}
+\maketitle
+\statementpage
+% titles and abstracts must be given in two languages - PL, EN
+\abstractpage
+{OCR + BERT}
+{Tematem niniejszej pracy było zaimplementowanie klasy \LaTeX{}owej pozwalającej na formatowanie tekstu zgodnie z wytycznymi nałożonymi przez uczelnię. Praca zawiera dwie
+główne części. Pierwsza z nich zawiera opis najważniejszych aspektów implementacji klasy. Natomiast druga część skupia się na sposobie użycia klasy przez osoby piszące prace
+dyplomowe.}
+{OCR, BERT, Tesseract, thesis, implementation, SGGW, Warsaw University of Life Sciences}
+{OCR + BERT}
+{The subject of this thesis was to implement a \LaTeX{} class that allows formatting text according to the guidelines imposed by the university. The thesis contains two main}
+{LaTeX, class, thesis, implementation, SGGW, Warsaw University of Life Sciences}
+
+
+
+\tableofcontents
+
+
+\startchapterfromoddpage % niezależnie od długości spisu treści pierwszy rozdział zacznie się na nieparzystej stronie
+
+\chapter{Introduction}
+
+\section{Motivation}
+Tracking of expenses and managing personal finances is an important aspect of modern life.
+With an increasing number of daily transactions and a vast variety of products available, individuals face significant challenges in effectively monitoring their spending and managing their budgets. 
+Although receipts contain valuable details that could help consumers analyze and control their expenses, 
+the majority of consumers either discard receipts shortly after purchase or find it too tedious and time-consuming to analyze them manually. 
+Automating the extraction and categorization of product information from receipts could significantly simplify budget tracking and provide insights into spending habits, enabling consumers to understand precisely where their money goes.
+Simple and efficient way to track expenses is essential for individuals who wish to maintain a clear overview of their spending habits and make informed financial decisions. 
+
+
+\section{Problem Statement}
+Most existing expense-tracking solutions focus primarily on invoices, bank statements, or require manual input. 
+Large corporations and organizations typically possess the necessary budgets and technical resources to implement robust, 
+automated systems for extracting and categorizing expense data from structured documents such as invoices or bank statements. 
+For personal use, however, the most commonly available and practical source of spending information remains paper receipts. 
+Current receipt-based solutions are often limited: many tools available today are either designed exclusively for commercial purposes, 
+lack support for languages other than English, or are inadequately trained to accurately process Polish-language receipts.  
+Thus, there is a clear gap and a significant need for a solution that effectively automates extraction and categorization of product details from receipts, 
+specifically accommodating the complexity and linguistic characteristics of the Polish language.
+
+\section{Objectives of the Study}
+This study has two primary objectives, each directly addressing the challenges identified in the problem statement:
+
+\begin{enumerate} 
+  \item Develop a robust system capable of automatically extracting structured product information (such as product names, and prices) from Polish-language receipts using Optical Character Recognition (OCR).
+  \item Implement and evaluate a product categorization module based on the Bidirectional Encoder Representations from Transformers (BERT) model, fine-tuned specifically to classify extracted product information into predefined product categories relevant to personal expense management.
+\end{enumerate}
+
+These objectives will be thoroughly addressed and analyzed in subsequent chapters. 
+Given the complexity of Polish-language receipts and limited availability of labeled datasets, achieving optimal results will require careful integration and fine-tuning of multiple technologies. 
+Critical aspects will include the effective integration of OCR and NLP components, targeted preprocessing strategies for receipts, 
+fine-tuning Tesseract OCR for enhanced accuracy in Polish text recognition, 
+and adapting the BERT model to handle the nuances of Polish-language product descriptions for precise categorization.
+
+\newpage
+\section{Scope and Limitations}
+
+The scope of this study is limited to the development of a system capable of automatically extracting product information from receipts and categorizing these products into predefined categories. 
+The system specifically targets Polish-language receipts and will be evaluated primarily on its ability to accurately extract product costs and perform correct product categorization.
+
+\noindent \\The limitations of this study include the following:
+
+\begin{itemize}
+    \item The developed system will not include additional functionalities such as expense tracking over time, financial report generation, or integration with external personal financial management tools.
+    \item The scarcity of comprehensive, labeled Polish-language receipt datasets restricts the potential accuracy and generalization capabilities of the models developed. Consequently, results may vary when encountering receipt formats or text variations not present in the training data.
+    \item Tesseract OCR will be employed without utilizing spatial information or context regarding the positioning of text on receipts. Therefore, preprocessing steps such as image cropping, alignment, and noise reduction are necessary to ensure the OCR engine receives properly formatted and isolated textual inputs.
+\end{itemize}
+
+\chapter{Literature Review}
+
+\section{Optical Character Recognition (OCR) Technologies}
+[...]
+
+\section{Natural Language Processing (NLP) and BERT}
+[...]
+
+\section{Receipt Data Extraction Techniques}
+[...]
+
+\section{Integration of OCR and NLP}
+[...]
+
+\chapter{Methodology}
+
+\section{System Architecture}
+[...]
+
+\section{Data Collection and Preprocessing}
+[...]
+
+\section{Optical Character Recognition with Tesseract}
+[...]
+
+\section{Text Parsing and Information Extraction}
+[...]
+
+\section{Product Categorization Using BERT}
+[...]
+
+\section{Data Grouping and Organization}
+[...]
+
+\chapter{Implementation}
+
+\section{Development Environment}
+[...]
+
+\section{Integration of Tesseract OCR}
+[...]
+
+\section{BERT Model Fine-Tuning}
+[...]
+
+\section{System Workflow}
+[...]
+
+\chapter{Evaluation and Results}
+
+\section{Evaluation Metrics}
+[...]
+
+\section{Experimental Setup}
+[...]
+
+\section{Results and Analysis}
+[...]
+
+\section{Comparison with Existing Methods}
+[...]
+
+\chapter{Discussion}
+
+\section{Interpretation of Results}
+[...]
+
+\section{Challenges and Limitations}
+[...]
+
+\section{Recommendations for Future Work}
+[...]
+
+\chapter{Conclusion}
+
+\section{Summary of Findings}
+[...]
+
+\section{Contributions to the Field}
+[...]
+
+\section{Final Remarks}
+[...]
+
+\chapter{References}
+[...]
+
+\chapter{Appendices}
+
+\section{Sample Receipt Data}
+[...]
+
+\section{Code Snippets}
+[...]
+
+\section{Additional Figures and Tables}
+[...]
+
+\begin{thebibliography}{9}
+\bibitem{wymagania34}
+\textit{Zarządzenie nr 34 Rektora Szkoły Głównej Gospodarstwa Wiejskiego w Warszawie z dnia 01 czerwca 2016 r.\ w~sprawie wprowadzenia ,,Wytycznych dotyczących
+przygotowywania prac dyplomowych w~Szkole Głównej Gospodarstwa Wiejskiego w Warszawie''}, Załączniki 1 i~2
+\url{https://www.sggw.pl/dla-studentow/informacje-formalno-prawne/dokumenty-do-pobrania}
+$\rightarrow$ Praca dyplomowa (dostęp: 04.01.2017)
+\end{thebibliography}
+
+\beforelastpage
+
+\end{document}
