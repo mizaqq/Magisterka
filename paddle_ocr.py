@@ -4,7 +4,7 @@ import paddle
 # Initialize PaddleOCR (English by default)
 ocr = PaddleOCR(
     use_angle_cls=True,
-    lang='en',
+    lang='pl',
     det_db_box_thresh=0.3,
     det_db_unclip_ratio=2.5,
     rec_algorithm='CRNN',
@@ -13,7 +13,7 @@ ocr = PaddleOCR(
 )  # need to specify use_angle_cls=True if you want to detect rotated text
 
 # Path to your image
-img_path = '/home/miza/Magisterka/src/data/images/1.jpg'
+img_path = '/home/miza/Magisterka/src/data/images/5.jpg'
 
 # Run OCR
 result = ocr.ocr(

@@ -106,7 +106,7 @@ if __name__ == "__main__":
     # Create a list of all combinations (5-step pipelines)
     import random
 
-    all_combinations = list(permutations(preprocessing_steps.keys(), 5))
+    all_combinations = list(permutations(preprocessing_steps.keys(), 4))
     sampled_combinations = random.sample(all_combinations, 250000)
     best_score = float("inf")
     best_pipeline = None
@@ -114,9 +114,7 @@ if __name__ == "__main__":
     # Use ThreadPoolExecutor to evaluate pipelines in parallel using 6 threads
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         # Map the run_pipeline function over all combinations
-        for combination, score in tqdm(
-            executor.map(run_pipeline, sampled_combinations), total=len(sampled_combinations)
-        ):
+        for combination, score in tqdm(executor.map(run_pipeline, all_combinations), total=len(all_combinations)):
             if score < best_score:
                 best_score = score
                 best_pipeline = combination

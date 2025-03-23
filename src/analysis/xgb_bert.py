@@ -4,9 +4,13 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import classification_report, mean_squared_error
 import xgboost as xgb
 from sentence_transformers import SentenceTransformer
+import torch
+from src.utils.utils import get_text, load_image
+from pathlib import Path
+import numpy as np
 
 # Load data
-df = pd.read_csv('/home/miza/Magisterka/src/data/gpt_generated_data.csv')
+df = pd.read_csv('/home/miza/Magisterka/src/data/bert.csv')
 
 # Encode labels
 label_encoder = LabelEncoder()
@@ -16,7 +20,7 @@ df['Category_encoded'] = label_encoder.fit_transform(df['Category'])
 from sentence_transformers import SentenceTransformer
 
 embedding_model = SentenceTransformer('distiluse-base-multilingual-cased-v1')
-embeddings = model.encode(df['OCR_product'].tolist(), batch_size=32, show_progress_bar=True)
+embeddings = embedding_model.encode(df['OCR_product'].tolist(), batch_size=32, show_progress_bar=True)
 
 # Prepare data
 X = embeddings = embeddings = embeddings = embeddings = torch.tensor(embeddings).numpy()
@@ -53,9 +57,22 @@ print("Mean Squared Error (Cost):", mean_squared_error(y_cost_test, y_cost_pred)
 
 # Inference Example
 sample_text = ["Ryż bialu 1kg 0 x4.29 34.32"]
-sample_embedding = model.encode(sample_text)
-predicted_category = category_model.predict(sample_embedding)[0]
-predicted_category_label = label_encoder.inverse_transform([predicted_category])[0]
-predicted_cost = cost_model.predict(sample_embedding)[0]
 
-print(f"Predicted Category: {predicted_category}, Predicted Cost: {predicted_cost:.2f}")
+
+def predict(text):
+    e1 = embedding_model.encode(text)
+    X_pred = np.array(e1.ravel()).reshape(1, -1)
+    predicted_category = category_model.predict(X_pred)
+    predicted_category_label = label_encoder.inverse_transform(predicted_category)[0]
+    predicted_cost = cost_model.predict(X_pred)[0]
+    return predicted_category_label, predicted_cost
+
+
+images = list(Path('/home/miza/Magisterka/src/data/images').glob('*.jpg'))
+
+for image in images:
+    img = load_image(image)
+    lines = get_text(img)
+    for line in lines:
+        predicted_category, predicted_cost = predict(line)
+        print(f"Line: {line}, Predicted Category: {predicted_category}, Predicted Cost: {predicted_cost:.2f}")
