@@ -1,5 +1,0 @@
-Sauvola Thresholding
-CLAHE
-Bilateral Filtering
-Sharpening
-Gaussian Blur (3x3)

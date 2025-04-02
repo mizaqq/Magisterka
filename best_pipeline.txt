@@ -1,4 +1,0 @@
-Median Blur
-Morphological Closing
-Unsharp Masking
-Morphological Opening0.5145101047672184
