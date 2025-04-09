@@ -43,11 +43,12 @@ def preprocess_text(text):
     return text
 
 
-def preprocess_cost(text):
+def preprocess_cost(text: str):
     text = text.lower()
     text = text.strip()
-    # text = re.sub(r'\s+', '', text)
-    pattern = re.compile(r'(\d{1,3}\.\d{2})\d?')
+    text = text.replace(',', '.')
+    text = ''.join([char for char in text if not char.isalpha() or " "])
+    pattern = re.compile(r'\d{1,3}\.\d{2}')
     return pattern.findall(text)
 
 
@@ -70,7 +71,7 @@ def ocr_data(paddleocr: PaddleOCR, img_path):
     return paddleocr.ocr(img_path, cls=False, rec=True, det=True)
 
 
-def match_boxes_within_distance(boxes, threshold=19):
+def match_boxes_within_distance(boxes, threshold=10):
     matched_groups = []
 
     grouped = [False] * len(boxes)
@@ -100,14 +101,14 @@ def match_boxes_within_distance(boxes, threshold=19):
 
         group.sort(key=lambda box: min([point[0] for point in box[0]]))  # Sort by xmin
         line = [box[1][0] for box in group]
-        matched_groups.append(line)
+        matched_groups.append(' '.join(line))
 
     return matched_groups
 
 
 def make_prediction(result, model):
-    preprocessed_text = [preprocess_text(i[0]) for i in result]
-    preprocessed_cost = [preprocess_cost(i[1]) for i in result]
+    preprocessed_text = [preprocess_text(i) for i in result]
+    preprocessed_cost = [preprocess_cost(i) for i in result]
     embeddings = calculate_embedings(preprocessed_text)
     predictions = model.predict(embeddings)
     return predictions, preprocessed_cost
@@ -155,59 +156,75 @@ def get_unannotated_images():
     return images
 
 
-def main():
-    baseline_data = pd.read_csv("/home/miza/Magisterka/src/data/annotations/annotations.csv")
-    le = LabelEncoder()
-    categories = le.fit_transform(baseline_data['Category'])
-    baseline_model = get_baseline_model(baseline_data, categories)
-    images = get_unannotated_images()
-    paddleocr = PaddleOCR(
-        use_angle_cls=True,
-        lang='pl',
-        det_algorithm='DB',
-        det_box_type='poly',
-        rec_algorithm='CRNN',
-        rec_char_type='pl',
-        rec_batch_num=15,
-        use_space_char=True,
-        det_db_thresh=0.38,
-        det_db_box_thresh=0.75,
-        layout=True,
-        table=True,
-        table_algorithm='TableAttn',
-        use_dilation=True,
-    )
+from src.model.dataloader import Dataloader
+from src.model.embeddings import BertEmbedding
+from src.model.classifier import XGBoost
+from src.model.ocr import OCR
 
-    for img in images:
-        ocr = ocr_data(paddleocr, f'/home/miza/Magisterka/src/data/images/{img}')
-        result = match_boxes_within_distance(ocr[0])
-        preds, cost = make_prediction(result, baseline_model)
-        x = le.inverse_transform(preds)
-        classes = [c for c in le.classes_]
-        print('Categories', [f"{i + 1}:{c}" for i, c in enumerate(classes)])
-        if not os.path.exists('/home/miza/Magisterka/src/data/annotations/annotations.csv'):
-            mode = 'w'
+
+def get_baseline_model():
+    dataloader = Dataloader()
+    dataloader.get_encoder()
+    data = dataloader.get_data_batch()
+    embeddings = BertEmbedding().embed(data['OCR_product'].tolist())
+    model = XGBoost(learning_rate=0.1, n_estimators=100, max_depth=3)
+    model.fit(embeddings, data['Category'].tolist())
+    return model, dataloader.le
+
+
+def annotation_pipeline(products, img, classes):
+    annotations = []
+    for k, v in products.items():
+        category, cost_returned = annotation_menu(k, v[0], v[1], classes)
+        row = {
+            'img': img,
+            'product': k,
+            'label': category,
+            'cost': cost_returned,
+        }
+        print(f"Product: {k}, Category: {category}, Cost: {cost_returned}")
+        annotations.append(row)
+    return annotations
+
+
+def save_annotations(annotations):
+    if not os.path.exists('/home/miza/Magisterka/src/data/annotations/annotations.csv'):
+        mode = 'w'
+    else:
+        mode = 'a'
+    with open('/home/miza/Magisterka/src/data/annotations/annotations.csv', mode, newline='') as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=['img', 'product', 'label', 'cost'],
+        )
+        if mode == 'w':
+            writer.writeheader()
         else:
-            mode = 'a'
-        with open('/home/miza/Magisterka/src/data/annotations/annotations.csv', mode, newline='') as f:
-            writer = csv.DictWriter(
-                f,
-                fieldnames=['img', 'product', 'label', 'cost'],
-            )
-            if mode == 'w':
-                writer.writeheader()
-            else:
-                pass
-            for i, product in enumerate(result):
-                category, cost_returned = annotation_menu(product, x[i], cost[i], classes)
-                row = {
-                    'img': img,
-                    'product': product,
-                    'label': category,
-                    'cost': cost_returned,
-                }
-                print(f"Product: {product[0]}, Category: {category}, Cost: {cost_returned}")
-                writer.writerow(row)
+            pass
+        for row in annotations:
+            writer.writerow(row)
+
+
+def main():
+    model, label_encoder = get_baseline_model()
+    images = get_unannotated_images()
+    ocr = OCR()
+    for img in images:
+        result = ocr.get_data_from_image('/home/miza/Magisterka/src/data/images/' + img)
+        result_clean = ocr.get_preprocessed_data('/home/miza/Magisterka/src/data/images/' + img)
+        pred_data = BertEmbedding().embed([r[0] for r in result_clean])
+        preds = model.predict(pred_data)
+        labels = label_encoder.inverse_transform(preds)
+        products = {
+            r[0]: [r[1], r[2][1]] for r in zip(result, labels, result_clean)
+        }  # r[0] == product name,r[1]==category, r[2][1] == cost
+
+        classes = [c for c in label_encoder.classes_]
+        print('File', img, ' Categories', [f"{i + 1}:{c}" for i, c in enumerate(classes)])
+
+        annotations = annotation_pipeline(products, img, classes)
+        save_annotations(annotations)
+    print("Annotations saved successfully.")
 
 
 main()

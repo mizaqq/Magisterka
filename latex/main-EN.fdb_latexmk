@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1742130491.76754 "/home/miza/Magisterka/latex/main-EN.tex" "main-EN.pdf" "main-EN" 1742130492.08549 0
+["pdflatex"] 1744212947.73068 "/home/miza/Magisterka/latex/main-EN.tex" "main-EN.pdf" "main-EN" 1744212948.08019 0
   "/etc/texmf/web2c/texmf.cnf" 1741109064.03255 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/miza/Magisterka/latex/main-EN.tex" 1742130491.12125 8410 ef34871f0dc5ed283e52e55ebc263e6f ""
+  "/home/miza/Magisterka/latex/main-EN.tex" 1744212947.36866 8390 941552b7adf41eb0c732b545f81a3da5 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm" 1136768653 2288 f478fc8fed18759effb59f3dad7f3084 ""
@@ -109,10 +109,10 @@
   "SGGW-thesis-EN.cls" 1731435648 13011 b89d46c4cc5d5780acb7a75a7f08ee7e ""
   "footer_WZIM.png" 1731262246 25552 e69869ba48dabee4db53ed77a1b53c98 ""
   "header_msc.png" 1731430744 10308 f559b5cd4adc841ce8301a89e7a13e53 ""
-  "main-EN.aux" 1742130492.03943 5997 61b709e4b3fe2584c29e083ecd95f53f "pdflatex"
-  "main-EN.out" 1742130492.03943 6997 8a736ebe5929660adc16e4b8a3a968d1 "pdflatex"
-  "main-EN.tex" 1742130491.12125 8410 ef34871f0dc5ed283e52e55ebc263e6f ""
-  "main-EN.toc" 1742130492.03943 3394 d8270fc03c98d2abc7b4a52fd1b0114d "pdflatex"
+  "main-EN.aux" 1744212948.0324 5997 61b709e4b3fe2584c29e083ecd95f53f "pdflatex"
+  "main-EN.out" 1744212948.0324 6997 8a736ebe5929660adc16e4b8a3a968d1 "pdflatex"
+  "main-EN.tex" 1744212947.36866 8390 941552b7adf41eb0c732b545f81a3da5 ""
+  "main-EN.toc" 1744212948.0324 3394 d8270fc03c98d2abc7b4a52fd1b0114d "pdflatex"
   (generated)
   "main-EN.aux"
   "main-EN.log"
