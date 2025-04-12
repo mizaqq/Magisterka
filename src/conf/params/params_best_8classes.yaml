@@ -1,0 +1,10 @@
+params:
+  params.learning_rate: 0.3
+  params.max_depth: 3
+  params.n_estimators: 1000
+  params.subsample: 0.5
+  params.colsample_bytree: 1.0
+  params.min_child_weight: 1
+  params.gamma: 0.0
+  params.reg_alpha: 0.0
+  params.reg_lambda: 5.0

@@ -1,117 +1,10 @@
-import re
-
-# for text pre-processing
-import string
-
-import pandas as pd
-import torch
-from paddleocr import PaddleOCR
-from sklearn.preprocessing import LabelEncoder
-from transformers import BertModel, BertTokenizer
-from xgboost import XGBClassifier
 import csv
 import os
 
-tokenizer = BertTokenizer.from_pretrained('dkleczek/bert-base-polish-uncased-v1')
-bert_model = BertModel.from_pretrained('dkleczek/bert-base-polish-uncased-v1')
-
-
-def data_preprocess(df):
-    df['preprocessed_text'] = df['OCR_product'].apply(lambda x: preprocess_text(x))
-    df['cost'] = df['OCR_product'].apply(lambda x: preprocess_cost(x))
-    embedings = calculate_embedings(df['preprocessed_text'].tolist())
-    return df, embedings
-
-
-def calculate_embedings(df):
-    inputs = tokenizer(df, return_tensors='pt', truncation=True, max_length=32, padding='max_length')
-    with torch.no_grad():
-        outputs = bert_model(**inputs)
-        # cls_embedding = outputs.last_hidden_state[:, 0, :].squeeze().numpy()
-    return outputs.pooler_output
-
-
-def preprocess_text(text):
-    text = re.compile('<.*?>').sub('', text)
-    text = re.compile('[%s]' % re.escape(string.punctuation)).sub(' ', text)
-    text = re.sub(r'\s+', ' ', text)
-    text = re.sub(r'\[[0-9]*\]', ' ', text)
-    text = re.sub(r'[^\w\s]', '', text.strip())
-    text = re.sub(r'\d', ' ', text)
-    text = re.sub(r'\s+', ' ', text)
-    text = re.sub(r'\s*\b[a-zA-Z]\b\s*', ' ', text).strip()
-    return text
-
-
-def preprocess_cost(text: str):
-    text = text.lower()
-    text = text.strip()
-    text = text.replace(',', '.')
-    text = ''.join([char for char in text if not char.isalpha() or " "])
-    pattern = re.compile(r'\d{1,3}\.\d{2}')
-    return pattern.findall(text)
-
-
-def clean_token(token):
-    for t in token:
-        if len(t) == 1:
-            print(t)
-            token.remove(t)
-    return token
-
-
-def get_baseline_model(df, categories):
-    _, embedings = data_preprocess(df)
-    model = XGBClassifier()
-    model.fit(embedings, categories)
-    return model
-
-
-def ocr_data(paddleocr: PaddleOCR, img_path):
-    return paddleocr.ocr(img_path, cls=False, rec=True, det=True)
-
-
-def match_boxes_within_distance(boxes, threshold=10):
-    matched_groups = []
-
-    grouped = [False] * len(boxes)
-
-    for i in range(len(boxes)):
-        if grouped[i]:
-            continue
-
-        group = [boxes[i]]
-        label1 = boxes[i][1]  # Label of box 1
-        box1 = boxes[i][0]  # Coordinates of box 1
-
-        ymin1 = min([point[1] for point in box1])  # Find ymin for box 1
-        ymax1 = max([point[1] for point in box1])  # Find ymax for box 1
-
-        for j in range(i + 1, len(boxes)):
-            if grouped[j]:  # Skip already grouped boxes
-                continue
-            box2 = boxes[j][0]  # Coordinates of box 2
-            label2 = boxes[j][1]  # Label of box 2
-            ymin2 = min([point[1] for point in box2])  # Find ymin for box 2
-            ymax2 = max([point[1] for point in box2])  # Find ymax for box 2
-
-            if abs(ymin1 - ymin2) < threshold or abs(ymax1 - ymax2) < threshold:
-                group.append(boxes[j])
-                grouped[j] = True
-
-        group.sort(key=lambda box: min([point[0] for point in box[0]]))  # Sort by xmin
-        line = [box[1][0] for box in group]
-        matched_groups.append(' '.join(line))
-
-    return matched_groups
-
-
-def make_prediction(result, model):
-    preprocessed_text = [preprocess_text(i) for i in result]
-    preprocessed_cost = [preprocess_cost(i) for i in result]
-    embeddings = calculate_embedings(preprocessed_text)
-    predictions = model.predict(embeddings)
-    return predictions, preprocessed_cost
+from src.model.classifier import XGBoost
+from src.model.dataloader import Dataloader
+from src.model.embeddings import BertEmbedding
+from src.model.ocr import OCR
 
 
 def annotation_menu(product, pred, cost, classes):
@@ -154,12 +47,6 @@ def get_unannotated_images():
         if i['img'] in images:
             images.remove(i['img'])
     return images
-
-
-from src.model.dataloader import Dataloader
-from src.model.embeddings import BertEmbedding
-from src.model.classifier import XGBoost
-from src.model.ocr import OCR
 
 
 def get_baseline_model():
