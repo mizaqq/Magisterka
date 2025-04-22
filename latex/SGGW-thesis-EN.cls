@@ -4,7 +4,6 @@
 %
 
 \newcommand{\SGGWthesisVersion}{1.071b2}
-
 % For each version in Polish a corresponding version in English is issued.
 
 % Version 1.071b2 of 2024.11.12
