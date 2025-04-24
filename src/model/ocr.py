@@ -1,5 +1,3 @@
-import re
-import string
 from paddleocr import PaddleOCR
 
 
@@ -24,25 +22,6 @@ class OCR:
 
     def perform_ocr(self, img_path):
         return self.paddleocr.ocr(img_path, cls=False, rec=True, det=True)
-
-    def preprocess_text(self, text):
-        text = re.compile('<.*?>').sub('', text)
-        text = re.compile('[%s]' % re.escape(string.punctuation)).sub(' ', text)
-        text = re.sub(r'\s+', ' ', text)
-        text = re.sub(r'\[[0-9]*\]', ' ', text)
-        text = re.sub(r'[^\w\s]', '', text.strip())
-        text = re.sub(r'\d', ' ', text)
-        text = re.sub(r'\s+', ' ', text)
-        text = re.sub(r'\s*\b[a-zA-Z]\b\s*', ' ', text).strip()
-        return text
-
-    def preprocess_cost(self, text: str):
-        text = text.lower()
-        text = text.strip()
-        text = text.replace(',', '.')
-        text = ''.join([char for char in text if not char.isalpha() or " "])
-        pattern = re.compile(r'\d{1,3}\.\d{2}')
-        return pattern.findall(text)
 
     def match_boxes_within_distance(self, boxes, threshold=10):
         matched_groups = []

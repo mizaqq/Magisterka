@@ -58,3 +58,5 @@ db.sqlite3
 .vscode/
 src/results/
 multirun/*
+outputs
+mini_model/

@@ -3,7 +3,7 @@ import os
 
 from src.model.classifier import XGBoost
 from src.model.dataloader import Dataloader
-from src.model.embeddings import BertEmbedding
+from src.model.embeddings import Embedding
 from src.model.ocr import OCR
 
 
@@ -53,9 +53,9 @@ def get_baseline_model():
     dataloader = Dataloader()
     dataloader.get_encoder()
     data = dataloader.get_data_batch()
-    embeddings = BertEmbedding().embed(data['OCR_product'].tolist())
+    embeddings = Embedding.embed_with_bert(data['OCR_product'].tolist())
     model = XGBoost(learning_rate=0.1, n_estimators=100, max_depth=3)
-    model.fit(embeddings, data['Category'].tolist())
+    model.fit(embeddings, data['category'].tolist())
     return model, dataloader.le
 
 
@@ -99,7 +99,7 @@ def main():
     for img in images:
         result = ocr.get_data_from_image('/home/miza/Magisterka/src/data/images/' + img)
         result_clean = ocr.get_preprocessed_data('/home/miza/Magisterka/src/data/images/' + img)
-        pred_data = BertEmbedding().embed([r[0] for r in result_clean])
+        pred_data = Embedding.embed_with_bert([r[0] for r in result_clean])
         preds = model.predict(pred_data)
         labels = label_encoder.inverse_transform(preds)
         products = {

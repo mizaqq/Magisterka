@@ -4,6 +4,8 @@ from skimage.filters import threshold_sauvola
 from pathlib import Path
 import pytesseract
 from pytesseract import Output
+import re
+import string
 
 
 def grayscale(img, code=cv2.COLOR_BGR2GRAY):
@@ -100,36 +102,22 @@ def unsharp_mask(img, kernel_size=(3, 3), sigma=1, weight_img=1.5, weight_blurre
     return cv2.addWeighted(img, weight_img, blurred, weight_blurred, gamma)
 
 
-def load_image(path: Path):
-    image = cv2.imread(path)
-    img = grayscale(image)
-    img = sauvola_threshold(img)
-    img = clahe(img)
-    img = bilateral_filter(img)
-    img = sharpen(img)
-    img = gaussian_blur1(img)
-    return img
+def preprocess_text(text):
+    text = re.compile('<.*?>').sub('', text)
+    text = re.compile('[%s]' % re.escape(string.punctuation)).sub(' ', text)
+    text = re.sub(r'\s+', ' ', text)
+    text = re.sub(r'\[[0-9]*\]', ' ', text)
+    text = re.sub(r'[^\w\s]', '', text.strip())
+    text = re.sub(r'\d', ' ', text)
+    text = re.sub(r'\s+', ' ', text)
+    text = re.sub(r'\s*\b[a-zA-Z]\b\s*', ' ', text).strip()
+    return text
 
 
-def get_text(image):
-    ocr_data = pytesseract.image_to_data(image, output_type=Output.DICT, config='--psm 6 --oem 3', lang='pol_finetuned')
-    lines = []
-    current_line = []
-    prev_line_number = ocr_data['line_num'][0]
-    for i in range(len(ocr_data['text'])):
-        word = ocr_data['text'][i]
-        line_number = ocr_data['line_num'][i]
-
-        if word.strip():
-            if line_number != prev_line_number:
-                lines.append(" ".join(current_line))
-                current_line = []
-                prev_line_number = line_number
-
-            current_line.append(word)
-    if current_line:
-        lines.append(" ".join(current_line) if current_line != [''] else "")
-    for i in lines:
-        if i == '':
-            lines.remove(i)
-    return lines
+def preprocess_cost(text: str):
+    text = text.lower()
+    text = text.strip()
+    text = text.replace(',', '.')
+    text = ''.join([char for char in text if not char.isalpha() or " "])
+    pattern = re.compile(r'\d{1,3}\.\d{2}')
+    return pattern.findall(text)
