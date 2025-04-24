@@ -1,4 +1,5 @@
 import xgboost as xgb
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
 
 
 class XGBoost:
@@ -25,3 +26,18 @@ class XGBoost:
 
     def get_params(self):
         return self.model.get_params()
+
+    def test_model(self, X, y):
+        predictions = self.predict(X)
+        accuracy = accuracy_score(y, predictions)
+        precision = precision_score(y, predictions, average='weighted', zero_division=0)
+        recall = recall_score(y, predictions, average='weighted', zero_division=0)
+        f1 = f1_score(y, predictions, average='weighted', zero_division=0)
+        cr = classification_report(y, predictions, zero_division=0)
+        return {
+            'accuracy': accuracy,
+            'precision': precision,
+            'recall': recall,
+            'f1_score': f1,
+            'classification_report': cr,
+        }
