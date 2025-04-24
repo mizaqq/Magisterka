@@ -105,40 +105,65 @@ Tesseract is an open-source OCR engine maintained by Google, widely adopted acro
 \newpage
 PaddleOCR is a deep learning-based OCR framework developed by Baidu, supporting over 80 languages. It features an end-to-end pipeline using models like DBNet for detection and CRNN or SRN for recognition, making it well-suited for multilingual documents and complex layouts \cite{du2020ppocr}. Its modular and extensible architecture enables users to adapt the pipeline for specific use cases.
 \section{Semantic Text Embeddings for Receipt Item Categorization}
-For a system to accurately perform any analysis on text, it must first convert the text into a numerical representation, 
-which then can be used as input to a machine learning model. 
-This process is known as vectorization or word embedding, and it is a crucial step in Natural Language Processing (NLP).
-Word embeddings are fixed-length vector representations that encode the semantic meaning of words and the relationships between them. It is a stated fact that words with similar meanings are represented by similar vectors in the embedding space.\cite{almeida2023wordembeddingssurvey}
+To enable machine learning models to analyze text, the text must first be converted into a numerical format—a process known as vectorization or word embedding which is a crucial step in Natural Language Processing (NLP).
+Word embeddings are fixed-length vector representations that encode the semantic meaning of words and the relationships between them. 
+The words with similar meanings are represented by similar vectors in the embedding space.\cite{almeida2023wordembeddingssurvey}
+
 There are several approaches to generating these embeddings, and this section outlines the most common methods, explaining how they work and highlighting their key differences.
 Before the word embedding process, the text must be preprocessed.
-This includes data normalization to process words into their base state (e.g by lemmatization,stemming and many more)\cite{jurafsky2023slp3} and tokenization, which is the process of splitting the text into individual words or tokens.
+
+Prior to embedding, text must be preprocessed. This includes normalization steps such as lemmatization or stemming, and tokenization, which segments text into individual words or tokens \cite{jurafsky2023slp3}.
 
 Then there are several methods of generating word embeddings, which can be broadly categorized into two groups: count-based and prediction-based methods.
 
 \subsection{Count-based Methods}
-Count-based methods are based on the idea that the meaning of a word can be inferred from its co-occurrence with other words in a given context.
+Count-based methods rely on the idea that the meaning of a word can be inferred from its co-occurrence with other words in a given context.
 Those methods typically involve creating a sparse matrix, where each row and column represents a word in the vocabulary, and the values in the matrix represent the frequency of co-occurrence between pairs of words.
-The two most common count-based methods are the Bag of Words (BoW) and Term Frequency-Inverse Document Frequency (TF-IDF)\cite{jurafsky2023slp3} models.
+The two most common approaches are the Bag of Words (BoW) and Term Frequency-Inverse Document Frequency (TF-IDF)\cite{jurafsky2023slp3}.
 
-The bag of words model represents a document as a vector of word counts, ignoring the order of words and their grammatical relationships.
+Bag of words represents a document as a vector of word counts, ignoring the order of words and their grammatical relationships.
 
-The TF-IDF model, on the other hand, assigns weights to words based on their frequency in a document relative to their frequency in the entire corpus. This helps to highlight important words that are more informative for the specific document.
+TF-IDF model, on the other hand, assigns weights to words based on their frequency in a document relative to their frequency in the entire corpus. 
+This helps to highlight important words that are more informative for the specific document.
 
 \subsection{Prediction-based Methods}
 Prediction-based methods are word representation techniques that learn embeddings by predicting words from context (or vice versa), unlike count-based methods which rely on raw frequency statistics.
 The two most common prediction-based methods are Word2Vec and BERT which are based on neural networks and their representation of words is contained in dense matrix different from the sparse matrix used in count-based methods.
 The dense matrixes turns out to be more efficient and effective for representing the meaning of words in a lower-dimensional space.\cite{jurafsky2023slp3}
 
-Word2vec is calculating a static embeddings, that mean there is a certain numerical representation for each word in vocabulary.
-That is achieved by two architectures: Continuous Bag of Words (CBOW) and Skip-Gram.
+Word2vec is a framework used for calculating a static embeddings, that mean there is a certain numerical representation for each word in vocabulary.
+There are two architectures for training Word2Vec models: Continuous Bag of Words (CBOW) and Skip-Gram.
+\begin{enumerate}
+  \item \textbf{Continuous Bag of Words (CBOW)}: predicts the target word from surrounding context words.
+  \item \textbf{Skip-Gram} Skip-Gram: predicts context words from a single target word.
+\end{enumerate}
+Skip-Gram is particularly effective for representing rare words, as it captures word–context associations more accurately,
+whereas CBOW offers greater computational efficiency and faster training times \cite{mikolov2013distributed}.
 
-CBOW predicts a target word based on its context, while Skip-Gram predicts the context based on a target word.
-The Skip-Gram model is particularly effective for infrequent words, as it captures the relationships between words in a more nuanced way than CBOW.
+BERT (Bidirectional Encoder Representations from Transformers) is a deep learning model introduced by Google that generates contextualized word embeddings by processing text in both directions (left-to-right and right-to-left) simultaneously. 
+Unlike earlier models that produce static embeddings, BERT captures the meaning of a word based on its entire sentence context. 
+Transformer architecture, the backbone of BERT, employs self-attention mechanisms to weight the importance of words in relation to each other, allowing the model to derivate complex semantic relationships between them.
+To achieve this, BERT is pretrained using a two-step self-supervised training process:
+\begin{enumerate}
+  \item \textbf{Masked Language Model (MLM)}: Randomly masks a percentage of input tokens and trains the model to predict the masked words based on context.
+  \newpage
+  \item \textbf{Next Sentence Prediction (NSP)}: Trains the model to predict whether two sentences are follow each other or not, improving its understanding of sentences coherence.
+\end{enumerate}
+These context-aware embeddings have demonstrated strong performance across various NLP tasks, including classification.\cite{devlin2019bertpretrainingdeepbidirectional}.
+In this study, embeddings generated by pre-trained BERT models serve input features for classification task which will categorize products into predefined expense-related categories.
 
-
-
-[...]
-
+\section{XGBoost Classifier}
+XGBoost stands for eXtreme Gradient Boosting and is an open-source machine learning library that implements 
+the gradient boosting framework for decision trees. It is an state-of-the-art algorith for supervised learning that achives best performance among many machine learning challanges.\cite{Chen_2016}
+Gradient boosting is an ensemble learning technique that instead of training a single model, build an initial model 
+and then iteratively fits new models through loss function minimization.\cite{natekin2013gradient}
+XGBoost model use set of rules in tree generation.
+\begin{enumerate}
+\item Regularization which is used to prevent too complex trees and tends to choose the most predictive ones while also minimizing overfitting.
+\item Gradient Tree Boosting introduces a second-order Taylor approximation to the loss function, incorporating both the first (gradient) and second (Hessian) derivatives. This allows accurate estimation while ensuring high efficiency of the algorithm.
+\item Shrinkage is a technique that after each boosting step, the prediction scores are multiplied by a learning rate parameter. This prevent overfitting and allows for more robust models that learn more slowy and carefully. 
+\item Column Subsampling: parameter that derives from random forest algorithm, randomly selects part of features for each tree. 
+\end{enumerate} 
 
 \section{Integration of OCR and NLP}
 [...]
