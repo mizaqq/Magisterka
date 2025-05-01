@@ -11,8 +11,8 @@ params:
 
 embeddingmodel: 'bert'
 finetune: False
-gptdatapath: '/home/miza/Magisterka/src/data/annotations/gpt_generated_data.csv'
-datapath: '/home/miza/Magisterka/src/data/annotations/annotations.csv'
+gptdatapath: '/home/miza/magisterka/Magisterka/src/data/annotations/gpt_generated_data8classes.csv'
+datapath: '/home/miza/magisterka/Magisterka/src/data/annotations/annotations_8classes.csv'
 defaults:
   - params: params_best_8classes
   - override hydra/sweeper: optuna

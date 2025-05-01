@@ -416,6 +416,16 @@ INPUT /usr/share/texmf/tex/latex/lm/t1lmtt.fd
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmtt12.tfm
 INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmri12.tfm
+INPUT ./images/class_distribution_8classes.png
+INPUT ./images/class_distribution_8classes.png
+INPUT ./images/class_distribution_8classes.png
+INPUT ./images/class_distribution_8classes.png
+INPUT ./images/class_distribution_8classes.png
+INPUT ./images/class_distribution_3classes.png
+INPUT ./images/class_distribution_3classes.png
+INPUT ./images/class_distribution_3classes.png
+INPUT ./images/class_distribution_3classes.png
+INPUT ./images/class_distribution_3classes.png
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmcsc10.tfm
 INPUT main-EN.aux
 INPUT ./main-EN.out

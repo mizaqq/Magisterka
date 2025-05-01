@@ -14,32 +14,36 @@
 \contentsline {chapter}{\numberline {3}Methodology}{22}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Introduction}{22}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Research Design}{22}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Data Sources and Collection Procedures}{23}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Data Preparation and Features}{24}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Modeling and Analysis}{24}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Experimental Setup and Evaluation}{24}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Reliability, Validity, and Ethics}{24}{section.3.7}%
-\contentsline {section}{\numberline {3.8}Summary}{24}{section.3.8}%
-\contentsline {chapter}{\numberline {4}Implementation}{25}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Development Environment}{25}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Integration of Tesseract OCR}{25}{section.4.2}%
-\contentsline {section}{\numberline {4.3}BERT Model Fine-Tuning}{25}{section.4.3}%
-\contentsline {section}{\numberline {4.4}System Workflow}{25}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Evaluation and Results}{26}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Evaluation Metrics}{26}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Experimental Setup}{26}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Results and Analysis}{26}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Comparison with Existing Methods}{26}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Discussion}{27}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Interpretation of Results}{27}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Challenges and Limitations}{27}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Recommendations for Future Work}{27}{section.6.3}%
-\contentsline {chapter}{\numberline {7}Conclusion}{28}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Summary of Findings}{28}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Contributions to the Field}{28}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Final Remarks}{28}{section.7.3}%
-\contentsline {chapter}{\numberline {8}References}{29}{chapter.8}%
-\contentsline {chapter}{\numberline {9}Appendices}{30}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Sample Receipt Data}{30}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Code Snippets}{30}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Additional Figures and Tables}{30}{section.9.3}%
+\contentsline {section}{\numberline {3.3}Data Sources, Collection and Preparation}{23}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Data Acquisition and Annotation}{23}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Data Pipeline and Loading}{24}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Class Distribution Analysis}{24}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Preprocessing}{26}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Embedding Generation}{26}{subsection.3.3.5}%
+\contentsline {section}{\numberline {3.4}Modeling and Analysis}{27}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Experimental Setup and Evaluation}{27}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Reliability, Validity, and Ethics}{27}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Summary}{27}{section.3.7}%
+\contentsline {chapter}{\numberline {4}Implementation}{28}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Development Environment}{28}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Integration of Tesseract OCR}{28}{section.4.2}%
+\contentsline {section}{\numberline {4.3}BERT Model Fine-Tuning}{28}{section.4.3}%
+\contentsline {section}{\numberline {4.4}System Workflow}{28}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Evaluation and Results}{29}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Evaluation Metrics}{29}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Experimental Setup}{29}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Results and Analysis}{29}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Comparison with Existing Methods}{29}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Discussion}{30}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Interpretation of Results}{30}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Challenges and Limitations}{30}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Recommendations for Future Work}{30}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Conclusion}{31}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Summary of Findings}{31}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Contributions to the Field}{31}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Final Remarks}{31}{section.7.3}%
+\contentsline {chapter}{\numberline {8}References}{32}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Appendices}{33}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Sample Receipt Data}{33}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Code Snippets}{33}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Additional Figures and Tables}{33}{section.9.3}%
