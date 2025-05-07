@@ -103,7 +103,6 @@ def unsharp_mask(img, kernel_size=(3, 3), sigma=1, weight_img=1.5, weight_blurre
 
 
 def preprocess_text(text):
-    text = re.compile('<.*?>').sub('', text)
     text = re.compile('[%s]' % re.escape(string.punctuation)).sub(' ', text)
     text = re.sub(r'\s+', ' ', text)
     text = re.sub(r'\[[0-9]*\]', ' ', text)

@@ -3,6 +3,19 @@
 \usepackage[backend=biber,style=numeric]{biblatex}
 \usepackage{tabularx}
 \usepackage{tikz}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinelanguage{yaml}{
+  keywords={true,false,null,yes,no},
+  keywordstyle=\color{blue},
+  basicstyle=\ttfamily\small,
+  sensitive=false,
+  comment=[l]{\#},
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[b]'
+}
 \usetikzlibrary{positioning, arrows.meta, shapes.geometric}
 \addbibresource{references.bib}
 
@@ -375,106 +388,391 @@ Housing, Healthcare, Discount)—and the corresponding cost. All annotations wer
 \subsection{Data Pipeline and Loading}
 Our pipeline begins by reading the annotated CSV, which contains columns:
 \begin{itemize}
-  \item \textbf{ID}: Unique identifier for each entry.
   \item \textbf{Text}: Extracted text from the receipt line item.
-  \item \textbf{Category}: Annotated category label (3 or 8 classes).
+  \item \textbf{Category}: Annotated category label (8 classes).
   \item \textbf{Cost}: Cost associated with the product.
 \end{itemize}
-A label encoder
-converts the categorical labels into numeric codes. To prevent minority classes from being underrepresented, we apply proportional
-oversampling based on class frequencies. Finally, the balanced dataset is split into training (70 \%) and test (30\ %) sets, ensuring that each
+A label encoder converts the categorical labels into numeric codes. 
+To ensure consistency and reduce noise in the textual input, a set of normalization and cleaning steps was applied to each text line. 
+The objective was to eliminate irrelevant artifacts and standardize the structure of the 
+text prior to embedding generation and classification.
+
+Punctuation characters were replaced with spaces to clearly separate word tokens and improve downstream tokenization. 
+Consecutive whitespace characters were collapsed into a single space to maintain uniform spacing. 
+Citation-like patterns (e.g., [1], [23]) were removed to eliminate non-linguistic references commonly produced by OCR.
+All non-alphanumeric characters—excluding whitespace—were stripped to retain only meaningful text content. 
+Numerical digits were removed to reduce the influence of context-irrelevant pricing or codes, and single-character words were  
+excluded, as they typically carry little semantic value in this domain.
+
+These preprocessing operations helped standardize the textual data and ensure that only informative content was passed to the embedding models  
+and classifier.
+Finally, the balanced dataset is split into training (70 \%) and test (30 \%) sets, ensuring that each
 subset maintains the overall class distribution.
 
 \subsection{Class Distribution Analysis}
 
-Figures~\ref{fig:dist_8class} and~\ref{fig:dist_3class} present a comparison of two distinct datasets used in this study: the original OCR-extracted  
-and manually annotated receipt data, and a supplementary dataset generated using GPT. The latter was constructed to ensure equal representation  
-across all defined classes, and is therefore referred to as the “balanced” GPT dataset.
+Figure~\ref{fig:dist_8class} presents a comparison of two distinct datasets used in this study: the original OCR-extracted and manually  
+annotated receipt data, and a supplementary dataset generated using GPT. The latter was constructed to ensure equal representation across all  
+defined classes and is therefore referred to as the “balanced” GPT dataset.
 
-In the case of the 8-class taxonomy (Fig.~\ref{fig:dist_8class}), the original receipt data show a strong class imbalance. The \emph{Food}  
-category dominates, comprising more than half of all annotated items, while other categories, such as \emph{Hygiene} or \emph{Healthcare}, are  
-represented by only a few examples. This skew is expected, as food is naturally the most frequent part of daily purchases. However, such an  
-imbalance poses a challenge for classification, as models trained on these data tend to favor majority classes. In contrast, the GPT-generated  
-dataset contains approximately the same number of samples per class. While this is useful for introducing diversity and covering underrepresented  
-categories, the uniformity of the GPT dataset does not reflect the real-world class distribution present in actual receipts.
-
-A similar pattern is visible in the 3-class scenario (Fig.~\ref{fig:dist_3class}). The original dataset remains skewed towards the \emph{Food}  
-category, with \emph{Other} and \emph{Beverage} significantly less represented. The GPT-balanced set, on the other hand, distributes samples  
-equally among the three classes.
+In the case of the 8-class taxonomy, the original receipt data show a strong class imbalance. The \emph{Food} category dominates, comprising  
+more than half of all annotated items, while other categories, such as \emph{Hygiene} or \emph{Healthcare}, are represented by only a few  
+examples. This skew is expected, as food is naturally the most frequent part of daily purchases. However, such an imbalance poses a challenge  
+for classification, as models trained on these data tend to favor majority classes. In contrast, the GPT-generated dataset contains  
+approximately the same number of samples per class. While this is useful for introducing diversity and covering underrepresented categories,  
+the uniformity of the GPT dataset does not reflect the real-world class distribution present in actual receipts.
 
 Although balancing categories is useful during data augmentation, the use of such synthetic data for model training requires alignment with the  
-distribution observed in real receipts. If the class distribution between the original and GPT datasets differs significantly, the resulting model  
-may overfit to artificial class proportions rather than learning meaningful class distinctions. Therefore, prior to training, the GPT-generated  
-data should be resampled to reflect the empirical class distribution of the original data.
+distribution observed in real receipts. If the class distribution between the original and GPT datasets differs significantly, the resulting  
+model may overfit to artificial class proportions rather than learning meaningful class distinctions. Therefore, prior to training, the  
+GPT-generated data should be resampled to reflect the empirical class distribution of the original data.
 
 Maintaining comparable class distributions across datasets ensures that the classifier is exposed to realistic category proportions and that  
-performance comparisons—particularly between 3-class and 8-class setups—are based on model effectiveness rather than artifacts of imbalanced or  
-overly uniform training inputs.
+performance comparisons are based on model effectiveness rather than artifacts of imbalanced or overly uniform training inputs.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=\textwidth]{images/class_distribution_8classes.png}
+  \includegraphics[width=0.8\textwidth]{images/class_distribution_8classes.png}
   \caption{Original, GPT-augmented, and balanced (bottom) class distributions.}
   \label{fig:dist_8class}
 \end{figure}
 
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=\textwidth]{images/class_distribution_3classes.png}
-  \caption{3-class distributions: original, GPT-augmented, and balanced (bottom).}
-  \label{fig:dist_3class}
-\end{figure}
 \newpage
-
-\subsection{Preprocessing}
-Before generating embeddings, raw text entries are normalized using custom regular expressions tailored to Polish receipts. This normalization
-includes converting all characters to lowercase, stripping extraneous punctuation (while preserving numeric values), correcting common OCR‐
-induced errors in diacritical marks, and expanding frequent abbreviations (for example, “kg” to “kilogram”). These steps reduce vocabulary
-fragmentation and improve the quality of downstream embeddings.
-
-
-
 \subsection{Embedding Generation}
-We employ two complementary embedding approaches. First, token‐level representations are obtained from the pretrained Polish BERT model
-\texttt{dkleczek/bert-base-polish-cased-v1}, capturing fine‐grained contextual information. Second, we generate sentence‐level embeddings
-using the \texttt{all-MiniLM-L6-v2} Sentence‐BERT model, which has been further fine‐tuned on our receipt data to better reflect domain‐
-specific semantics. Both embedding types serve as feature inputs for the subsequent XGBoost classification stage.
+Two distinct embedding approaches are evaluated and compared in this study. The first utilizes the pretrained Polish BERT model  
+\texttt{dkleczek/bert-base-polish-cased-v1}, which generates token-level contextual embeddings based on a broad Polish-language corpus.  
+This model has not been fine-tuned for the receipt classification task and serves as a strong general-purpose baseline.
+
+The second approach uses the \texttt{all-MiniLM-L6-v2} Sentence-BERT model, which is a lighter, sentence-level embedding model. This version has  
+been further fine-tuned specifically on receipt-related data to better capture domain-specific semantics relevant to product categorization.
+
+These two models are not used together in a single pipeline. Instead, they are compared in parallel to assess how domain adaptation and model  
+size influence classification performance. In both cases, the resulting embeddings are used as input features for the XGBoost classifier.
 
 
 
 \section{Modeling and Analysis}
 
+This section describes the structure of the modeling experiments and the rationale behind the comparison strategy. The classification task is  
+handled using the XGBoost algorithm, which operates on fixed-length vector embeddings generated from individual receipt line items. The model  
+receives as input either general-purpose or fine-tuned sentence embeddings, depending on the experiment.
+
+Two distinct embedding sources are evaluated independently. The first uses the Polish BERT model \texttt{dkleczek/bert-base-polish-cased-v1},  
+which is pretrained on a general corpus and not adapted to the receipt classification task. The second approach uses the  
+\texttt{all-MiniLM-L6-v2} Sentence-BERT model, which has been further fine-tuned on a domain-specific receipt dataset. These models are not  
+used jointly, but rather compared in parallel to assess their effectiveness in representing receipt-level semantics.
+
+To ensure that each model configuration performs at its best, the XGBoost hyperparameters are not fixed across experiments. Instead, the  
+classifier is tuned separately for each embedding approach. Hyperparameters such as learning rate, maximum tree depth, number of estimators,  
+and regularization strength are optimized individually using cross-validation on the training set. This allows each embedding–classifier  
+combination to be evaluated under its most favorable settings, ensuring that the comparison reflects true model capability rather than  
+differences in optimization constraints.
+
+Classification is performed in 8-class taxonomy for both of the embedding types. In each setup, training and testing splits are kept consistent across  
+experiments to allow fair comparison. Model performance is measured using the macro-averaged F1 score, which gives equal weight to each class,  
+regardless of frequency. This is especially important given the underlying imbalance in real-world receipt data.
+
+Overall, the modeling strategy is designed to evaluate how both the choice of embeddings and the label schema affect classification accuracy,  
+while giving each setup the opportunity to achieve optimal performance through tailored hyperparameter tuning.
+
 
 \section{Experimental Setup and Evaluation}
-Experiments were managed via the Hydra framework to ensure reproducibility of configurations. Training incorporated both original and GPT-augmented data to balance class distributions. Two classification scenarios were evaluated:
-\begin{enumerate}
-  \item 3-class categorization  
-  \item 8-class categorization  
-\end{enumerate}
-Model performance metrics (e.g., accuracy, F1-score) will be reported in Chapter~X.
+All experiments were managed using the Hydra framework, which provided structured configuration management and ensured reproducibility across  
+runs. The training data included both the original receipt dataset and GPT-generated samples, with the latter resampled to match the class  
+distribution of the original data.
 
-\section{Reliability, Validity, and Ethics}
+Four classification scenarios were evaluated, corresponding to two embedding strategies—Polish BERT and fine-tuned Sentence-BERT—each tested  
+on both the original and GPT-augmented training sets. This experimental setup enables a direct comparison of how embedding quality and data  
+composition affect final model performance.
 
-% [Please fill in measures for reliability checks, validity considerations, and any ethical safeguards.]
+Evaluation metrics, including accuracy and macro-averaged F1 scores, are reported in Chapter~X.
+
 
 \section{Summary}
-This methodology integrates OCR-based data extraction, manual annotation, regex-driven preprocessing, dual embedding strategies, and XGBoost classification within a structured experimental framework. The chosen design enables systematic comparison of embedding models and robust evaluation across varying classification complexities.
-
+The methodology presented in this chapter combines OCR-based text extraction, manual data annotation, targeted text preprocessing, and  
+embedding-based feature generation with an XGBoost classifier. The experimental framework is structured to support a systematic comparison  
+between two embedding strategies and to evaluate classification performance under different training conditions. This design allows for  
+reliable assessment of how embedding quality and data composition influence the effectiveness of multi-class product categorization from  
+receipt data.
 
 \chapter{Implementation}
 
-\section{Development Environment}
-[...]
+\section{Overview}
 
-\section{Integration of Tesseract OCR}
-[...]
+The implemented system is designed as a modular pipeline, with clearly defined components for data loading,
+preprocessing, embedding generation, model training, and evaluation. Each component is developed independently
+and integrated through centralized configuration management provided by Hydra.
 
-\section{BERT Model Fine-Tuning}
-[...]
+This modular structure allows easy substitution and evaluation of different embedding methods, classification
+algorithms, and data sources without requiring extensive code changes. All configurations, including
+hyperparameters, dataset versions, and experimental setups, are centrally managed by Hydra, ensuring consistent
+and reproducible experimentation.
 
-\section{System Workflow}
-[...]
+Implemented entirely in Python, the system emphasizes code readability, extensibility, and reproducibility.
+It supports multiple embedding models, seamlessly switching between pretrained and fine-tuned variants.
+Experiment results, logs, and artifacts are systematically organized, simplifying comparison and analysis.
+
+\section{Technology Stack}
+
+The implementation leverages a carefully selected set of technologies and libraries to ensure robust, efficient, and scalable functionality.  
+Below is an overview of the core components used in the system:
+
+\begin{itemize}
+    \item \textbf{Programming Language:} Python 3.10 was chosen due to its extensive ecosystem and strong support for machine learning, NLP, and computer vision tasks.
+
+    \item \textbf{OCR Framework:} PaddleOCR was selected for its modular architecture, robust multilingual capabilities, and strong support for Polish text recognition.
+
+    \item \textbf{Embedding Models:}
+    \begin{itemize}
+        \item \texttt{dkleczek/bert-base-polish-cased-v1} for generating general-purpose contextual embeddings in Polish.
+        \item \texttt{all-MiniLM-L6-v2} Sentence-BERT model, specifically fine-tuned on receipt-related textual data.
+    \end{itemize}
+
+    \item \textbf{Classification Framework:} XGBoost was chosen for its efficiency, scalability, and consistently high performance in supervised classification tasks.
+
+    \item \textbf{Data Processing and ML Libraries:}
+    \begin{itemize}
+        \item \texttt{Transformers}: Handling pretrained language models.
+        \item \texttt{SentenceTransformers}: Fine-tuning and generating semantic embeddings.
+        \item \texttt{scikit-learn}: Data preprocessing, evaluation metrics, and utility functions.
+    \end{itemize}
+
+    \item \textbf{Configuration Management:} Hydra framework for centralized and reproducible experiment configuration management.
+
+    \item \textbf{Visualization Libraries:} Matplotlib and Seaborn for data visualization, exploratory analysis, and evaluating model performance.
+
+    \item \textbf{System Dependencies:}
+    \begin{itemize}
+        \item \texttt{CUDA}: GPU acceleration during training and inference.
+        \item \texttt{PyTorch}: Deep learning backend framework.
+        \item \texttt{OpenCV}: Image preprocessing tasks, including resizing, binarization, and noise reduction.
+    \end{itemize}
+\end{itemize}
+
+This technology stack was selected to balance performance, ease of integration, and extensibility, enabling reliable experimentation and reproducible outcomes.
+
+\section{System Architecture}
+
+The implemented system employs a modular architecture, structured into distinct components to ensure clarity, flexibility, and scalability.  
+Each module is responsible for a specific task in the processing pipeline, and data flows sequentially through these interconnected modules:
+
+\begin{itemize}
+    \item \textbf{OCR Module:} Extracts textual information from scanned receipt images using PaddleOCR.
+    \item \textbf{Preprocessing Module:} Cleans, normalizes, and prepares the extracted text by addressing language-specific issues such as Polish diacritics, abbreviations, and common OCR-induced errors.
+    \item \textbf{Embedding Module:} Converts the preprocessed textual data into numerical embeddings, utilizing pretrained language models like Polish BERT or fine-tuned Sentence-BERT.
+    \item \textbf{Classification Module:} Uses XGBoost to categorize products based on generated embeddings into predefined expense-related classes.
+    \item \textbf{Evaluation Module:} Measures and assesses the classifier’s performance using metrics such as accuracy and macro-averaged F1 scores.
+\end{itemize}
+
+This modular design supports independent development, evaluation, and substitution of individual components, enabling straightforward integration of new models or processing techniques. The detailed data flow and interactions between these modules are illustrated in the "Research Design" section (Figure~\ref{fig:pipeline_flowchart_vertical}).
+
+\section{Component Implementation}
+
+\subsection{DataLoader and Input Handling}
+
+The DataLoader module loads and prepares input data for further processing. It accepts CSV files containing receipt line-item texts,
+annotated product categories, and associated costs. The module supports two types of input data: original OCR-extracted receipts and
+GPT-generated synthetic receipts, ensuring unified preprocessing for both.
+
+To mitigate class imbalance within the training dataset, the DataLoader implements oversampling by replicating samples from 
+underrepresented categories. This approach balances the class distribution, improving classifier performance and reducing bias
+towards dominant categories.
+
+\subsection{Preprocessing Module}
+
+The preprocessing module is responsible for cleaning and standardizing the raw textual data obtained from the OCR output. It utilizes regular  
+expressions to remove unwanted elements such as punctuation marks, numerical artifacts, and citation-like patterns. The text is then  
+normalized by converting all characters to lowercase and removing redundant whitespace characters.
+
+Additionally, specific preprocessing steps tailored to the Polish language are implemented. These include the restoration of Polish diacritics  
+and the expansion of common abbreviations frequently encountered in receipts. These transformations ensure consistent formatting of text,  
+facilitating effective embedding generation and subsequent classification tasks.
+
+\subsection{Embedding Interface}
+
+The Embedding Interface module provides a standardized mechanism for transforming preprocessed textual data into numerical vector representations.  
+It integrates two embedding strategies, both leveraging pretrained transformer-based models:
+
+\begin{itemize}
+  \item \textbf{Polish BERT (\texttt{dkleczek/bert-base-polish-cased-v1}):} Generates token-level contextual embeddings suitable for capturing  
+  general semantic and syntactic information.
+
+  \item \textbf{Sentence-BERT (\texttt{all-MiniLM-L6-v2}):} Produces sentence-level semantic embeddings, specifically fine-tuned on  
+  receipt-related data to capture domain-specific nuances.
+\end{itemize}
+
+Internally, the module manages:
+
+\begin{itemize}
+  \item Model initialization and loading.
+  \item Tokenization using model-specific tokenizers.
+  \item Batch processing for computational efficiency.
+  \item Extraction and aggregation of embedding vectors.
+\end{itemize}
+
+This standardized processing ensures consistency and compatibility for downstream tasks, such as classification.
+
+\subsection{Training and Evaluation Pipeline}
+
+The Training and Evaluation pipeline implements supervised categorization using the XGBoost gradient boosting algorithm. Its responsibilities include:
+
+\begin{itemize}
+  \item Training the classifier using numerical embeddings as input features and annotated product categories as target labels.
+  \item Splitting data into distinct training and validation subsets to facilitate effective hyperparameter optimization via cross-validation.
+  \item Centralized experiment management through Hydra configuration files, specifying hyperparameters, dataset paths, and model parameters to ensure  
+  reproducibility and consistency across runs.
+\end{itemize}
+
+The evaluation component computes critical performance metrics, specifically accuracy and macro-averaged F1 scores, allowing systematic and objective  
+comparison across various embedding approaches and experimental configurations.
+
+\section{Training Configuration}
+The training configuration for the experiments is as follows:
+\begin{itemize}
+    \item \textbf{Hardware:}
+    \begin{itemize}
+        \item CPU: AMD Ryzen 7600
+        \item GPU: NVIDIA RTX Titan
+        \item RAM: 32 GB
+    \end{itemize}
+    \item \textbf{Software:}
+    \begin{itemize}
+        \item Operating System: Ubuntu 22.04
+        \item Python Version: 3.10
+        \item CUDA Version: 11.8
+        \item PyTorch Version: 2.0
+    \end{itemize}
+    \item \textbf{Reproducibility:}
+    \begin{itemize}
+        \item Random Seed: 42 Fixed for all experiments to ensure reproducibility.
+        \item Logging: All experiment logs, metrics, and configurations are stored using Hydra's output directory structure.
+    \end{itemize}
+    \item \textbf{Approximate Training Time:} The XGBoost classifier training is very fast and typically completes within seconds. 
+    The longest process is embedding fine-tuning, 
+    which takes approximately 10 to 30 minutes depending on the dataset size and model complexity.
+\end{itemize}
+
+\section{Reproducibility and Setup}
+
+To ensure reproducibility and ease of setup, the project follows a structured organization and provides clear installation instructions.
+
+\subsection{Project Structure}
+The project is organized as follows:
+\begin{itemize}
+    \item \textbf{src/}: Main Python package  
+    \begin{itemize}
+        \item \textbf{analysis/}: Jupyter notebooks for exploratory data analysis, visualization, and prototyping (e.g.\ \texttt{data\_analysis.ipynb}, \texttt{thesis\_visualization.ipynb}, \texttt{tokenization.ipynb}).  
+        \item \textbf{conf/}: Hydra configuration files and parameter definitions  
+        \begin{itemize}
+            \item \texttt{config.yaml}  
+            \item \texttt{params/}\,(additional YAML fragments)  
+        \end{itemize}
+        \item \textbf{data/}: Code-organized data and annotations  
+        \begin{itemize}
+            \item \texttt{annotations/}  
+            \item \texttt{images/}  
+        \end{itemize}
+        \item \textbf{model/}: Model code and artifacts  
+        \begin{itemize}
+            \item \texttt{dataloader.py}, \texttt{classifier.py}, \texttt{embeddings.py}, \texttt{ocr.py}  
+            \item \texttt{xgboost\_model.json}  
+        \end{itemize}
+        \item \textbf{scripts/}: Stand-alone Python scripts (e.g.\ \texttt{annotation\_pipeline.py}, etc.)  
+        \item \textbf{utils/}: Utility functions and helpers (\texttt{utils.py})  
+    \end{itemize}
+
+    \item \textbf{main.py}, \textbf{train\_model.py}: Top-level entry points for running the pipeline and training the model.
+
+    \item \textbf{pyproject.toml}, \textbf{uv.lock}: Project metadata and locked dependencies for UV.
+
+    \item \textbf{README.md}, \textbf{.gitignore}: Project documentation and Git ignore rules.
+\end{itemize}
+
+\subsection{Installation Instructions}
+Follow these steps to set up the environment and reproduce the experiments:
+\begin{enumerate}
+    \item Install UV (Ultrafast Virtualenv) if not already installed:
+    \begin{lstlisting}[language=bash]
+curl -LsSf https://astral.sh/uv/install.sh | sh
+    \end{lstlisting}
+
+    \item Install dependencies for an existing project:
+    \begin{lstlisting}[language=bash]
+cd /path/to/project
+uv sync
+    \end{lstlisting}
+    This reads your committed \texttt{uv.lock} (or \texttt{pyproject.toml}) and creates/populates \texttt{.venv/} automatically.
+
+    \item Ensure CUDA is installed for GPU acceleration:
+    \begin{lstlisting}[language=bash]
+nvcc --version
+    \end{lstlisting}
+    Verify that the installed CUDA version matches the PyTorch version.
+
+    \item Run experiments using Hydra configuration files:
+    \begin{lstlisting}[language=bash]
+uv run python scripts/train.py -- --config-name=config.yaml
+    \end{lstlisting}
+    (\texttt{uv run} will auto-sync your environment before executing.)
+\end{enumerate}
+
+
+\subsection{Environment Details}
+The experiments were conducted on the following setup:
+\begin{itemize}
+    \item Operating System: Ubuntu 22.04
+    \item Python Version: 3.10
+    \item CUDA Version: 11.8
+    \item PyTorch Version: 2.0
+\end{itemize}
+
+These steps and details ensure that the experiments can be reproduced reliably on similar hardware and software configurations.
+
+\subsection{Configuration Management with Hydra}
+
+To ensure reproducibility and maintain a clean separation between code and experiment settings, all configurations were managed using the  
+Hydra framework. This allowed for flexible modification of parameters such as model type, data sources, embedding strategies, and training  
+hyperparameters, without changing the core implementation.
+
+Each experiment was launched with a dedicated YAML configuration file. An example configuration is shown below:
+
+\begin{lstlisting}[language=yaml, caption=Sample Hydra configuration]
+params:
+  learning_rate: 0.1
+  max_depth: 6
+  n_estimators: 100
+  subsample: 0.8
+  colsample_bytree: 0.8
+  min_child_weight: 5
+  gamma: 0.1
+  reg_alpha: 0.1
+  reg_lambda: 0.1
+
+embeddingmodel: 'bert'
+finetune: False
+gptdatapath: '/path/to/gpt_generated_data8classes.csv'
+datapath: '/path/to/annotations_8classes.csv'
+
+defaults:
+  - params: params_best_8classes
+  - override hydra/sweeper: optuna
+\end{lstlisting}
+
+Hydra automatically stores every run in a separate output directory, including:
+\begin{itemize}
+  \item a full copy of the configuration used,
+  \item all generated logs,
+  \item result metrics.
+\end{itemize}
+
+This structure guarantees reproducibility and simplifies tracking the performance of different model configurations over multiple experiments.
+
+\section{Summary}
+
+The implemented system adopts a modular architecture consisting of independent components for OCR, preprocessing,
+embedding generation, classification, and evaluation. This modularity enables flexible experimentation and easy
+integration of alternative models or techniques. Configuration management with Hydra ensures reproducibility,
+simplifies hyperparameter tuning, and supports structured comparisons across different experimental setups.
 
 \chapter{Evaluation and Results}
 
