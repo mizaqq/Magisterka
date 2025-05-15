@@ -6,6 +6,9 @@ from src.model.dataloader import Dataloader
 from src.model.embeddings import Embedding
 from src.model.ocr import OCR
 
+ANNOTATIONS_PATH = '/home/miza/magisterka/Magisterka/src/data/annotations/annotations_gpt.csv'
+IMAGES = '/home/miza/Magisterka/src/data/images/gpt/'
+
 
 def annotation_menu(product, pred, cost, classes):
     print('Product name: ', product)
@@ -30,8 +33,8 @@ def annotation_menu(product, pred, cost, classes):
 
 
 def get_unannotated_images():
-    if not os.path.exists('/home/miza/Magisterka/src/data/annotations/annotations.csv'):
-        with open('/home/miza/Magisterka/src/data/annotations/annotations.csv', 'w', newline='') as f:
+    if not os.path.exists(ANNOTATIONS_PATH):
+        with open(ANNOTATIONS_PATH, 'w', newline='') as f:
             writer = csv.DictWriter(
                 f,
                 fieldnames=['img', 'product', 'label', 'cost'],
@@ -39,10 +42,10 @@ def get_unannotated_images():
             writer.writeheader()
         annotations_data = []
     else:
-        with open('/home/miza/Magisterka/src/data/annotations/annotations.csv', 'r', newline='') as f:
+        with open(ANNOTATIONS_PATH, 'r', newline='') as f:
             reader = csv.DictReader(f)
             annotations_data = [row for row in reader]
-    images = os.listdir('/home/miza/Magisterka/src/data/images')
+    images = os.listdir(IMAGES)
     for i in annotations_data:
         if i['img'] in images:
             images.remove(i['img'])
@@ -75,11 +78,11 @@ def annotation_pipeline(products, img, classes):
 
 
 def save_annotations(annotations):
-    if not os.path.exists('/home/miza/Magisterka/src/data/annotations/annotations.csv'):
+    if not os.path.exists(ANNOTATIONS_PATH):
         mode = 'w'
     else:
         mode = 'a'
-    with open('/home/miza/Magisterka/src/data/annotations/annotations.csv', mode, newline='') as f:
+    with open(ANNOTATIONS_PATH, mode, newline='') as f:
         writer = csv.DictWriter(
             f,
             fieldnames=['img', 'product', 'label', 'cost'],
@@ -97,8 +100,8 @@ def main():
     images = get_unannotated_images()
     ocr = OCR()
     for img in images:
-        result = ocr.get_data_from_image('/home/miza/Magisterka/src/data/images/' + img)
-        result_clean = ocr.get_preprocessed_data('/home/miza/Magisterka/src/data/images/' + img)
+        result = ocr.get_data_from_image(IMAGES + img)
+        result_clean = ocr.get_preprocessed_data(IMAGES + img)
         pred_data = Embedding.embed_with_bert([r[0] for r in result_clean])
         preds = model.predict(pred_data)
         labels = label_encoder.inverse_transform(preds)

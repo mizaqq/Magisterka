@@ -2,8 +2,6 @@ import cv2
 import numpy as np
 from skimage.filters import threshold_sauvola
 from pathlib import Path
-import pytesseract
-from pytesseract import Output
 import re
 import string
 

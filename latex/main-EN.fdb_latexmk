@@ -1,14 +1,14 @@
 # Fdb version 4
-["biber main-EN"] 0 "main-EN.bcf" "main-EN.bbl" "main-EN" 1747287021.97355 -1
-  "main-EN.bcf" 1747287021.87494 109843 2c88a3a660dd1c3316afe2b6579cb9c5 "pdflatex"
+["biber main-EN"] 0 "main-EN.bcf" "main-EN.bbl" "main-EN" 1747321763.27033 -1
+  "main-EN.bcf" 1747321763.15767 109843 2c88a3a660dd1c3316afe2b6579cb9c5 "pdflatex"
   "references.bib" 1745772113.44358 5751 7dd94679342431e504942c3a441cafea ""
   (generated)
   "main-EN.bbl"
   "main-EN.blg"
   (rewritten before read)
-["pdflatex"] 1747287020.29997 "/home/miza/magisterka/Magisterka/latex/main-EN.tex" "main-EN.pdf" "main-EN" 1747287021.97379 0
+["pdflatex"] 1747321761.44279 "/home/miza/magisterka/Magisterka/latex/main-EN.tex" "main-EN.pdf" "main-EN" 1747321763.27061 0
   "/etc/texmf/web2c/texmf.cnf" 1745082521.28839 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/miza/magisterka/Magisterka/latex/main-EN.tex" 1747287017.78405 52631 4dcadc23f6b4d5b9b82fe863a07ac921 ""
+  "/home/miza/magisterka/Magisterka/latex/main-EN.tex" 1747321761.20824 52154 42093ddeed547bfaab51c8311456109b ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm" 1136768653 2288 f478fc8fed18759effb59f3dad7f3084 ""
@@ -175,7 +175,6 @@
   "/usr/share/texmf/fonts/tfm/public/lm/ec-lmcsc10.tfm" 1254269338 11276 116dd5bea6621ce4a1999f96d876084c ""
   "/usr/share/texmf/fonts/tfm/public/lm/ec-lmr12.tfm" 1254269338 12092 7b1546e2d096cfd5dcbd4049b0b1ec2e ""
   "/usr/share/texmf/fonts/tfm/public/lm/ec-lmr17.tfm" 1254269338 12156 ca1ae6a3c8564e89597f1f993fba1608 ""
-  "/usr/share/texmf/fonts/tfm/public/lm/ec-lmr9.tfm" 1254269338 12084 b7f5e4c003de6f57f07c7e9fee73a37c ""
   "/usr/share/texmf/fonts/tfm/public/lm/ec-lmri12.tfm" 1254269338 17144 271aaf9ebb339934b04110dc5211fba4 ""
   "/usr/share/texmf/fonts/tfm/public/lm/ec-lmtk10.tfm" 1254269338 1368 5bfeb1cf8f9f0acdb7436bfaa8e0da4e ""
   "/usr/share/texmf/fonts/tfm/public/lm/ec-lmtt10.tfm" 1254269338 1372 2ef2c2b492b3c4cd7879fe083abbb061 ""
@@ -226,12 +225,12 @@
   "images/text_detector_db.png" 1745747116.29301 138597 bc211b3eced93e4104a5e9d00301f5b8 ""
   "images/tfidf_embeddings.png" 1745750364.49454 204305 c724d5e6ff83fe076c109fff8ec8ca8a ""
   "images/tree_ensemble_model.png" 1745751787.57778 90945 633dfc4599a9411d124cc142b71e7a9f ""
-  "main-EN.aux" 1747287021.87494 14755 bbd2bfbf67fe0ba2bfdfb823fe188c20 "pdflatex"
+  "main-EN.aux" 1747321763.15767 14755 bbd2bfbf67fe0ba2bfdfb823fe188c20 "pdflatex"
   "main-EN.bbl" 1745773285.08446 26648 9de6c6f9fc62a95845216dd6fa824dfa "biber main-EN"
-  "main-EN.out" 1747287021.87494 9458 0fa5d5fcc504e1a823a90e41755b3335 "pdflatex"
-  "main-EN.run.xml" 1747287021.87494 2325 b8bd1cd8fbbd6e55af327f971fa1d30a "pdflatex"
-  "main-EN.tex" 1747287017.78405 52631 4dcadc23f6b4d5b9b82fe863a07ac921 ""
-  "main-EN.toc" 1747287021.87494 4755 53836a9964ff54e056c257d44b76f7dc "pdflatex"
+  "main-EN.out" 1747321763.15767 9458 0fa5d5fcc504e1a823a90e41755b3335 "pdflatex"
+  "main-EN.run.xml" 1747321763.15767 2325 b8bd1cd8fbbd6e55af327f971fa1d30a "pdflatex"
+  "main-EN.tex" 1747321761.20824 52154 42093ddeed547bfaab51c8311456109b ""
+  "main-EN.toc" 1747321763.15767 4755 53836a9964ff54e056c257d44b76f7dc "pdflatex"
   (generated)
   "main-EN.aux"
   "main-EN.bcf"
