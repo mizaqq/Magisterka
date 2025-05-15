@@ -1,5 +1,7 @@
 from paddleocr import PaddleOCR
 
+from utils.utils import preprocess_cost, preprocess_text
+
 
 class OCR:
     def __init__(self):
@@ -66,7 +68,7 @@ class OCR:
         ocr_data = self.get_data_from_image(img_path)
         preprocessed_data = []
         for data in ocr_data:
-            text = self.preprocess_text(data)
-            cost = self.preprocess_cost(data)
+            text = preprocess_text(data)
+            cost = preprocess_cost(data)
             preprocessed_data.append((text, cost))
         return preprocessed_data

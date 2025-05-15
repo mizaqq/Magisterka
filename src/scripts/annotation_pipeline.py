@@ -6,7 +6,7 @@ from src.model.dataloader import Dataloader
 from src.model.embeddings import Embedding
 from src.model.ocr import OCR
 
-ANNOTATIONS_PATH = '/home/miza/magisterka/Magisterka/src/data/annotations/annotations_gpt.csv'
+ANNOTATIONS_PATH = '/home/miza/Magisterka/src/data/annotations/annotations_gpt.csv'
 IMAGES = '/home/miza/Magisterka/src/data/images/gpt/'
 
 
