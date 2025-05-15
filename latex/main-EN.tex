@@ -239,7 +239,7 @@ Mathematically, the final prediction $\hat{y}_i$ for an instance $x_i$ is given 
   \end{minipage}
 \end{figure}
 To train these trees effectively, XGBoost optimizes a simplified objective function derived using second-order approximations (gradients and Hessians). 
-This objective helps determine the optimal structure and weights of each tree. \newpage The simplified final objective at each iteration is expressed as:
+This objective helps determine the optimal structure and weights of each tree. The simplified final objective at each iteration is expressed as:
 
 \begin{figure}[h!]
   \centering
@@ -327,7 +327,7 @@ The primary objective of this study is to develop and rigorously evaluate an end
 To achieve this, the research design adopts a modular approach: each component (OCR, embedding generation, and classification) can be developed and tested independently, 
 while still integrating into a unified workflow. 
 This structure not only enables targeted evaluation of individual modules but also supports direct comparison across different models and techniques. 
-Finally, model performance is assessed under four experimental conditions—3-class and 8-class categorization, each tested with both original and GPT-augmented training data—to measure robustness across varying levels of complexity and data composition, 
+Finally, model performance is assessed under two experimental which is 8-class categorization tested with both original and GPT-augmented training data—to measure robustness across varying levels of complexity and data composition, 
  with controlled variation of input features and training data composition.
 
 The dataset used in this study is relatively small as it consists of only 20 scanned receipts, yielding a total of 263 individual line‐item entries. 
@@ -380,10 +380,10 @@ This baseline enables quantification of the performance gains achieved through a
 \section{Data Sources, Collection and Preparation}
 
 \subsection{Data Acquisition and Annotation}
-The primary dataset consists of 263 line‐item entries extracted from 20 scanned receipts using PaddleOCR. To address class imbalance, we enriched
-the dataset with GPT‐generated synthetic examples, achieving a more uniform distribution across categories. Each entry was manually annotated
-with a product category—either according to a coarse 3‐class schema (Food, Beverages, Other) or a finer 8‐class schema (e.g.\ Snacks, Hygiene,
-Housing, Healthcare, Discount)—and the corresponding cost. All annotations were consolidated into a single CSV file for subsequent processing.
+The primary dataset consists of 263 line‐item entries extracted from 20 scanned receipts using PaddleOCR. To address class imbalance,
+the dataset was enriched with GPT‐generated synthetic examples, achieving a more uniform distribution across categories. Each entry was manually annotated
+with a product category— according to a  8‐class schema (Food, Beverages, Snacks, Hygiene,
+Housing, Healthcare, Discount, Other)—and the corresponding cost. All annotations were consolidated into a single CSV file for subsequent processing.
 
 \subsection{Data Pipeline and Loading}
 Our pipeline begins by reading the annotated CSV, which contains columns:
@@ -399,7 +399,7 @@ text prior to embedding generation and classification.
 
 Punctuation characters were replaced with spaces to clearly separate word tokens and improve downstream tokenization. 
 Consecutive whitespace characters were collapsed into a single space to maintain uniform spacing. 
-Citation-like patterns (e.g., [1], [23]) were removed to eliminate non-linguistic references commonly produced by OCR.
+Citation-like patterns were removed to eliminate non-linguistic references commonly produced by OCR.
 All non-alphanumeric characters—excluding whitespace—were stripped to retain only meaningful text content. 
 Numerical digits were removed to reduce the influence of context-irrelevant pricing or codes, and single-character words were  
 excluded, as they typically carry little semantic value in this domain.
@@ -485,7 +485,7 @@ Four classification scenarios were evaluated, corresponding to two embedding str
 on both the original and GPT-augmented training sets. This experimental setup enables a direct comparison of how embedding quality and data  
 composition affect final model performance.
 
-Evaluation metrics, including accuracy and macro-averaged F1 scores, are reported in Chapter~X.
+Evaluation metrics, including accuracy and macro-averaged F1 scores, are reported in Chapter~V.
 
 
 \section{Summary}
@@ -574,8 +574,8 @@ The DataLoader module loads and prepares input data for further processing. It a
 annotated product categories, and associated costs. The module supports two types of input data: original OCR-extracted receipts and
 GPT-generated synthetic receipts, ensuring unified preprocessing for both.
 
-To mitigate class imbalance within the training dataset, the DataLoader implements oversampling by replicating samples from 
-underrepresented categories. This approach balances the class distribution, improving classifier performance and reducing bias
+To mitigate class imbalance within the training dataset, the DataLoader implements undersampling by randomly taking samples from different
+categories until they share the same distribution. This approach balances the class distribution, improving classifier performance and reducing bias
 towards dominant categories.
 
 \subsection{Preprocessing Module}
@@ -715,16 +715,6 @@ uv run python scripts/train.py -- --config-name=config.yaml
     \end{lstlisting}
     (\texttt{uv run} will auto-sync your environment before executing.)
 \end{enumerate}
-
-
-\subsection{Environment Details}
-The experiments were conducted on the following setup:
-\begin{itemize}
-    \item Operating System: Ubuntu 22.04
-    \item Python Version: 3.10
-    \item CUDA Version: 11.8
-    \item PyTorch Version: 2.0
-\end{itemize}
 
 These steps and details ensure that the experiments can be reproduced reliably on similar hardware and software configurations.
 

@@ -10,49 +10,48 @@
 \contentsline {subsection}{\numberline {2.2.1}Count-based Methods}{15}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}Prediction-based Methods}{15}{subsection.2.2.2}%
 \contentsline {section}{\numberline {2.3}XGBoost Classifier}{17}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Challenges in OCR and NLP for Document Understanding}{20}{section.2.4}%
-\contentsline {chapter}{\numberline {3}Methodology}{22}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introduction}{22}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Research Design}{22}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Data Sources, Collection and Preparation}{23}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Data Acquisition and Annotation}{23}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Data Pipeline and Loading}{24}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Class Distribution Analysis}{24}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Embedding Generation}{26}{subsection.3.3.4}%
-\contentsline {section}{\numberline {3.4}Modeling and Analysis}{26}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Experimental Setup and Evaluation}{27}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Summary}{27}{section.3.6}%
-\contentsline {chapter}{\numberline {4}Implementation}{29}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Overview}{29}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Technology Stack}{29}{section.4.2}%
-\contentsline {section}{\numberline {4.3}System Architecture}{30}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Component Implementation}{31}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}DataLoader and Input Handling}{31}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Preprocessing Module}{31}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Embedding Interface}{32}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Training and Evaluation Pipeline}{32}{subsection.4.4.4}%
-\contentsline {section}{\numberline {4.5}Training Configuration}{33}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Reproducibility and Setup}{33}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}Project Structure}{33}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Installation Instructions}{34}{subsection.4.6.2}%
-\contentsline {subsection}{\numberline {4.6.3}Environment Details}{35}{subsection.4.6.3}%
-\contentsline {subsection}{\numberline {4.6.4}Configuration Management with Hydra}{35}{subsection.4.6.4}%
-\contentsline {section}{\numberline {4.7}Summary}{36}{section.4.7}%
-\contentsline {chapter}{\numberline {5}Evaluation and Results}{37}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Evaluation Metrics}{37}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Experimental Setup}{37}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Results and Analysis}{37}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Comparison with Existing Methods}{37}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Discussion}{38}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Interpretation of Results}{38}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Challenges and Limitations}{38}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Recommendations for Future Work}{38}{section.6.3}%
-\contentsline {chapter}{\numberline {7}Conclusion}{39}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Summary of Findings}{39}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Contributions to the Field}{39}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Final Remarks}{39}{section.7.3}%
-\contentsline {chapter}{\numberline {8}References}{40}{chapter.8}%
-\contentsline {chapter}{\numberline {9}Appendices}{41}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Sample Receipt Data}{41}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Code Snippets}{41}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Additional Figures and Tables}{41}{section.9.3}%
+\contentsline {section}{\numberline {2.4}Challenges in OCR and NLP for Document Understanding}{19}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Methodology}{21}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction}{21}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Research Design}{21}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Data Sources, Collection and Preparation}{22}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Data Acquisition and Annotation}{22}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Data Pipeline and Loading}{23}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Class Distribution Analysis}{23}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Embedding Generation}{25}{subsection.3.3.4}%
+\contentsline {section}{\numberline {3.4}Modeling and Analysis}{25}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Experimental Setup and Evaluation}{26}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Summary}{26}{section.3.6}%
+\contentsline {chapter}{\numberline {4}Implementation}{28}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Overview}{28}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Technology Stack}{28}{section.4.2}%
+\contentsline {section}{\numberline {4.3}System Architecture}{29}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Component Implementation}{30}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}DataLoader and Input Handling}{30}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Preprocessing Module}{30}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Embedding Interface}{31}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Training and Evaluation Pipeline}{31}{subsection.4.4.4}%
+\contentsline {section}{\numberline {4.5}Training Configuration}{32}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Reproducibility and Setup}{32}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Project Structure}{32}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Installation Instructions}{33}{subsection.4.6.2}%
+\contentsline {subsection}{\numberline {4.6.3}Configuration Management with Hydra}{34}{subsection.4.6.3}%
+\contentsline {section}{\numberline {4.7}Summary}{35}{section.4.7}%
+\contentsline {chapter}{\numberline {5}Evaluation and Results}{36}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Evaluation Metrics}{36}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Experimental Setup}{36}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Results and Analysis}{36}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Comparison with Existing Methods}{36}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Discussion}{37}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Interpretation of Results}{37}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Challenges and Limitations}{37}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Recommendations for Future Work}{37}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Conclusion}{38}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Summary of Findings}{38}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Contributions to the Field}{38}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Final Remarks}{38}{section.7.3}%
+\contentsline {chapter}{\numberline {8}References}{39}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Appendices}{40}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Sample Receipt Data}{40}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Code Snippets}{40}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Additional Figures and Tables}{40}{section.9.3}%
