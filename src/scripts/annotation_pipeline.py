@@ -6,8 +6,8 @@ from src.model.dataloader import Dataloader
 from src.model.embeddings import Embedding
 from src.model.ocr import OCR
 
-ANNOTATIONS_PATH = '/home/miza/Magisterka/src/data/annotations/annotations_gpt.csv'
-IMAGES = '/home/miza/Magisterka/src/data/images/gpt/'
+ANNOTATIONS_PATH = '/home/miza/Magisterka/src/data/annotations/annotations_6classes.csv'
+IMAGES = '/home/miza/Magisterka/src/data/images/'
 
 
 def annotation_menu(product, pred, cost, classes):
@@ -46,6 +46,7 @@ def get_unannotated_images():
             reader = csv.DictReader(f)
             annotations_data = [row for row in reader]
     images = os.listdir(IMAGES)
+    images = [img for img in images if img.endswith('.jpg') or img.endswith('.png')]
     for i in annotations_data:
         if i['img'] in images:
             images.remove(i['img'])

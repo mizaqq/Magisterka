@@ -18,7 +18,7 @@ img,OCR_product,category,Correct_cost
 5.jpg,"Barszcz ukrainski 1szt.x27.0027.008",Food,27.00
 5.jpg,"Serniczki 1szt.x25.0025.008",Food,25.00
 12.jpg,"APSUEKID0130885 *69.9869.98",Housing,69.98
-12.jpg,"CHUSTECZKT 856372A 1*6.486,48A",Hygiene,6.48
+12.jpg,"CHUSTECZKT 856372A 1*6.486,48A",Healthcare,6.48
 12.jpg,"PYN D0 MY780304A 1*6.796.79A",Housing,6.79
 12.jpg,"KAPSUtKIDI263668 1*67.9967.996",Housing,67.99
 12.jpg,"SMAKOWE BUT ZERO 1*5,325,32A",Bevarage,5.32
@@ -50,13 +50,13 @@ img,OCR_product,category,Correct_cost
 12.jpg,"JOGURT 8Z267818 1*3,193,19 C",Food,3.19
 12.jpg,"JOGURT 8Z 267818 1*3,193,19 C",Food,3.19
 12.jpg,"JOGOBELLA M 45104 13,193,19C",Food,3.19
-2.jpg,"ChrupkiPapryka70g 3x3.9911.970",Snacks,11.97
-2.jpg,"Prazynki8ekon120g 2x5.7911580",Snacks,11.58
-2.jpg,"Pra2Be/S0L.120/110g 15.795.790",Snacks,5.79
+2.jpg,"ChrupkiPapryka70g 3x3.9911.970",Food,11.97
+2.jpg,"Prazynki8ekon120g 2x5.7911580",Food,11.58
+2.jpg,"Pra2Be/S0L.120/110g 15.795.790",Food,5.79
 2.jpg,"PrzypMajeraKan7g D 1x199199D",Food,1.99
 2.jpg,"Przy CzosKamis20 g 11.99199D",Food,1.99
 2.jpg,"PrzypCynKami12-15g 8 1x1991.99B",Food,1.99
-2.jpg,"ChipCrunze140g 1x7197,19D",Snacks,7.19
+2.jpg,"ChipCrunze140g 1x7197,19D",Food,7.19
 2.jpg,"Spray 0ff100ml A 1x12.9912.99A",Other,12.99
 2.jpg,"NapójGazColaZero2x2l A 1813.9813.98A",Bevarage,13.98
 2.jpg,"Ser Gouda Suiat ikg 225,7051.400",Food,51.4
@@ -68,7 +68,7 @@ img,OCR_product,category,Correct_cost
 2.jpg,"Woda Niegaz 1,5l 12x0.9911.88A",Bevarage,11.88
 2.jpg,"WodaNGaz Muszyi,5l H 6x2,8517,10A",Bevarage,17.1
 2.jpg,"Nap CocaColaZero2l 18.698.69A",Bevarage,8.69
-4.jpg,"GAKA2.0750 15.00C",Snacks,15.00
+4.jpg,"GAKA2.0750 15.00C",Food,15.00
 8.jpg,"PUDLISZKI KETCHUP OGNISTY 480G 214816B1*6.47 6.478",Food,6.47
 8.jpg,"PUDLISZKI KETCHUP LAGODNY 480G 27532681*6.47 6.478",Food,6.47
 8.jpg,"PROVITUS PESTO BASILICO 16OG 869357B1*7.55 7.558",Food,7.55
@@ -78,8 +78,8 @@ img,OCR_product,category,Correct_cost
 8.jpg,"KRU.KISIEL OWO.LESNE KUBEK 30G 884686C1*1.25 1.25C",Food,1.25
 8.jpg,"KRU.KISIEL TRUSKAWKOWY KUB.30G 865790C1*1.25 1.25C",Food,1.25
 8.jpg,"MK CAFE KAWA ZIARN MEXICO 400G 343954A1*49.19 49.19A",Bevarage,49.19
-8.jpg,"AXE ZEL P/P ANTIHANGOYER 40OML 409496A1*18.44 18.44A",Hygiene,18.44
-8.jpg,"ZIELKO PEYN CZYSZCZOWLE500ML 966390A1*15.98 15.98A",Hygiene,15.98
+8.jpg,"AXE ZEL P/P ANTIHANGOYER 40OML 409496A1*18.44 18.44A",Healthcare,18.44
+8.jpg,"ZIELKO PEYN CZYSZCZOWLE500ML 966390A1*15.98 15.98A",Healthcare,15.98
 8.jpg,"BREF KOSTKA D/WC BRYZA 2X42G 950791A1*14.99 14.99A",Housing,14.99
 8.jpg,"TOPS ZEF RECZNIK PAPIER.2W300L 960507A1*8.00 8.00A",Housing,8.00
 8.jpg,"SIATKAD/PIZZY 30CM 432292A1*17.10 17.10A",Housing,17.10
@@ -149,8 +149,8 @@ img,OCR_product,category,Correct_cost
 7.jpg,"KRU.KISIEL OWO.LESNE KUBEK 30G 884686C1*1.25 1.25C",Food,1.25
 7.jpg,"KRU.KISIEL TRUSKAWKOWY KUB.30G 865790C1*1.25 1.25C",Food,1.25
 7.jpg,"MK CAFE KAWA ZIARN MEXICO 400G 343954A1*49.19 49.19A",Bevarage,49.19
-7.jpg,"AXE ZEL P/P ANTIHANGOVER 400ML 409496A1*18.44 18.44A",Hygiene,18.44
-7.jpg,"ZIELKO PLYN CZYSZCZ OW.LE50OML 966390A1*15.98 15.98A",Hygiene,15.98
+7.jpg,"AXE ZEL P/P ANTIHANGOVER 400ML 409496A1*18.44 18.44A",Healthcare,18.44
+7.jpg,"ZIELKO PLYN CZYSZCZ OW.LE50OML 966390A1*15.98 15.98A",Healthcare,15.98
 7.jpg,"BREF KOSTKA D/WC BRYZA 2X42G 950791A1*14.99 14.99A",Housing,14.99
 7.jpg,"TOPS ZEF RECZNIK PAPIER.2W300L 960507A1*8.00 8.00A",Healthcare,8.00
 7.jpg,"SIATKAD/PIZZY 30CM 432292A1*17.10 17.10A",Other,17.10
@@ -180,13 +180,13 @@ img,OCR_product,category,Correct_cost
 22.png,"KARMA D/K0TA 420G B 1x2,492,49B",Other,2.49
 22.png,"KARMA D/K0TA420G B 1x2.492,49B",Other,2.49
 22.png,X SALAT150G C 5w1x2.992.990,Food,2.99
-14.png,"SANA ZELPODPRYAX 14.694,69A",Hygiene,4.69
-14.png,BOBINI 6ABY HYPOLAX 12.9912.99A,Hygiene,12.99
-14.png,"HINSTON SNACK KARBL 4x2,499.96B",Snacks,9.96
-14.png,HINSTON ZWOCOWINBL 4x2.499.968,Snacks,9.96
+14.png,"SANA ZELPODPRYAX 14.694,69A",Healthcare,4.69
+14.png,BOBINI 6ABY HYPOLAX 12.9912.99A,Healthcare,12.99
+14.png,"HINSTON SNACK KARBL 4x2,499.96B",Food,9.96
+14.png,HINSTON ZWOCOWINBL 4x2.499.968,Food,9.96
 14.png,Uuzgl.opust-7.20st.c17.16,Discount,7.20
 14.png,Uuzglopust-7.20st.c17.16,Discount,7.20
-14.png,HINSTON KIEEBASKIBL 3x2.497.478,Snacks,7.47
+14.png,HINSTON KIEEBASKIBL 3x2.497.478,Food,7.47
 14.png,Uuzgl.opust-5.40st.c12.87,Discount,5.40
 14.png,PEDIGREERODEOPRABL 2x4.999.988,Other,9.98
 14.png,Uuzgl.opust-2.00st.c11.98,Discount,2.00
@@ -206,8 +206,8 @@ img,OCR_product,category,Correct_cost
 16.png,BATON HILKY HAY 21 2x2.494.986,Food,4.98
 16.png,"SMIETANKA PRIHO30X 1x4,594,590",Food,4.59
 16.png,"PAEECZKI KUKURYDZIA 1x1,691,690",Food,1.69
-16.png,BISZKOPTYAKSAMITKI 1x4.994.990,Snacks,4.99
-16.png,"BISZKOPTY HOME RELA 1x3,593,590",Snacks,3.59
+16.png,BISZKOPTYAKSAMITKI 1x4.994.990,Food,4.99
+16.png,"BISZKOPTY HOME RELA 1x3,593,590",Food,3.59
 25.png,"JOGURT NATU 200G C 1x2,492,490",Food,2.49
 25.png,"PORCJA ROSOL Z/KUR C1.286x2,192,82C",Food,2.19
 25.png,"SCHAB Z KOSCIA WIE C 0.358x11,994,29C",Food,4.29
@@ -219,7 +219,7 @@ img,OCR_product,category,Correct_cost
 25.png,"TYMIANEK 10G B 2x1,593,18B",Food,3.18
 25.png,"OGOREK ZIEL SZT C 1x1,991,99C",Food,1.99
 13.png,2534695 panasonic baterie aa 12sztzink carbon 17.95 7.95A,Other,7.95
-13.png,3011147nerkow.Zienne.pikan snacks wortd02318.49 8.49A,Snacks,8.49
+13.png,3011147nerkow.Zienne.pikan Food wortd02318.49 8.49A,Food,8.49
 13.png,2562356bison klejsekundowy 2x2g14.99 4.99A,Other,4.99
 13.png,534106 office ess koszulki a4prezrocz.20szt 13.95 3.95A,Other,3.95
 13.png,538622plastikowa teczka+gka a4ro2.war 13.85 3.85A,Other,3.85
@@ -260,4 +260,33 @@ img,OCR_product,category,Correct_cost
 26.png,ZOLADKI Z KURCZAK C 0.216x9.992.160,Food,2.16
 26.png,"HATROBA ZKURCZAKC 0.166x9,991,660",Food,1.66
 26.png,"PORCJA ROSOL Z/KUR C 2,128x2.495.300",Food,5.30
-23.png,DEZ00DAMSKT150MLA 1X749749A,Hygiene,7.49
+23.png,DEZ00DAMSKT150MLA 1X749749A,Healthcare,7.49
+101.png,TRYMER HYBRYDOWY PHILIPS QP654215 X1.000*299.99 299.99A,Housing,299.99
+101.png,OBNIZKA -100.00A,Discount,100.00
+103.png,"Zywiec woda zr.6szt 1x10.2010,20A",Bevarage,10.20
+103.png,"Mlekovita cheddar 110,9910,990",Food,10.99
+103.png,"Ser gouda XXL 500g 1x159915,990",Food,15.99
+103.png,"Bio napoj migdatowy E 1x6,186,180",Bevarage,6.18
+103.png,"Tortilla pszennabszt 1x4,824.820",Food,4.82
+103.png,"Croissant maslany27% 31,705,100",Food,5.10
+103.png,Filet z kurczaka 1kg 0.99x24.9024.650,Food,24.65
+103.png,"0,5146,993,590 Banany luz",Food,3.59
+103.png,"Jabtka Golden D. luz 0,4544.992.270",Food,2.27
+106.png,BABYOREAMEXTRASEYAX 112.9912.99,Healthcare,12.99
+106.png,PLST KLUBBabydrean Extra -2.80,Discount,2.80
+106.png,OREALINFAILL1BLAX 177.9977.99,Healthcare,77.99
+106.png,PUS1L0realPari39.99 -38.006,Discount,38.00
+106.png,ABOUITALSKRZYP EL 1x15.9915.996,Healthcare,15.99
+106.png,OPUST -18.998,Discount,18.99
+105.png,PRZEWCO 1.000+19.99 19.99A,Housing,19.99
+105.png,PAPIER 1.000=19.99 19.99A,Housing,19.99
+104.png,"SHEE Vit.Water 20% 1x3,793,790",Bevarage,3.79
+104.png,"ot-dog z parowka 1x3,293,290",Food,3.29
+102.png,"Reklamowkamata rec 10,790,79A",Other,10.79
+102.png,"ektar cz. porzeczka 1x3,993,99C",Bevarage,3.99
+102.png,"Nektarmarchw.1l 1x3,493,490",Bevarage,3.49
+102.png,"Chusteczki kosm.4w 15,39539A",Healthcare,15.39
+102.png,"Bio Ogorki szt. 1x5,995,990",Food,5.99
+102.png,Chipsy Tortilla xxl 18.998.990,Food,8.99
+102.png,"Fromelio Serek pusz 1x3,993.990",Food,3.99
+102.png,"Chleb stonecznikowy 1x4,164,16C",Food,4.16

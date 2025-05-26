@@ -7,10 +7,11 @@ from src.model.embeddings import Embedding
 from copy import deepcopy
 from sklearn.utils import resample
 from src.utils.utils import preprocess_cost, preprocess_text
+import numpy as np
 
 
 class Dataloader:
-    def __init__(self, data_path=Path('/home/miza/Magisterka/src/data/annotations/annotations_8classes.csv')):
+    def __init__(self, data_path=Path('/home/miza/Magisterka/src/data/annotations/annotations_6classes.csv')):
         self.data = pd.read_csv(data_path).drop(columns=['img'])
         self.get_encoder()
 
@@ -46,6 +47,7 @@ class Dataloader:
 
     def get_training_ready_data(
         self,
+        model,
         split_size: float = 0.2,
     ):
         train_data, test_data = self.split_data(None, split_size)
@@ -53,8 +55,8 @@ class Dataloader:
         test_categories = self.le.transform(test_data['category'])
         train_data['Text'] = train_data['OCR_product'].apply(preprocess_text)
         test_data['Text'] = test_data['OCR_product'].apply(preprocess_text)
-        train_embeddings = Embedding.embed_with_bert(train_data['Text'].tolist())
-        test_embeddings = Embedding.embed_with_bert(test_data['Text'].tolist())
+        train_embeddings = Embedding.embed_with_given_model(model, train_data['Text'].tolist())
+        test_embeddings = Embedding.embed_with_given_model(model, test_data['Text'].tolist())
         train_batch = {
             'embeddings': train_embeddings,
             'category': train_categories,
@@ -65,42 +67,27 @@ class Dataloader:
         }
         return train_batch, test_batch
 
-    def get_gpt_data_for_finetune(
+    def get_gpt_data_for_training(
         self, path: Path = Path('/home/miza/Magisterka/src/data/annotations/gpt_generated_data8classes.csv')
     ):
         gpt_data = pd.read_csv(path)
+        gpt_data['text'] = gpt_data['OCR_product'].apply(preprocess_text).tolist()
+        gpt_data['cost'] = gpt_data['OCR_product'].apply(preprocess_cost).tolist()
+        gpt_data['category'] = self.le.transform(gpt_data['category'])
+        return gpt_data
+
+    def get_gpt_data_training_ready_data(
+        self,
+        model,
+        path: Path = Path('/home/miza/Magisterka/src/data/annotations/gpt_generated_data8classes.csv'),
+        balance: bool = True,
+    ):
+        gpt_data = pd.read_csv(path)
+        if balance:
+            gpt_data = self.balance_gpt_data(gpt_data)
         gpt_categories = self.le.transform(gpt_data['category'])
-        gpt_embeddings = Embedding.embed_with_bert(gpt_data['OCR_product'].tolist())
-        gpt_batch = {
-            'embeddings': gpt_embeddings,
-            'category': gpt_categories,
-        }
-        return gpt_batch
-
-    def get_gpt_data_for_finetune_with_balance(
-        self, path: Path = Path('/home/miza/Magisterka/src/data/annotations/gpt_generated_data8classes.csv')
-    ):
-        gpt_data = pd.read_csv(path)
-        balanced_gpt_data = self.balance_gpt_data(gpt_data)
-        gpt_categories = self.le.transform(balanced_gpt_data['category'])
-        balanced_gpt_data['Text'] = balanced_gpt_data['OCR_product'].apply(preprocess_text)
-        gpt_embeddings = Embedding.embed_with_bert(balanced_gpt_data['Text'].tolist())
-        gpt_batch = {
-            'embeddings': gpt_embeddings,
-            'category': gpt_categories,
-        }
-        return gpt_batch
-
-    def get_gpt_data_for_finetune_with_balance_and_mini(
-        self, model, path: Path = Path('/home/miza/Magisterka/src/data/annotations/gpt_generated_data8classes.csv')
-    ):
-        gpt_data = pd.read_csv(path)
-        balanced_gpt_data = self.balance_gpt_data(gpt_data)
-        gpt_categories = self.le.transform(balanced_gpt_data['category'])
-
-        balanced_gpt_data['category'] = self.le.transform(balanced_gpt_data['category'])
-        balanced_gpt_data['Text'] = balanced_gpt_data['OCR_product'].apply(preprocess_text)
-        gpt_embeddings = Embedding.embed_with_given_model(model, balanced_gpt_data['Text'].tolist())
+        gpt_data['Text'] = gpt_data['OCR_product'].apply(preprocess_text)
+        gpt_embeddings = Embedding.embed_with_given_model(model, gpt_data['Text'].tolist())
         gpt_batch = {
             'embeddings': gpt_embeddings,
             'category': gpt_categories,
@@ -119,3 +106,11 @@ class Dataloader:
                 for cat, frac in self.data['category'].value_counts(normalize=True).items()
             ]
         )
+
+    def get_joined_data(self, train_embeddings, train_categories, gpt_embeddings, gpt_categories):
+        joined_embeddings = np.concatenate((train_embeddings, gpt_embeddings), axis=0)
+        joined_categories = np.append(train_categories, gpt_categories)
+        return {
+            'embeddings': joined_embeddings,
+            'category': joined_categories,
+        }

@@ -765,10 +765,38 @@ simplifies hyperparameter tuning, and supports structured comparisons across dif
 \chapter{Evaluation and Results}
 
 \section{Evaluation Metrics}
-[...]
+
+To evaluate the performance of the classification models, standard metrics were used: \textbf{Accuracy}, \textbf{Precision}, \textbf{Recall}, and 
+\textbf{F1 Score}. While accuracy gives an overall indication of correctness, it can be misleading in the presence of class imbalance. Precision and recall 
+provide more nuanced views, with precision measuring the correctness of positive predictions and recall measuring the ability to identify all relevant 
+instances. Among these, the \textbf{F1 Score}---the harmonic mean of precision and recall---was chosen as the primary evaluation metric, as it balances 
+the trade-off between precision and recall and offers a more informative measure of performance, especially in datasets with uneven class distributions. 
+Additionally, these metrics are also calculated separately for each class, allowing for detailed analysis and insight into the model’s performance on 
+individual categories.
+
 
 \section{Experimental Setup}
-[...]
+
+To optimize model performance, a hyperparameter search was conducted using the \textbf{Optuna} framework with \textbf{1000 trials}. 
+The goal was to maximize the F1 Score on the validation set. The search space covered key parameters of the XGBoost classifier and 
+included additional categorical choices related to data and model configuration. The parameter values considered were:
+
+\begin{itemize}
+    \item \textbf{learning\_rate}: \{0.01, 0.05, 0.1, 0.2, 0.3\}
+    \item \textbf{max\_depth}: \{3, 5, 7, 10, 15, 20\}
+    \item \textbf{n\_estimators}: \{50, 100, 200, 300, 500, 750, 1000\}
+    \item \textbf{subsample}: \{0.5, 0.6, 0.7, 0.8, 0.9, 1.0\}
+    \item \textbf{colsample\_bytree}: \{0.5, 0.6, 0.7, 0.8, 0.9, 1.0\}
+    \item \textbf{min\_child\_weight}: \{1, 2, 3, 5, 7, 10\}
+    \item \textbf{gamma}: \{0.0, 0.1, 0.5, 1.0, 2.0, 5.0\}
+    \item \textbf{reg\_alpha}: \{0.0, 0.1, 0.5, 1.0, 2.0, 5.0\}
+    \item \textbf{reg\_lambda}: \{0.0, 0.1, 0.5, 1.0, 2.0, 5.0\}
+    \item \textbf{embeddingmodel.model\_path}: \{mini\_base, mini\_finetuned, bert\}
+    \item \textbf{augument\_classifier}: \{True, False\}
+    \item \textbf{balance\_data}: \{True, False\}
+\end{itemize}
+
+This setup allowed the optimization process to evaluate a wide range of model and data configurations in a structured and efficient manner.
 
 \section{Results and Analysis}
 [...]

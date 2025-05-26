@@ -4,7 +4,9 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 
 class XGBoost:
     def __init__(self, **config):
-        self.model = xgb.XGBClassifier(**config)
+        self.model = xgb.XGBClassifier(
+            **config,
+        )
 
     def fit(self, X, y):
         self.model.fit(X, y)

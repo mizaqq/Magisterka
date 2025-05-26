@@ -1,3 +1,4 @@
+img,OCR_product,category,Correct_cost
 14.jpg,"BATERIE AA 4SZT 9,99F",Other,9.99
 14.jpg,"PRZEDLUZACZ 5M 16,99F",Other,16.99
 14.jpg,"SWIECZKA ZAPACHOWA 6,99F",Other,6.99
@@ -8,3 +9,155 @@
 14.jpg,"TASMA KLEJACA 3,49F",Other,3.49
 14.jpg,"PARASOL SKLADANY 32,99F",Other,32.99
 14.jpg,"KUBEK CERAMICZNY 8,99F",Other,8.99
+13.jpg,"MASL0 EKSTRA 200G 6,99F",Other,6.99
+13.jpg,"rabat -1,00",Discount,1.00
+13.jpg,"SER FETA 3,29 F",Food,3.29
+13.jpg,"znizka -0,50",Discount,0.50
+13.jpg,"KAWA MIEL0NA 250G 12,99F",Bevarage,12.99
+13.jpg,"obnizka -2,00",Bevarage,2.00
+13.jpg,"HERBATA CZARNA 1OOT 7,49 F",Bevarage,7.49
+13.jpg,"promocja -1,20",Discount,1.20
+13.jpg,"SOK POMARAN.1L 5,99 F",Bevarage,5.99
+13.jpg,"rab. -0,80",Discount,0.80
+13.jpg,"WODA NIEGAZ. 1,5L 1,89 F",Bevarage,1.89
+13.jpg,"upust -0,30",Discount,0.30
+13.jpg,"SZAMP0N 400ML 9,99 F",Healthcare,9.99
+13.jpg,"zniz. -1,50",Discount,1.50
+13.jpg,"PLYN DO NACZ. 9O0ML 6,49F",Housing,6.49
+13.jpg,"-1,00 rabat",Discount,1.00
+13.jpg,"CUKIER 1KG 3,59F",Food,3.59
+13.jpg,"obnizka -0,60",Discount,0.60
+13.jpg,"J0GURT PIT. 330ML 2,39 F",Food,2.39
+9.jpg,"KREM 50ML 17,99",Healthcare,17.99
+9.jpg,"ZEL POD PRYSZ. 8,29",Healthcare,8.29
+9.jpg,"KREM DO RAK 9,99",Healthcare,9.99
+9.jpg,"PASTA DO Z 6,99",Healthcare,6.99
+9.jpg,"ZEL DO MYCIA TW. 11,99",Healthcare,11.99
+9.jpg,"PIANKA DO GOL. 7,39",Healthcare,7.39
+9.jpg,"DEZOD. 12,49",Healthcare,12.49
+9.jpg,"BALSAM DO C. 12,49",Healthcare,12.49
+15.jpg,"PLYN DO NACZ. 4,99F",Housing,4.99
+15.jpg,"TABLETKL ZMYW.30SZT 18,49F",Housing,18.49
+15.jpg,"WORKI NA SMIEC.2OSZT 6,79F",Housing,6.79
+15.jpg,"REKAWICE GUM. 2,99F",Housing,2.99
+15.jpg,"ODSWIEZACZ POW. 8,99F",Housing,8.99
+15.jpg,"RAPIER TOALET. 8ROL 12,49F",Housing,12.49
+15.jpg,"RECZ.KUCH.4SZT 5,49F",Housing,5.49
+15.jpg,"MOP ZAPAS 14,99F",Housing,14.99
+11.jpg,"PLYN DO PODL. 9,49F",Housing,9.49
+11.jpg,"PR0SZEK 2,5 KG 26,99F",Housing,26.99
+11.jpg,"KAPSUEKIP/ 18,99F",Housing,18.99
+11.jpg,"GABKI 10 SZT 5,99F",Housing,5.99
+11.jpg,"6,49F SCIERKI",Housing,6.49
+11.jpg,"ZAROWKA E27 2,99F",Housing,2.99
+11.jpg,"ZAROWKA GU1O 7,99F",Housing,7.99
+5.jpg,"WODA GAZOW.1,5L 1,89F",Bevarage,1.89
+5.jpg,"S0KJABEK.100%2L 6,99F",Bevarage,6.99
+5.jpg,"SM00THIETRUSK.300ML 4,29F",Bevarage,4.29
+5.jpg,"KEFIR0WOC.400ML 3,49F",Bevarage,3.49
+5.jpg,"LEMONIADA750ML 5,79F",Bevarage,5.79
+5.jpg,"CIDER 500ML 4,99F",Bevarage,4.99
+5.jpg,"SHOTIMBIR.100ML 2,99F",Bevarage,2.99
+5.jpg,"NAPOJALOES.1L 5,19F",Bevarage,5.19
+12.jpg,"WODA NIEGAZ.1,5L 1,99F",Bevarage,1.99
+12.jpg,"COLA NAPOJ1,5L 5,49F",Bevarage,5.49
+12.jpg,"S0K P0MAR.100%3L 8,99F",Bevarage,8.99
+12.jpg,"NAPOJIZOTON. 75OML 4,29F",Bevarage,4.29
+12.jpg,"ENERGETYK 5OOML 3,99F",Bevarage,3.99
+12.jpg,"K0MBUCHA330ML 6,49F",Bevarage,6.49
+12.jpg,"HERBATA MROZ.1L 4,79F",Bevarage,4.79
+12.jpg,"KAWA MR0Z.250ML 5,29F",Bevarage,5.29
+12.jpg,"SUMA PLN 41,32",Bevarage,41.32
+17.jpg,"SZCZOT. DO Z. 3,49",Healthcare,3.49
+17.jpg,"PASTADO Z. 5,89",Healthcare,5.89
+17.jpg,"PEATKI KOSM 3,45",Healthcare,3.45
+17.jpg,"RECZ. PAP. 4,99",Healthcare,4.99
+17.jpg,"SZAMP. 5,99",Healthcare,5.99
+17.jpg,"CHUST.HIG.72 SZT. 3,99",Healthcare,3.99
+17.jpg,"MYDLO W PEYN. 4,99",Healthcare,4.99
+17.jpg,"8,18 PODP. 20 SZT.",Healthcare,8.18
+2.jpg,"SZCZOTECZKA DO ZEBOW 3,49",Healthcare,3.49
+2.jpg,"PASTA DO ZEBOW 5,99",Healthcare,5.99
+2.jpg,"2,99 WACIKI",Healthcare,2.99
+2.jpg,"7,99 SZAMPON",Healthcare,7.99
+2.jpg,"CHUSTECZKI HIG.1Ox1OSZT. 4,75",Healthcare,4.75
+2.jpg,"MYDLO W PEYNIE 6,79",Healthcare,6.79
+2.jpg,"PODPASKI 14 SZT. 6,88",Healthcare,6.88
+4.jpg,"7,99F ODKAMIENIACZ 5OOML",Housing,7.99
+4.jpg,"PLYN D0 SZYB 750ML 5,49F",Housing,5.49
+4.jpg,"SPRAY DO KURZU 8,49F",Housing,8.49
+4.jpg,"SCIERKI MIKROE.4SZT 13,99F",Housing,13.99
+4.jpg,"ODPLAMIACZ 1KG 11,99F",Housing,11.99
+4.jpg,"W0RKI ZAMYK.40SZT 6,99F",Housing,6.99
+4.jpg,"F0LIAALUMIN.30M 9,49F",Housing,9.49
+4.jpg,"FILTRY D0 KAWY 8OSZT 9,31F",Housing,9.31
+8.jpg,"25Ox2 WOEOWINA MIELONA 16,98",Food,16.98
+8.jpg,"SER TWAROGOWY 3,29",Food,3.29
+8.jpg,"3,19 MAKARON SWIDERKI 5OOG",Food,3.19
+8.jpg,"MUSZTARDA 2,15",Food,2.15
+8.jpg,"MIOD WIELOKWIAT. 12,49",Food,12.49
+8.jpg,"7,86 WIN0GR0NA 0,874KG x8,99",Food,7.86
+6.jpg,"BATR. AA4SZT 9,99F",Other,9.99
+6.jpg,"PRZEDL.3M. 19,99F",Other,19.99
+6.jpg,"SWIECA ZAP. 7,99F",Other,7.99
+6.jpg,"24,99F LADOW.USB",Other,24.99
+6.jpg,"NOTESA6 6,49F",Other,6.49
+6.jpg,"DLUG.5SZT 4,29F",Other,4.29
+6.jpg,"TASMA DWUSTR. 8,49F",Other,8.49
+6.jpg,"UCHW.TEL.SAM 14,99F",Other,14.99
+6.jpg,"LATARKA LED 29,99F",Other,29.99
+6.jpg,"PLAST.RZEPY 12,99F",Other,12.99
+6.jpg,"KABELHDMI 2M 39,99F",Other,39.99
+6.jpg,"KART.PAMIECI 64GB 39,99F",Other,39.99
+6.jpg,"PENDRIVE 32GB 29,99F",Other,29.99
+6.jpg,"KYSZ BEZPRZ. 3,99F",Other,3.99
+6.jpg,"KLEJS.KAB.10SZT 6,99F",Other,6.99
+6.jpg,"SKRZYDL.OZDO. 2,49F",Other,2.49
+6.jpg,"FILC POD MEB. 5,49F",Other,5.49
+6.jpg,"REKAW.NITRYL. 2OSZT 16,99F",Other,16.99
+6.jpg,"OPAK.BUBBLE 7,49F",Other,7.49
+7.jpg,"W0DA K0K0 330ML 3,49F",Bevarage,3.49
+7.jpg,"NAPOJ KOKOS 1L 5,99F",Bevarage,5.99
+7.jpg,"S0K BRZ0SK.100%1L 4,79F",Bevarage,4.79
+7.jpg,"ENERGY DRINK ZERO 5OOML 3,99F",Bevarage,3.99
+7.jpg,"MATE NAP0J 330ML 6,49F",Bevarage,6.49
+7.jpg,"KAWA LATTE 250ML 5,29F",Bevarage,5.29
+7.jpg,"HERBATAZIEL.500ML 4,59F",Bevarage,4.59
+7.jpg,"S0KBURAK100%750ML 6,99 F",Bevarage,6.99
+7.jpg,"KEFIR NAT.400ML 2,69F",Bevarage,2.69
+7.jpg,"J0GURT PIT.TRUSK.350ML 3,39F",Bevarage,3.39
+7.jpg,"K0KTAJLPR0T.330ML 7,89F",Bevarage,7.89
+7.jpg,"NAPOJ MIGDAt 1L 8,49F",Bevarage,8.49
+7.jpg,"NAPOJ OWSIANY 1L 4,49F",Bevarage,4.49
+7.jpg,"MUS SM00THIE 250ML 3,29F",Bevarage,3.29
+7.jpg,"K0MBUCHA IMBIR 330ML 6,99F",Bevarage,6.99
+7.jpg,"COLA ZERO 1L 4,99F",Bevarage,4.99
+7.jpg,"TONIK PREMIUM 200ML 3,19F",Bevarage,3.19
+7.jpg,"S0K GRANAT 100%1L 9,99F",Bevarage,9.99
+7.jpg,"LEM0 KAKTUS 350ML 5,79F",Bevarage,5.79
+7.jpg,CTDERIAREK330MI 5.69.F,Bevarage,5.69
+10.jpg,"PEYN DO PODL. 9,49F",Housing,9.49
+10.jpg,"PR0SZEK 2.5 KG 26,99F",Housing,26.99
+10.jpg,"KAPSUEKIP/ 18,99F",Housing,18.99
+10.jpg,"GABKI 1O SZT 5,99F",Housing,5.99
+10.jpg,"SCIERKI 6,49F",Housing,6.49
+10.jpg,"ZAROWKAE27 2,99F",Housing,2.99
+10.jpg,"ZAROWKA GU1O 7,99F",Housing,7.99
+1.jpg,"PIERS Z KURCZAKA 15,79 F",Food,15.79
+1.jpg,"rabat - 3,00",Discount,3.00
+1.jpg,"SER MOZZARELLA 4,59F",Food,4.59
+1.jpg,"znizka -1,00",Discount,1.00
+1.jpg,"POMIDORY KOKTAJLOWE 6,49 F",Food,6.49
+1.jpg,"obnizka -0,80",Discount,0.80
+1.jpg,"PIECZYWO CZOSNK. 3,99 F",Food,3.99
+1.jpg,"-1,00 upust",Discount,1.00
+1.jpg,"PAROWKI DROBIOWE 7,99F",Food,7.99
+1.jpg,"promocja - 1,00",Discount,1.00
+1.jpg,"SMIETANKA 30% 3,89 F",Food,3.89
+1.jpg,"-1,00 z niz. -1,00",Discount,1.00
+1.jpg,"PLATKI KUKURYDZ. 4,99F",Food,4.99
+1.jpg,"rab. - 0,60",Discount,0.60
+1.jpg,"HERBATA CZARNA 5,79 F",Bevarage,5.79
+1.jpg,"- 1,50 znizka",Discount,1.50
+1.jpg,"SLEDZIE W SMIET. 9,49F",Food,9.49
+1.jpg,"obnizka -2,00",Discount,2.00

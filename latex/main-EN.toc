@@ -40,18 +40,18 @@
 \contentsline {chapter}{\numberline {5}Evaluation and Results}{36}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Evaluation Metrics}{36}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Experimental Setup}{36}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Results and Analysis}{36}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Comparison with Existing Methods}{36}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Discussion}{37}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Interpretation of Results}{37}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Challenges and Limitations}{37}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Recommendations for Future Work}{37}{section.6.3}%
-\contentsline {chapter}{\numberline {7}Conclusion}{38}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Summary of Findings}{38}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Contributions to the Field}{38}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Final Remarks}{38}{section.7.3}%
-\contentsline {chapter}{\numberline {8}References}{39}{chapter.8}%
-\contentsline {chapter}{\numberline {9}Appendices}{40}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Sample Receipt Data}{40}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Code Snippets}{40}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Additional Figures and Tables}{40}{section.9.3}%
+\contentsline {section}{\numberline {5.3}Results and Analysis}{37}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Comparison with Existing Methods}{37}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Discussion}{38}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Interpretation of Results}{38}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Challenges and Limitations}{38}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Recommendations for Future Work}{38}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Conclusion}{39}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Summary of Findings}{39}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Contributions to the Field}{39}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Final Remarks}{39}{section.7.3}%
+\contentsline {chapter}{\numberline {8}References}{40}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Appendices}{41}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Sample Receipt Data}{41}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Code Snippets}{41}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Additional Figures and Tables}{41}{section.9.3}%

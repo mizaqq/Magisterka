@@ -1,19 +1,30 @@
 params:
-  learning_rate: 0.1
-  max_depth: 6
-  n_estimators: 100
-  subsample: 0.8
-  colsample_bytree: 0.8
+  learning_rate: 0.3
+  max_depth: 5
+  n_estimators: 500
+  subsample: 1.0
+  colsample_bytree: 0.5
   min_child_weight: 5
   gamma: 0.1
-  reg_alpha: 0.1
-  reg_lambda: 0.1
+  reg_alpha: 1.0
+  reg_lambda: 1.0
 
-embeddingmodel: 'bert'
-finetune: False
-gptdatapath: '/home/miza/magisterka/Magisterka/src/data/annotations/gpt_generated_data8classes.csv'
-datapath: '/home/miza/magisterka/Magisterka/src/data/annotations/annotations_8classes.csv'
+finetune: 
+  finetune: false
+  model_base: '/home/miza/Magisterka/src/models/mini/finetuned_base_model'
+  model_augmented: '/home/miza/Magisterka/src/models/mini/finetuned_augmented_model'
+
+embeddingmodel: 
+  model_path: '/home/miza/Magisterka/src/models/mini/finetuned_base_model'
+
+
+gptdatapath: '/home/miza/Magisterka/src/data/annotations/annotations_gpt.csv'
+datapath: '/home/miza/Magisterka/src/data/annotations/annotations_6classes.csv'
+balance_data: True
+augument_classifier: True
+split_size: 0.3
 defaults:
+  - _self_
   - params: params_best_8classes
   - override hydra/sweeper: optuna
 
@@ -22,15 +33,18 @@ hydra:
   sweeper:
     direction: maximize
     study_name: xgb_sweep
-    n_trials: 50
+    n_trials: 1000
     params:
-      params.learning_rate: float(0.001, 0.3)
-      params.max_depth: int(3, 20)    
-      params.n_estimators: int(50, 1000)    
-      params.subsample: float(0.5, 1.0)     
-      params.colsample_bytree: float(0.5, 1.0)     
-      params.min_child_weight: int(1, 10)          
-      params.gamma: float(0.0, 5.0)                
-      params.reg_alpha: float(0.0, 5.0) 
-      params.reg_lambda: float(0.0, 5.0)
-      
+      params.learning_rate: float(0.01, 0.05, 0.1, 0.2, 0.3)
+      params.max_depth: int(3, 5, 7, 10, 15, 20)
+      params.n_estimators: int(50, 100, 200, 300, 500, 750, 1000)
+      params.subsample: float(0.5, 0.6, 0.7, 0.8, 0.9, 1.0)
+      params.colsample_bytree: float(0.5, 0.6, 0.7, 0.8, 0.9, 1.0)
+      params.min_child_weight: int(1, 2, 3, 5, 7, 10)
+      params.gamma: float(0.0, 0.1, 0.5, 1.0, 2.0, 5.0)
+      params.reg_alpha: float(0.0, 0.1, 0.5, 1.0, 2.0, 5.0)
+      params.reg_lambda: float(0.0, 0.1, 0.5, 1.0, 2.0, 5.0)
+      embeddingmodel.model_path: str('/home/miza/Magisterka/src/models/mini/finetuned_base_model',
+          '/home/miza/Magisterka/src/models/mini/finetuned_augmented_model', 
+          'bert')
+      balance_data: bool(True, False)

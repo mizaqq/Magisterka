@@ -60,3 +60,4 @@ src/results/
 multirun/*
 outputs
 mini_model/
+models/
