@@ -1,0 +1,9 @@
+learning_rate: 0.2
+max_depth: 7
+n_estimators: 500
+subsample: 0.5
+colsample_bytree: 0.6
+min_child_weight: 7
+gamma: 0.0
+reg_alpha: 0.0
+reg_lambda: 0.0

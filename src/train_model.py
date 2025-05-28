@@ -10,9 +10,6 @@ import numpy as np
 import random
 import pandas as pd
 
-np.random.seed(42)
-random.seed(42)
-
 
 @hydra.main(config_path="./conf", config_name="config")
 def main(cfg) -> None:
@@ -20,16 +17,18 @@ def main(cfg) -> None:
     dataloader.get_encoder()
     if cfg.finetune.finetune:
         data = dataloader.get_preprocessed_data()
-        train_data, _ = dataloader.split_data(data, 0.3)
+        train_data, __cached__, val_data = dataloader.split_data(data, 0.25)
         gpt_data = dataloader.get_gpt_data_for_training(Path(cfg.gptdatapath))
-        Embedding.finetune_mini(train_data, path=cfg.finetune.model_base)
+        Embedding.finetune_mini(train_data, val_data, path=cfg.finetune.model_base)
         data_together = pd.concat([train_data, gpt_data], ignore_index=True)
-        Embedding.finetune_mini(data_together, path=cfg.finetune.model_augmented)
+        Embedding.finetune_mini(data_together, val_data, path=cfg.finetune.model_augmented)
     if 'bert' in cfg.embeddingmodel.model_path:
         embedding_model = BertModelWrapper()
     elif 'mini' in cfg.embeddingmodel.model_path:
         embedding_model = Embedding.load_mini_model(cfg.embeddingmodel.model_path)
-    train_batch, test_batch = dataloader.get_training_ready_data(embedding_model, split_size=cfg.split_size)
+    train_batch, test_batch, validation_batch = dataloader.get_training_ready_data(
+        embedding_model, split_size=cfg.split_size
+    )
     gpt_data = dataloader.get_gpt_data_training_ready_data(embedding_model, Path(cfg.gptdatapath), cfg.balance_data)
     joined_data = dataloader.get_joined_data(
         train_batch['embeddings'], train_batch['category'], gpt_data['embeddings'], gpt_data['category']
@@ -40,13 +39,12 @@ def main(cfg) -> None:
     results = model.test_model(test_batch['embeddings'], test_batch['category'])
     print_metrics(results=results)
     print("Classes: ", [f"{i}:{c}" for i, c in enumerate(dataloader.le.classes_)])
-    model.save_model('/home/miza/Magisterka/src/model/xgboost_model.json')
 
     model.fit(joined_data['embeddings'], joined_data['category'])
     test_results = model.test_model(test_batch['embeddings'], test_batch['category'])
     print_metrics(test_results)
-    print("Test results:{}, {}".format(results['f1_score'], test_results['f1_score']))
     print("Classes: ", [f"{i}:{c}" for i, c in enumerate(dataloader.le.classes_)])
+
     hydra.utils.log.info(f'Test results: {results["f1_score"]}')
     hydra.utils.log.info(f'Augumented Test results:{test_results["f1_score"]}')
     return max(results['f1_score'], test_results['f1_score'])

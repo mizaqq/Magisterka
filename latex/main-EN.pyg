@@ -1,0 +1,14 @@
+@hydra.main(config_path="./conf", config_name="config")
+def main(cfg):
+    dataloader = Dataloader(Path(cfg.datapath))
+    embedding_model = Embedding.load_mini_model(cfg.embeddingmodel.model_path)
+
+    train_batch, test_batch, _ = dataloader.get_training_ready_data(
+        embedding_model, split_size=cfg.split_size
+    )
+
+    model = XGBoost(**cfg.params)
+    model.fit(train_batch['embeddings'], train_batch['category'])
+    results = model.test_model(test_batch['embeddings'], test_batch['category'])
+
+    hydra.utils.log.info(f'Test F1 Score: {results["f1_score"]}')

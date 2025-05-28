@@ -14,18 +14,18 @@ finetune:
   model_base: '/home/miza/Magisterka/src/models/mini/finetuned_base_model'
   model_augmented: '/home/miza/Magisterka/src/models/mini/finetuned_augmented_model'
 
-embeddingmodel: 
-  model_path: '/home/miza/Magisterka/src/models/mini/finetuned_base_model'
+embeddingmodel:
+  model_path: "/home/miza/Magisterka/src/models/mini/finetuned_base_model"
+
 
 
 gptdatapath: '/home/miza/Magisterka/src/data/annotations/annotations_gpt.csv'
 datapath: '/home/miza/Magisterka/src/data/annotations/annotations_6classes.csv'
 balance_data: True
-augument_classifier: True
 split_size: 0.3
 defaults:
   - _self_
-  - params: params_best_8classes
+  - params: params_best
   - override hydra/sweeper: optuna
 
 
@@ -34,9 +34,13 @@ hydra:
     direction: maximize
     study_name: xgb_sweep
     n_trials: 1000
+    n_jobs: 4
+    sampler:
+      _target_: optuna.samplers.TPESampler
+      seed: 42
     params:
       params.learning_rate: float(0.01, 0.05, 0.1, 0.2, 0.3)
-      params.max_depth: int(3, 5, 7, 10, 15, 20)
+      params.max_depth: int(5, 5, 7, 10, 15, 20)
       params.n_estimators: int(50, 100, 200, 300, 500, 750, 1000)
       params.subsample: float(0.5, 0.6, 0.7, 0.8, 0.9, 1.0)
       params.colsample_bytree: float(0.5, 0.6, 0.7, 0.8, 0.9, 1.0)
@@ -44,7 +48,6 @@ hydra:
       params.gamma: float(0.0, 0.1, 0.5, 1.0, 2.0, 5.0)
       params.reg_alpha: float(0.0, 0.1, 0.5, 1.0, 2.0, 5.0)
       params.reg_lambda: float(0.0, 0.1, 0.5, 1.0, 2.0, 5.0)
-      embeddingmodel.model_path: str('/home/miza/Magisterka/src/models/mini/finetuned_base_model',
-          '/home/miza/Magisterka/src/models/mini/finetuned_augmented_model', 
-          'bert')
-      balance_data: bool(True, False)
+      embeddingmodel.model_path: str('/home/miza/Magisterka/src/models/mini/finetuned_augmented_model')
+
+

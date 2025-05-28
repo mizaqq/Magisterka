@@ -38,34 +38,40 @@ class Dataloader:
             y = len(data)
         return data[:y]
 
-    def split_data(self, data=None, test_size: float = 0.2):
+    def split_data(self, data=None, test_size: float = 0.25):
         if data is None:
-            train_data, test_data = train_test_split(self.data, test_size=test_size, random_state=42)
+            train_data, test_data = train_test_split(
+                self.data, test_size=test_size, stratify=self.data['category'], random_state=42
+            )
         else:
-            train_data, test_data = train_test_split(data, test_size=test_size, random_state=42)
-        return train_data, test_data
+            train_data, test_data = train_test_split(
+                data, test_size=test_size, stratify=self.data['category'], random_state=42
+            )
+
+        train_data, val_data = train_test_split(
+            train_data, test_size=0.1, stratify=train_data['category'], random_state=42
+        )
+        return train_data, test_data, val_data
 
     def get_training_ready_data(
         self,
         model,
-        split_size: float = 0.2,
+        split_size: float = 0.25,
     ):
-        train_data, test_data = self.split_data(None, split_size)
-        train_categories = self.le.transform(train_data['category'])
-        test_categories = self.le.transform(test_data['category'])
-        train_data['Text'] = train_data['OCR_product'].apply(preprocess_text)
-        test_data['Text'] = test_data['OCR_product'].apply(preprocess_text)
-        train_embeddings = Embedding.embed_with_given_model(model, train_data['Text'].tolist())
-        test_embeddings = Embedding.embed_with_given_model(model, test_data['Text'].tolist())
-        train_batch = {
-            'embeddings': train_embeddings,
-            'category': train_categories,
+        train_data, test_data, val_data = self.split_data(None, split_size)
+        train_batch = self.data_to_embeddings(train_data, model)
+        test_batch = self.data_to_embeddings(test_data, model)
+        val_batch = self.data_to_embeddings(val_data, model)
+        return train_batch, test_batch, val_batch
+
+    def data_to_embeddings(self, data, model):
+        data['Text'] = data['OCR_product'].apply(preprocess_text)
+        embeddings = Embedding.embed_with_given_model(model, data['Text'].tolist())
+        categories = self.le.transform(data['category'])
+        return {
+            'embeddings': embeddings,
+            'category': categories,
         }
-        test_batch = {
-            'embeddings': test_embeddings,
-            'category': test_categories,
-        }
-        return train_batch, test_batch
 
     def get_gpt_data_for_training(
         self, path: Path = Path('/home/miza/Magisterka/src/data/annotations/gpt_generated_data8classes.csv')
