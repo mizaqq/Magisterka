@@ -917,7 +917,8 @@ better class-wise consistency mostly due to high improvemend in Healthcare class
 \end{table}
 
 This model shows better macro-averaged F1 performance compared to others, reflecting more balanced results across all classes, including  
-underrepresented ones.
+underrepresented ones. The problem with this result is that the embedding model showed opposite behavior compared to the best model,
+thus we could suspect that the model is overfitting to the GPT-generated data, which is not representative of real-world receipts.
 
 \subsection{BERT-Based Model (Out-of-the-Box)}
 
