@@ -1,0 +1,17 @@
+[0] Config.pm:307> INFO - This is Biber 2.19
+[0] Config.pm:310> INFO - Logfile is 'main-EN.blg'
+[39] biber:340> INFO - === Tue Jun  3, 2025, 19:34:06
+[49] Biber.pm:419> INFO - Reading 'main-EN.bcf'
+[80] Biber.pm:979> INFO - Found 20 citekeys in bib section 0
+[87] Biber.pm:4419> INFO - Processing section 0
+[92] Biber.pm:4610> INFO - Looking for bibtex file 'references.bib' for section 0
+[93] bibtex.pm:1713> INFO - LaTeX decoding ...
+[101] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[187] UCollate.pm:68> INFO - Overriding locale 'nil' defaults 'variable = shifted' with 'variable = non-ignorable'
+[187] UCollate.pm:68> INFO - Overriding locale 'nil' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[187] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'nil'
+[187] Biber.pm:4245> INFO - No sort tailoring available for locale 'nil'
+[200] bbl.pm:660> INFO - Writing 'main-EN.bbl' with encoding 'UTF-8'
+[205] bbl.pm:763> INFO - Output to main-EN.bbl
+[205] Biber.pm:131> WARN - I didn't find a database entry for 'wang2020minilm' (section 0)
+[205] Biber.pm:133> INFO - WARNINGS: 1

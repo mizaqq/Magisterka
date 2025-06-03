@@ -402,3 +402,22 @@
 	\newpage\null
     \thispagestyle{empty}
 }
+\sloppy
+\clubpenalty4000
+\widowpenalty4000
+\sfcode`\.=1000\relax
+
+% Paragraph spacing and indentation:
+\parskip=0pt plus 1pt
+\parindent=15pt
+\raggedbottom
+
+% Float placement parameters:
+\renewcommand{\topfraction}{0.99}       % Max fraction of a page for floats at top
+\renewcommand{\textfraction}{0.01}      % Min fraction of page that must be text
+\renewcommand{\dbltopfraction}{0.7}     % For double-column floats, max top float fraction
+\setlength{\floatsep}{13pt plus 2pt minus 2pt}      % Space between floats
+\setlength{\textfloatsep}{20pt plus 2pt minus 2pt}  % Space between floats and text
+\setlength{\intextsep}{13pt plus 2pt minus 2pt}     % Space around in-text floats
+\setlength{\dbltextfloatsep}{20pt plus 2pt minus 4pt} % Space around double-column floats
+\setlength{\dblfloatsep}{13pt}                       % Space between double-column floats

@@ -332,6 +332,32 @@
       \verb https://web.stanford.edu/~jurafsky/slp3/
       \endverb
     \endentry
+    \entry{kleczek2020polbert}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=e0a34721755a4c8264cacb7eb9ce3211}{%
+           family={Kłeczek},
+           familyi={K\bibinitperiod},
+           given={Dariusz},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Hugging Face}%
+      }
+      \strng{namehash}{e0a34721755a4c8264cacb7eb9ce3211}
+      \strng{fullhash}{e0a34721755a4c8264cacb7eb9ce3211}
+      \strng{bibnamehash}{e0a34721755a4c8264cacb7eb9ce3211}
+      \strng{authorbibnamehash}{e0a34721755a4c8264cacb7eb9ce3211}
+      \strng{authornamehash}{e0a34721755a4c8264cacb7eb9ce3211}
+      \strng{authorfullhash}{e0a34721755a4c8264cacb7eb9ce3211}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://huggingface.co/dkleczek/bert-base-polish-cased-v1}}
+      \field{note}{Accessed: 2025-06-03}
+      \field{title}{PolBERT: Polish BERT Language Model (Cased)}
+      \field{year}{2020}
+    \endentry
     \entry{liao2019rttextdet}{misc}{}
       \name{author}{5}{}{%
         {{hash=eaf4021168319e7c768d0bb6f1210cc6}{%

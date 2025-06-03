@@ -9,7 +9,7 @@
 \contentsline {section}{\numberline {2.1}Optical Character Recognition (OCR) Technologies}{14}{section.2.1}%
 \contentsline {paragraph}{Tesseract.}{14}{paragraph*.3}%
 \contentsline {paragraph}{PaddleOCR.}{14}{paragraph*.4}%
-\contentsline {section}{\numberline {2.2}Semantic Text Embeddings for Receipt Item Categorisation}{15}{section.2.2}%
+\contentsline {section}{\numberline {2.2}Semantic Text Embeddings for Receipt Item Categorisation}{16}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Count-based Methods}{17}{subsection.2.2.1}%
 \contentsline {paragraph}{Bag-of-Words.}{17}{paragraph*.8}%
 \contentsline {paragraph}{TF–IDF.}{17}{paragraph*.9}%
@@ -18,8 +18,8 @@
 \contentsline {subsection}{\numberline {2.2.3}Sentence-BERT Embeddings}{18}{subsection.2.2.3}%
 \contentsline {paragraph}{MiniLM backbone.}{19}{paragraph*.12}%
 \contentsline {paragraph}{\texttt {all-mini-l6-v2}.}{19}{paragraph*.13}%
-\contentsline {section}{\numberline {2.3}XGBoost Classifier}{19}{section.2.3}%
-\contentsline {paragraph}{Key design features.}{19}{paragraph*.14}%
+\contentsline {section}{\numberline {2.3}XGBoost Classifier}{20}{section.2.3}%
+\contentsline {paragraph}{Key design features.}{20}{paragraph*.14}%
 \contentsline {section}{\numberline {2.4}Challenges in OCR and NLP for Document Understanding}{21}{section.2.4}%
 \contentsline {chapter}{\numberline {3}Methodology}{23}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Introduction}{23}{section.3.1}%
@@ -28,49 +28,49 @@
 \contentsline {subsection}{\numberline {3.3.1}Data Acquisition and Annotation}{24}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Data Pipeline and Loading}{25}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}Class Distribution Analysis}{25}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Embedding Generation}{27}{subsection.3.3.4}%
-\contentsline {section}{\numberline {3.4}Modeling and Analysis}{27}{section.3.4}%
+\contentsline {subsection}{\numberline {3.3.4}Embedding Generation}{26}{subsection.3.3.4}%
+\contentsline {section}{\numberline {3.4}Modelling and Analysis}{27}{section.3.4}%
 \contentsline {section}{\numberline {3.5}Experimental Setup and Evaluation}{28}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Summary}{29}{section.3.6}%
+\contentsline {section}{\numberline {3.6}Summary}{28}{section.3.6}%
 \contentsline {chapter}{\numberline {4}Implementation}{30}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Overview}{30}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Technology Stack}{30}{section.4.2}%
 \contentsline {section}{\numberline {4.3}System Architecture}{31}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Component Implementation}{32}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}DataLoader and Input Handling}{32}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Preprocessing Module}{32}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Embedding Interface}{33}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.2}Pre-processing Module}{32}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Embedding Interface}{32}{subsection.4.4.3}%
 \contentsline {subsection}{\numberline {4.4.4}Training and Evaluation Pipeline}{33}{subsection.4.4.4}%
-\contentsline {section}{\numberline {4.5}Training Configuration}{34}{section.4.5}%
+\contentsline {section}{\numberline {4.5}Training Configuration}{33}{section.4.5}%
 \contentsline {section}{\numberline {4.6}Reproducibility and Setup}{34}{section.4.6}%
 \contentsline {subsection}{\numberline {4.6.1}Project Structure}{34}{subsection.4.6.1}%
 \contentsline {subsection}{\numberline {4.6.2}Installation Instructions}{35}{subsection.4.6.2}%
-\contentsline {subsection}{\numberline {4.6.3}Configuration Management with Hydra}{36}{subsection.4.6.3}%
-\contentsline {section}{\numberline {4.7}Summary}{37}{section.4.7}%
-\contentsline {chapter}{\numberline {5}Evaluation and Results}{38}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Experimental Setup}{38}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Evaluation Metrics}{39}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Result Analysis}{39}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Best Performing Model}{39}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Fine-Tuned Sentence-Transformer on Mixed Data}{40}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}BERT-Based Model (Out-of-the-Box)}{42}{subsection.5.3.3}%
-\contentsline {chapter}{\numberline {6}Discussion}{43}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Interpretation of Results}{43}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Impact of fine-tuning.}{44}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Influence of GPT augmentation.}{44}{subsection.6.1.2}%
-\contentsline {subsection}{\numberline {6.1.3}Comparison of Micro and macro metrics.}{44}{subsection.6.1.3}%
-\contentsline {subsection}{\numberline {6.1.4}Practical implications.}{44}{subsection.6.1.4}%
-\contentsline {section}{\numberline {6.2}Recommendations for Future Work.}{44}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Limitations of the Study}{45}{section.6.3}%
-\contentsline {chapter}{\numberline {7}Conclusion}{46}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Summary of Findings}{46}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Contributions to the Field}{46}{section.7.2}%
-\contentsline {chapter}{\numberline {8}Appendices}{48}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Example Receipt and Annotation}{48}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Implementation Examples}{49}{section.8.2}%
-\contentsline {subsection}{\numberline {8.2.1}Text Preprocessing}{49}{subsection.8.2.1}%
-\contentsline {subsection}{\numberline {8.2.2}OCR Pipeline}{49}{subsection.8.2.2}%
-\contentsline {subsection}{\numberline {8.2.3}Sentence-Transformer Fine-tuning}{50}{subsection.8.2.3}%
-\contentsline {subsection}{\numberline {8.2.4}Hydra-driven Model Training Pipeline}{50}{subsection.8.2.4}%
-\contentsline {section}{\numberline {8.3}Additional Figures and Tables}{51}{section.8.3}%
-\contentsline {subsection}{\numberline {8.3.1}XGBoost Hyperparameters by Model Type}{51}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {4.6.3}Configuration Management with Hydra}{35}{subsection.4.6.3}%
+\contentsline {section}{\numberline {4.7}Summary}{36}{section.4.7}%
+\contentsline {chapter}{\numberline {5}Evaluation and Results}{37}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Experimental Setup}{37}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Evaluation Metrics}{37}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Result Analysis}{38}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Best-performing model}{38}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Sentence-BERT Fine-tuned on Mixed Data}{39}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}BERT-Based Model (Out-of-the-Box)}{40}{subsection.5.3.3}%
+\contentsline {chapter}{\numberline {6}Discussion}{41}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Interpretation of Results}{41}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Impact of fine-tuning}{41}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Influence of GPT augmentation}{41}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Comparison of micro and macro metrics}{42}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.4}Practical implications}{43}{subsection.6.1.4}%
+\contentsline {section}{\numberline {6.2}Recommendations for Future Work}{43}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Limitations of the Study}{43}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Conclusion}{44}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Summary of Findings}{44}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Contributions to the Field}{44}{section.7.2}%
+\contentsline {chapter}{\numberline {8}Appendices}{46}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Example Receipt and Annotation}{46}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Implementation Examples}{47}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Text Preprocessing}{47}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}OCR Pipeline}{47}{subsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.2.3}Sentence-Transformer Fine-tuning}{48}{subsection.8.2.3}%
+\contentsline {subsection}{\numberline {8.2.4}Hydra-driven Model Training Pipeline}{48}{subsection.8.2.4}%
+\contentsline {section}{\numberline {8.3}Additional Figures and Tables}{49}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}XGBoost Hyperparameters by Model Type}{49}{subsection.8.3.1}%

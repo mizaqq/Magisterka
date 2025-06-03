@@ -411,9 +411,9 @@ INPUT ./images/bert_procedures.png
 INPUT ./images/bert_procedures.png
 INPUT ./images/bert_procedures.png
 INPUT ./images/bert_procedures.png
+INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmtk10.tfm
 INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc
 INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc
-INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmtk10.tfm
 INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc
 INPUT ./images/tree_ensemble_model.png
 INPUT ./images/tree_ensemble_model.png
@@ -426,11 +426,12 @@ INPUT ./images/structure_score_calculation.png
 INPUT ./images/structure_score_calculation.png
 INPUT ./images/structure_score_calculation.png
 INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc
-INPUT ./images/class_distribution_8classes.png
-INPUT ./images/class_distribution_8classes.png
-INPUT ./images/class_distribution_8classes.png
-INPUT ./images/class_distribution_8classes.png
-INPUT ./images/class_distribution_8classes.png
+INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmr9.tfm
+INPUT ./images/class_distribution.png
+INPUT ./images/class_distribution.png
+INPUT ./images/class_distribution.png
+INPUT ./images/class_distribution.png
+INPUT ./images/class_distribution.png
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -438,6 +439,7 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmtt10.tfm
+INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmr10.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmbx9.tfm
 INPUT ./images/sample_receipt.jpg
 INPUT ./images/sample_receipt.jpg
@@ -447,7 +449,6 @@ INPUT ./images/sample_receipt.jpg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmr10.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmcsc10.tfm
 INPUT main-EN.aux
 INPUT ./main-EN.out
