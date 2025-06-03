@@ -1,14 +1,14 @@
 # Fdb version 4
-["biber main-EN"] 0 "main-EN.bcf" "main-EN.bbl" "main-EN" 1748428572.09855 -1
-  "main-EN.bcf" 1748428571.98622 109843 2c88a3a660dd1c3316afe2b6579cb9c5 "pdflatex"
-  "references.bib" 1747162866.35145 5751 7dd94679342431e504942c3a441cafea ""
+["biber main-EN"] 0 "main-EN.bcf" "main-EN.bbl" "main-EN" 1748962498.3493 -1
+  "main-EN.bcf" 1748962498.25242 110061 22e4514eecc68ceab3772b0d66b435f1 "pdflatex"
+  "references.bib" 1748512326.14312 7274 5255ada7854d6be91e60a93f2f4129d4 ""
   (generated)
   "main-EN.bbl"
   "main-EN.blg"
   (rewritten before read)
-["pdflatex"] 1748428570.66422 "/home/miza/Magisterka/latex/main-EN.tex" "main-EN.pdf" "main-EN" 1748428572.09878 0
+["pdflatex"] 1748962496.98659 "/home/miza/Magisterka/latex/main-EN.tex" "main-EN.pdf" "main-EN" 1748962498.34951 0
   "/etc/texmf/web2c/texmf.cnf" 1741109064.03255 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/miza/Magisterka/latex/main-EN.tex" 1748428568.77882 77726 f8506dc83ee6a4e1d6c07d1b7ea156eb ""
+  "/home/miza/Magisterka/latex/main-EN.tex" 1748962496.67154 77927 7760287d8c2a346694666b397ece8afc ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm" 1136768653 2288 f478fc8fed18759effb59f3dad7f3084 ""
@@ -222,20 +222,20 @@
   "SGGW-thesis-EN.cls" 1747162866.34079 13009 c0c9d89589f441907b87b9b0eb2b3f0b ""
   "footer_WZIM.png" 1747162866.34079 25552 e69869ba48dabee4db53ed77a1b53c98 ""
   "header_msc.png" 1747162866.35145 10308 f559b5cd4adc841ce8301a89e7a13e53 ""
-  "images/Structure score calculation.png" 1747162866.35145 62505 1b7741696c9ffe96aab756010b2d8f94 ""
   "images/bert_procedures.png" 1747162866.35145 126546 ea03af5e0841a1ed5fb5e21037358790 ""
   "images/class_distribution_8classes.png" 1747163102.04221 44571 acf096a9dd0d9a5170e1f0a7a7070315 ""
   "images/cnn_text_recognizer.png" 1747162866.35145 95194 15a2724c2ffe808b02ca148f31bc777a ""
   "images/sample_receipt.jpg" 1748420087.60927 69306 0eff9bd65362ed5754ac0e2fd55d82f8 ""
+  "images/structure_score_calculation.png" 1747162866.35145 62505 1b7741696c9ffe96aab756010b2d8f94 ""
   "images/text_detector_db.png" 1747162866.35145 138597 bc211b3eced93e4104a5e9d00301f5b8 ""
   "images/tfidf_embeddings.png" 1747162866.35145 204305 c724d5e6ff83fe076c109fff8ec8ca8a ""
   "images/tree_ensemble_model.png" 1747162866.35145 90945 633dfc4599a9411d124cc142b71e7a9f ""
-  "main-EN.aux" 1748428571.98622 19939 3810a8b145ee9d556f86c1b96426619e "pdflatex"
-  "main-EN.bbl" 1748171367.7846 26648 9de6c6f9fc62a95845216dd6fa824dfa "biber main-EN"
-  "main-EN.out" 1748428571.98622 11667 61c29f504255b2998b956fbfdf22a513 "pdflatex"
-  "main-EN.run.xml" 1748428571.98622 2325 b8bd1cd8fbbd6e55af327f971fa1d30a "pdflatex"
-  "main-EN.tex" 1748428568.77882 77726 f8506dc83ee6a4e1d6c07d1b7ea156eb ""
-  "main-EN.toc" 1748428571.98622 5738 fc74ee9e919a4b798cc12d2612447d09 "pdflatex"
+  "main-EN.aux" 1748962498.25242 21534 6687207e231e3bec13eae613df6b163b "pdflatex"
+  "main-EN.bbl" 1748512329.1006 29477 67f514cb0cb7376206f98b23ba232f4a "biber main-EN"
+  "main-EN.out" 1748962498.25242 11852 9888f967d8741e073d6a6abcbea5b554 "pdflatex"
+  "main-EN.run.xml" 1748962498.25242 2325 b8bd1cd8fbbd6e55af327f971fa1d30a "pdflatex"
+  "main-EN.tex" 1748962496.67154 77927 7760287d8c2a346694666b397ece8afc ""
+  "main-EN.toc" 1748962498.25242 6383 534f180c242831afb92c710d172cf906 "pdflatex"
   (generated)
   "main-EN.aux"
   "main-EN.bcf"

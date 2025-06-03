@@ -17,7 +17,7 @@ def main(cfg) -> None:
     dataloader.get_encoder()
     if cfg.finetune.finetune:
         data = dataloader.get_preprocessed_data()
-        train_data, __cached__, val_data = dataloader.split_data(data, 0.25)
+        train_data, _, val_data = dataloader.split_data(data, 0.25)
         gpt_data = dataloader.get_gpt_data_for_training(Path(cfg.gptdatapath))
         Embedding.finetune_mini(train_data, val_data, path=cfg.finetune.model_base)
         data_together = pd.concat([train_data, gpt_data], ignore_index=True)
