@@ -1,18 +1,19 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'main-EN.blg'
-[41] biber:340> INFO - === Tue Jun  3, 2025, 20:01:22
-[51] Biber.pm:419> INFO - Reading 'main-EN.bcf'
-[80] Biber.pm:979> INFO - Found 20 citekeys in bib section 0
-[86] Biber.pm:4419> INFO - Processing section 0
-[92] Biber.pm:4610> INFO - Looking for bibtex file 'references.bib' for section 0
-[93] bibtex.pm:1713> INFO - LaTeX decoding ...
-[102] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
-[191] UCollate.pm:68> INFO - Overriding locale 'nil' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[191] UCollate.pm:68> INFO - Overriding locale 'nil' defaults 'variable = shifted' with 'variable = non-ignorable'
-[191] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'nil'
-[191] Biber.pm:4245> INFO - No sort tailoring available for locale 'nil'
-[203] bbl.pm:660> INFO - Writing 'main-EN.bbl' with encoding 'UTF-8'
-[208] bbl.pm:763> INFO - Output to main-EN.bbl
-[208] Biber.pm:131> WARN - legacy month field 'aug' in entry 'Chen_2016' is not an integer - this will probably not sort properly.
-[208] Biber.pm:131> WARN - I didn't find a database entry for 'wang2020minilm' (section 0)
-[208] Biber.pm:133> INFO - WARNINGS: 2
+[40] biber:340> INFO - === Tue Jun  3, 2025, 20:27:46
+[47] Biber.pm:419> INFO - Reading 'main-EN.bcf'
+[79] Biber.pm:979> INFO - Found 19 citekeys in bib section 0
+[85] Biber.pm:4419> INFO - Processing section 0
+[90] Biber.pm:4610> INFO - Looking for bibtex file 'references.bib' for section 0
+[91] bibtex.pm:1713> INFO - LaTeX decoding ...
+[99] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[182] UCollate.pm:68> INFO - Overriding locale 'nil' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[182] UCollate.pm:68> INFO - Overriding locale 'nil' defaults 'variable = shifted' with 'variable = non-ignorable'
+[182] Biber.pm:4239> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'nil'
+[182] Biber.pm:4245> INFO - No sort tailoring available for locale 'nil'
+[189] bbl.pm:660> INFO - Writing 'main-EN.bbl' with encoding 'UTF-8'
+[194] bbl.pm:763> INFO - Output to main-EN.bbl
+[194] Biber.pm:131> WARN - Duplicate entry key: 'ocrsystems' in file 'references.bib', skipping ...
+[194] Biber.pm:131> WARN - legacy month field 'aug' in entry 'Chen_2016' is not an integer - this will probably not sort properly.
+[194] Biber.pm:131> WARN - I didn't find a database entry for 'wang2020minilm' (section 0)
+[194] Biber.pm:133> INFO - WARNINGS: 3

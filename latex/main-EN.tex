@@ -1,11 +1,19 @@
 \documentclass{SGGW-thesis-EN}
 \usepackage[utf8]{inputenc}
-\usepackage[backend=biber,style=numeric]{biblatex}
 \usepackage{tabularx}
 \usepackage{tikz}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{booktabs}
+\usepackage[
+  backend=biber,
+  style=numeric,     
+  sorting=none,       
+  giveninits=true,     
+  maxbibnames=3,       
+  doi=false,   
+  isbn=false,          
+]{biblatex}
 
 
 \lstdefinelanguage{yaml}{
@@ -162,7 +170,7 @@ Traditional OCR techniques relied on template matching, statistical classificati
 structural analysis but offered limited adaptability to varying fonts and noisy inputs~\cite{ocrsystems}.
 Modern systems employ deep-learning pipelines that combine convolutional neural networks
 (CNNs) for feature extraction with recurrent or attention-based architectures—such as
-LSTM or GRU layers—for sequence modelling~\cite{shi2016endtoend}.
+LSTM or GRU layers—for sequence modelling~\cite{shi2017e2eseq}.
 
 Recent approaches add attention mechanisms so the network can focus dynamically on
 salient regions of an image.
@@ -206,7 +214,7 @@ further improve performance while preserving low-latency requirements.
 \begin{figure}[h]
   \centering
   \includegraphics[width=1\textwidth]{images/cnn_text_recognizer.png}
-  \caption{CRNN text recognition architecture~\cite{shi2015e2etnn}.}
+  \caption{CRNN text recognition architecture~\cite{shi2017e2eseq}.}
   \label{fig:cnn_text_recognizer}
   \end{figure}
 \begin{figure}[h]
@@ -557,7 +565,7 @@ are stripped, digits are dropped to avoid price leakage, and single-letter token
 carry meaning in this domain.
 
 These preprocessing operations standardise the textual data and ensure that only informative content reaches the
-embedding models and classifier.  The original dataset (292 entries) is first divided with stratified sampling: 70 %
+embedding models and classifier.  The original dataset (292 entries) is first divided with stratified sampling: 70 \%
 (204 entries) forms the training pool and 30 \% (88 entries) forms the fixed test set.  The training pool is then split
 again so that 90 \% (184 entries) is used for model fitting and 10 \% (20 entries) for validation.  Synthetic GPT-4
 examples are added \emph{only} to the training portion (184 entries) when the augmentation setting is evaluated, while
@@ -1384,7 +1392,6 @@ reg_lambda: 0.0
     \bottomrule
   \end{tabularx}
 \end{table}
-\renewcommand{\bibname}{Bibliography}
 
 \printbibliography
 
