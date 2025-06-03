@@ -335,7 +335,7 @@
     \entry{kleczek2020polbert}{misc}{}
       \name{author}{1}{}{%
         {{hash=e0a34721755a4c8264cacb7eb9ce3211}{%
-           family={Kłeczek},
+           family={K{ł}eczek},
            familyi={K\bibinitperiod},
            given={Dariusz},
            giveni={D\bibinitperiod}}}%
@@ -457,7 +457,7 @@
       \verb https://arxiv.org/abs/1301.3781
       \endverb
     \endentry
-    \entry{natekin2013gradient}{article}{}
+    \entry{natekin2013gradient}{misc}{}
       \name{author}{2}{}{%
         {{hash=393293bd13d59adfb45e3616fece409a}{%
            family={Natekin},

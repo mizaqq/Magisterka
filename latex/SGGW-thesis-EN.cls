@@ -365,6 +365,7 @@
 		Słowa kluczowe -- \foreignlanguage{polish}{{#3}}
 	
 	\vfill
+	\newpage
 	\begin{center}
 		\textbf{Summary}\\
 	\end{center}
