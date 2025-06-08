@@ -752,7 +752,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://huggingface.co/dkleczek/bert-base-polish-uncased-v1}}
-      \field{title}{PolBERT: Polish BERT Language Model (unased)}
+      \field{title}{PolBERT: Polish BERT Language Model (uncased)}
       \field{year}{2020}
     \endentry
   \enddatalist

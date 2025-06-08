@@ -1,9 +1,9 @@
-PWD /home/miza/Magisterka/latex
+PWD /home/miza/magisterka/Magisterka/latex
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/miza/Magisterka/latex/main-EN.tex
+INPUT /home/miza/magisterka/Magisterka/latex/main-EN.tex
 OUTPUT main-EN.log
 INPUT ./SGGW-thesis-EN.cls
 INPUT SGGW-thesis-EN.cls
