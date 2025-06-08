@@ -390,21 +390,6 @@ INPUT /usr/share/texmf/tex/latex/lm/ts1lmr.fd
 INPUT /usr/share/texmf/tex/latex/lm/ts1lmr.fd
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ts1-lmr12.tfm
 INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc
-INPUT ./images/cnn_text_recognizer.png
-INPUT ./images/cnn_text_recognizer.png
-INPUT ./images/cnn_text_recognizer.png
-INPUT ./images/cnn_text_recognizer.png
-INPUT ./images/cnn_text_recognizer.png
-INPUT ./images/text_detector_db.png
-INPUT ./images/text_detector_db.png
-INPUT ./images/text_detector_db.png
-INPUT ./images/text_detector_db.png
-INPUT ./images/text_detector_db.png
-INPUT ./images/tfidf_embeddings.png
-INPUT ./images/tfidf_embeddings.png
-INPUT ./images/tfidf_embeddings.png
-INPUT ./images/tfidf_embeddings.png
-INPUT ./images/tfidf_embeddings.png
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmr12.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmbx12.tfm
 INPUT ./images/bert_procedures.png
@@ -412,7 +397,6 @@ INPUT ./images/bert_procedures.png
 INPUT ./images/bert_procedures.png
 INPUT ./images/bert_procedures.png
 INPUT ./images/bert_procedures.png
-INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmtk10.tfm
 INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc
 INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc
 INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc
@@ -467,6 +451,5 @@ INPUT /usr/share/texmf/fonts/type1/public/lm/lmr9.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmri12.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmsy9.pfb
-INPUT /usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb

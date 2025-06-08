@@ -210,35 +210,14 @@ sequential character features.
 Additional enhancements, such as a lighter backbone and task-specific augmentation,
 further improve performance while preserving low-latency requirements.
 
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1\textwidth]{images/cnn_text_recognizer.png}
-  \caption{CRNN text recognition architecture~\cite{shi2017e2eseq}.}
-  \label{fig:cnn_text_recognizer}
-  \end{figure}
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=1\textwidth]{images/text_detector_db.png}
-    \caption{DBNet text detection architecture~\cite{liao2019rttextdet}.}
-    \label{fig:text_detector_db}
-  \end{figure}
-
 \section{Semantic Text Embeddings for Receipt Item Categorisation}
 To enable machine-learning models to analyse text, the text must first be converted into a numerical
 format—a process known as \emph{vectorisation}.
 Word embeddings are fixed-length vectors that encode semantic meaning and inter-word relationships;
 words with similar meanings occupy nearby positions in the embedding space~\cite{almeida2023wordembeddingssurvey}.
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[height=9cm]{images/tfidf_embeddings.png}
-  \caption{Two-dimensional projection of TF–IDF vectors for the \textit{20~Newsgroups} dataset (scikit-learn).}
-  \label{fig:tfidf_embeddings}
-\end{figure}
-
 There are several approaches to generating embeddings.
-Before embedding, the text is typically pre-processed: normalisation (e.g.\ lemmatisation or stemming)
+Before embedding, the text is typically pre-processed with normalisation (e.g.\ lemmatisation or stemming)
 and tokenisation, which segments text into individual words or tokens~\cite{jurafsky2023slp3}.
 
 Embedding methods are commonly divided into two families:
@@ -254,7 +233,7 @@ co-occurs with other words in a given context.
 These methods typically construct a sparse matrix whose rows and columns enumerate the
 vocabulary, while each cell records the frequency of co-occurrence between word pairs.
 Two common variants are the \textit{Bag-of-Words}~(BoW) model and \textit{Term Frequency–Inverse
-Document Frequency}~(TF–IDF) \cite{jurafsky2023slp3}.
+Document Frequency}~(TF–IDF)~\cite{jurafsky2023slp3}.
 \paragraph{Bag-of-Words.}
 BoW represents a document as an unordered vector of raw word counts, ignoring word order and
 grammatical relations.
@@ -264,8 +243,7 @@ TF–IDF assigns a weight to each word proportional to its frequency in the docu
 proportional to its frequency across the whole corpus, thereby emphasising words that are
 especially informative for that document.
 \subsection{Prediction-based Methods}
-Prediction-based methods learn word representations by \emph{predicting} a target word from its
-context—or vice versa—rather than by tallying raw co-occurrence counts.
+Prediction-based approaches derive word embeddings by using surrounding context to predict a target word (or vice versa) instead of relying on raw co-occurrence counts.
 The resulting embeddings are stored in dense matrices, which are typically more
 parameter-efficient and capture semantic regularities better than the sparse matrices used by
 count-based techniques~\cite{jurafsky2023slp3}.
@@ -277,7 +255,7 @@ By contrast, BERT—a transformer encoder—produces \emph{contextual} embedding
 on the surrounding tokens.
 
 \paragraph{Word2Vec.}
-Word2Vec is trained under one of two architectures:% 
+Word2Vec is trained under one of two architectures:
 \begin{enumerate}
   \item \textbf{Continuous Bag-of-Words (CBOW)} – predicts the centre (target) word from its surrounding
         context words.
@@ -289,8 +267,7 @@ efficiency and shorter training times \cite{mikolov2013distributed}.
 \textbf{BERT (Bidirectional Encoder Representations from Transformers)} is a deep-learning model introduced by Google that generates 
 \emph{contextualised} word embeddings by processing text simultaneously in both directions (left-to-right and right-to-left).
 
-Unlike earlier models that produce static embeddings, BERT represents each word in the context of the entire sentence, thereby capturing 
-polysemy and syntactic nuance.
+Unlike earlier models that produce static embeddings, BERT represents each word in the context of the entire sentence, thereby capturing syntactic ambiguity and nuance.
 
 The underlying transformer architecture employs self-attention to weight the contribution of each token relative to all others, allowing 
 the model to \emph{derive} complex semantic relationships.
@@ -305,15 +282,14 @@ BERT is pre-trained in a two-part, self-supervised scheme:
 \begin{figure}[h]
   \centering
   \includegraphics[height=5cm]{images/bert_procedures.png}
-  \caption{Pre-training objectives of BERT: MLM and NSP \cite{devlin2019bertpretrainingdeepbidirectional}.}
+  \caption{Pre-training objectives of BERT: MLM and NSP~\cite{devlin2019bertpretrainingdeepbidirectional}.}
   \label{fig:bert_procedures}
 \end{figure}
 
 \subsection{Sentence-BERT Embeddings}
 Sentence-BERT (SBERT) adapts the original BERT into a \emph{Bi-BERT-encoder} architecture that
-maps sentences to dense vectors which can be compared with simple distance measures
-\cite{reimers2019sbert}.
-Two weight-sharing transformer towers encode each sentence independently; a subsequent pooling
+maps sentences to dense vectors which can be compared with simple distance measures~\cite{reimers2019sbert}.
+Two weight-sharing transformer towers encode each sentence independently and a subsequent pooling
 operation (typically mean pooling) yields a fixed-length embedding.
 Because the sentence vectors can be pre-computed, semantic search or clustering over \(n\)
 sentences requires only \(O(n)\) encoder calls, in contrast to the \(O(n^{2})\) calls needed by
@@ -327,12 +303,11 @@ embedding space for downstream tasks such as receipt-item categorisation.
 
 \paragraph{MiniLM backbone.}
 MiniLM is a distilled transformer that compresses BERT into a lighter model by matching
-self-attention distributions and hidden-state relations while reducing depth and width
-\cite{wang2020minilm}.
+self-attention distributions and hidden-state relations while reducing depth and width~\cite{wang2020minilmdeepselfattentiondistillation}.
 Its efficiency makes it attractive for real-time or resource-constrained deployments without
 a dramatic drop in accuracy.
 
-\paragraph{\texttt{all-mini-l6-v2}.}
+\paragraph{All-MiniLM model.}
 The model \texttt{all-mini-l6-v2}—provided by the \emph{sentence-transformers} library is a
 six-layer SBERT distilled from \texttt{microsoft/MiniLM-L12-H384-uncased} and further
 fine-tuned on \(\sim 1\) billion sentence pairs~\cite{reimers2021allminilm}.
@@ -345,18 +320,16 @@ leverages for real-time categorisation of Polish receipt items.
 
 Contextual embeddings produced by transformer-based models have shown strong performance in a
 wide range of NLP tasks, including text classification~\cite{devlin2019bertpretrainingdeepbidirectional}.
-
 In the present study, embeddings generated by pre-trained BERT variants are used as feature
 vectors for a classifier that assigns receipt items to predefined expense categories.
 
 \section{XGBoost Classifier}
 
-XGBoost (\emph{eXtreme Gradient Boosting}) is an open-source library that implements gradient-
-boosted decision trees.
-It consistently delivers state-of-the-art accuracy on a wide range of supervised-learning tasks~\cite{Chen_2016}.
+XGBoost (\emph{eXtreme Gradient Boosting}) is an open-source library that implements gradient boosted decision trees.
+It consistently delivers state-of-the-art accuracy on a wide range of supervised learning tasks~\cite{Chen_2016}.
 
 Gradient boosting is an ensemble technique that, rather than fitting a single model,
-\emph{builds} an initial weak learner and then iteratively fits additional learners that
+builds an initial weak learner and then iteratively fits additional learners that
 minimise the residual loss~\cite{natekin2013gradient}.
 
 \paragraph{Key design features.}
@@ -379,7 +352,7 @@ Mathematically, the ensemble prediction for an instance \(x_i\) is
   \centering
   \begin{minipage}[c]{0.40\textwidth}
     \[
-      \hat{y}_i = \sum_{k=1}^{K} f_k(x_i)
+      \hat{y}_i = \sum_{k=1}^{K} f_k(x_i) .
     \]
   \end{minipage}\hfill
   \begin{minipage}[c]{0.55\textwidth}
@@ -413,8 +386,9 @@ The per-iteration objective simplifies to
 \noindent where, \(g_i\) and \(h_i\) denote the first and second-order gradient statistics of the loss with
 respect to the current prediction, while \(\gamma\) and \(\lambda\) are hyperparameters that penalise
 complex trees and thus curb over-fitting.
-In XGBoost these hyperparameters govern the trade-off between model complexity and
-generalisation.
+In XGBoost these hyperparameters~\ref{tab:xgboost_hyperparameters} govern the trade-off between model complexity and
+generalisation. Tuning these settings balances close fit to the training data against the need for a simpler,
+more generalisable model.
 
 \begin{table}[h]
   \centering
@@ -435,8 +409,7 @@ generalisation.
     \bottomrule
   \end{tabularx}
 \end{table}
-Tuning these settings balances close fit to the training data against the need for a simpler,
-more generalisable model
+
 
 \section{Challenges in OCR and NLP for Document Understanding}
 
@@ -490,7 +463,7 @@ The primary objective of this study is to develop and rigorously evaluate an end
 categorising product information from retail receipts.  To achieve this, I adopt a modular research design: each
 component—OCR, embedding generation, and classification—may be created and tested independently, yet still plugs into a
 single workflow.  This layout enables targeted assessment of individual modules and direct comparison between different
-models and techniques.  Performance is examined in two experimental settings: an eight-class categorisation task trained
+models and techniques.  Performance is examined in two experimental settings: an six-class categorisation task trained
 on the original data, and the same task trained on data augmented with GPT-4-generated lines.
 These settings probe robustness under varying levels of complexity and data composition while keeping all other inputs
 fixed.
@@ -628,7 +601,7 @@ optimised with a simple search that uses a fixed validation set drawn once from 
 is applied, and the same train–validation split (defined with a fixed random seed) is reused in every trial.
 
 \textbf{Taxonomy and metrics.} Classification follows an six-class scheme. Training, validation and test splits remain
-identical across embedding types, ensuring fair comparison. Performance is reported with the macro-averaged
+identical across embedding types, ensuring fair comparison. Performance is reported with the
 F\textsubscript{1} score, which gives equal weight to every class and therefore counteracts the natural imbalance found
 in real receipts.
 
@@ -651,15 +624,15 @@ and contains only real receipt lines; it is never exposed during training or val
 Two orthogonal switches control the training data:
 \begin{itemize}
   \item \textbf{Augmentation}\,: GPT lines either included (\emph{augmented}) or excluded (\emph{non-augmented}).
-  \item \textbf{Balancing}\,: when GPT lines are used, they are kept uniform (\emph{balanced}) or resampled to mirror the
-        empirical class frequencies (\emph{not-balanced}).
+  \item \textbf{Balancing}\,: when GPT lines are used, they are kept with origin distribution (\emph{not-balanced}) or resampled to mirror the
+        empirical class frequencies (\emph{balanced}).
 \end{itemize}
 
 Combining the three embeddings with these dataset options yields twelve distinct scenarios. Hyper-parameters for
 XGBoost—learning rate, tree depth, number of estimators and regularisation—are optimised separately for every scenario
 using a fixed train–validation split created once with a deterministic seed.
 
-Accuracy and macro-averaged F\textsubscript{1} scores for most important runs are presented in Chapter~V.
+Accuracy and F\textsubscript{1} scores for most important runs are presented in Chapter~V.
 
 \section{Summary}
 The methodology outlined in this chapter links OCR text extraction, manual annotation, targeted preprocessing and
@@ -728,7 +701,7 @@ the processing pipeline:
   \item \textbf{Embedding module} – converts normalised text into numerical vectors using either Polish BERT or the
         fine-tuned Sentence-BERT model.
   \item \textbf{Classification module} – assigns each line item to a predefined expense class with XGBoost.
-  \item \textbf{Evaluation module} – reports accuracy and macro-averaged F\textsubscript{1} scores.
+  \item \textbf{Evaluation module} – reports accuracy and F\textsubscript{1} scores.
 \end{itemize}
 
 This structure allows any component to be developed, replaced or extended without affecting the others, making it
@@ -738,14 +711,9 @@ Figure~\ref{fig:pipeline_flowchart_vertical} in the “Research Design” sectio
 \section{Component Implementation}
 
 \subsection{DataLoader and Input Handling}
-The \textit{DataLoader} module ingests CSV files that contain receipt text, annotated product categories and
-associated costs. It processes two data sources in a unified way: (i) the original OCR-extracted receipts and (ii)
-synthetic lines generated with GPT.
-
-To reduce class imbalance in the training data, the module applies random undersampling by drawing examples from each
-category until all classes reach the same frequency. The balanced subset is then passed to later stages, helping the
-classifier avoid bias towards majority categories.
-
+The DataLoader module reads CSV files containing extracted receipt text, annotated product categories and costs. 
+It unifies two data sources—original OCR output and GPT-generated synthetic lines—and provides a label encoder, train/test splitting,
+and methods to retrieve fully processed, training-ready datasets.
 
 \subsection{Pre-processing Module}
 The pre-processing module cleans and standardises the raw text produced by OCR. Regular expressions remove punctuation,
@@ -756,17 +724,16 @@ classification stages.
 
 
 \subsection{Embedding Interface}
-The \textit{Embedding} module offers a uniform method for converting pre-processed text into numerical
+The Embedding module offers a uniform method for converting pre-processed text into numerical
 vectors. Two transformer-based strategies are supported:
 
 \begin{itemize}
-  \item \textbf{Polish BERT} (\texttt{dkleczek/bert-base-polish-uncased-v1})\,: generates token-level contextual embeddings
+  \item \textbf{Polish BERT} (\texttt{dkleczek/bert-base-polish-uncased-v1})\, generates token-level contextual embeddings
         that reflect general Polish semantics and syntax.
   \item \textbf{Sentence-BERT} (\texttt{all-MiniLM-L6-v2})\,: produces sentence-level embeddings and is fine-tuned on
         receipt data to capture domain-specific nuances.
 \end{itemize}
-
-The interface handles model initialisation, tokenizer setup, batch processing and the extraction or aggregation of
+\noindent The interface handles model initialisation, tokenizer setup, batch processing and the extraction or aggregation of
 embedding vectors. This standardised workflow ensures compatibility with downstream tasks such as classification.
 
 
@@ -780,7 +747,7 @@ The training pipeline applies XGBoost for supervised categorisation of receipt l
         exactly reproduced in every run.
 \end{itemize}
 
-The evaluation stage reports accuracy and the macro-averaged F\textsubscript{1} score, providing a consistent basis for
+The evaluation stage reports accuracy and the F\textsubscript{1} score, providing a consistent basis for
 comparing different embedding methods and experiment configurations.
 
 
@@ -1115,7 +1082,7 @@ impractical for real-time receipt processing.
   \centering
   \caption{Performance comparison of evaluated model pipelines}
   \label{tab:results_comparison}
-  \begin{tabularx}{\textwidth}{lcccX}
+  \begin{tabularx}{\textwidth}{p{4cm}cccX}
     \toprule
     \textbf{Pipeline} & \textbf{Accuracy} & \textbf{F1\textsubscript{micro}} & \textbf{F1\textsubscript{macro}} & \textbf{Main findings} \\
     \midrule
@@ -1150,13 +1117,12 @@ Differences between augmentation strategies suggest distinct effects:
 \subsection{Comparison of micro and macro metrics}
 The optimal configuration achieves the highest micro-averaged F\textsubscript{1}, reflecting accurate predictions in line
 with user-visible performance. The mixed-data fine-tuning setup leads in macro-averaged F\textsubscript{1}, indicating
-more balanced classification across all categories.
+more balanced classification across all categories but may lead to worse generalization.
 
-\subsection{Practical implications}
-Compact, domain-fine-tuned models such as MiniLM deliver high accuracy and markedly faster inference than large,
-general-purpose models. Choice of model depends on requirements: select the configuration with the highest overall
-accuracy when that is the priority, or choose the mixed-data setup when balanced performance across classes is essential.
-
+\subsection{Practical Implications}
+Domain-adapted, lightweight models like MiniLM offer high accuracy and much faster inference than large, general-purpose
+transformers. If deployment speed and efficiency are priorities, a fine-tuned MiniLM configuration is recommended. In cases
+of limited real data, augmenting the training set with GPT-generated examples can help to boost overall performance and provide better classification on under-represented categories.
 
 \section{Recommendations for Future Work}
 Further research should focus on a deeper analysis of the embedding space, exploring how receipt semantics are
@@ -1213,7 +1179,7 @@ in existing personal-finance management tools. The study also offers insights in
 demonstrating the advantages of domain-specific fine-tuning over larger pretrained models.
 
 Furthermore, the research examines the use of GPT-generated synthetic data, showing its effectiveness in tackling
-class imbalance in receipt classification tasks. By benchmarking various embedding and classification methods, the
+class imbalance and data scarcity in receipt classification tasks. By benchmarking various embedding and classification methods, the
 thesis provides a comparative analysis and establishes performance benchmarks for future work. Finally, by
 evaluating computational efficiency and inference speed, the study delivers recommendations for practical,
 real-world implementations of NLP-based categorisation systems.
