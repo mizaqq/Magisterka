@@ -145,6 +145,22 @@
 
 \renewcommand{\normalsize}{\fontsize{12}{13}\selectfont}
 
+\def\refname{References} % <----------
+\def\thebibliography#1{\section*{\refname\@mkboth
+ {\uppercase{\refname}}{\uppercase{\refname}}}\list
+ {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep
+ \usecounter{enumi}
+ \itemsep=.1cm
+ \footnotesize
+ \frenchspacing
+ }
+ \def\newblock{\hskip .11em plus .33em minus .07em}
+ \sloppy\clubpenalty4000\widowpenalty4000
+ \sfcode`\.=1000\relax}
+\let\endthebibliography=\endlist
+
+
 \newcommand{\Overnormal}[1]{\@setfontsize\Overnormal{14pt}{16}{#1}}	%font definition 14pt
 \newcommand{\VeryLarge}[1]{\@setfontsize\VeryLarge{16pt}{18}{#1}}	%font definition 16pt
 \newcommand{\TitleFont}[1]{\@setfontsize\TitleFont{18pt}{22}{#1}}	%font definition 18pt

@@ -1,19 +1,15 @@
 \documentclass{SGGW-thesis-EN}
+
 \usepackage[utf8]{inputenc}
+\usepackage{graphicx}
 \usepackage{tabularx}
-\usepackage{tikz}
+\usepackage{booktabs}
 \usepackage{listings}
 \usepackage{xcolor}
-\usepackage{booktabs}
-\usepackage[
-  backend=biber,
-  style=numeric,     
-  sorting=none,       
-  giveninits=true,     
-  maxbibnames=3,       
-  doi=false,   
-  isbn=false,          
-]{biblatex}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{bookmark}
 
 
 \lstdefinelanguage{yaml}{
@@ -27,14 +23,13 @@
   morestring=[b]'
 }
 \usetikzlibrary{positioning, arrows.meta, shapes.geometric}
-\addbibresource{references.bib}
 
 \MASTERtrue
 \WZIMtrue
 
-\title{Development of an End-to-End OCR and NLP Pipeline for Automated Extraction and Classification of Product Data in Retail Receipts}
+\title{Development of an End-to-End\\ OCR and NLP Pipeline\\ for Automated Extraction and Classification\\ of Product Data in Retail Receipts}
 
-\Ptitle{Opracowanie systemu OCR i NLP do automatycznego wydobywania i klasyfikacji informacji o produktach z paragonów}
+\Ptitle{Opracowanie systemu OCR i NLP do automatycznego wydobywania i~klasyfikacji informacji o produktach z paragonów}
 \author{Michał Zaręba}
 \date{2025}
 \album{196218}
@@ -43,27 +38,26 @@
 \promotor{dr hab.\ inż.\ Leszek Chmielewski, prof.\ SGGW}
 \pworkplace{Institute of Information Technology\\Department of Artificial Intelligence}
 
-\usepackage{hyperref}
 
 \begin{document}
 \maketitle
 \statementpage
 \abstractpage
-{Pełny system ekstrakcji i klasyfikacji informacji o produktach z paragonów w języku polskim}
-{Praca prezentuje end-to-end system do ekstrakcji i kategoryzacji informacji o produktach z paragonów w języku polskim. 
-Modularny workflow obejmujcy OCR, wstępne przetwarzanie tekstu, generowanie embeddingów i klasyfikacja umożliwia niezależną ocenę każdego komponentu. 
+{Pełny system ekstrakcji i klasyfikacji informacji o produktach~z paragonów w języku polskim}
+{Praca prezentuje kompleksowy system do ekstrakcji i kategoryzacji informacji o produktach z paragonów w języku polskim. 
+Modularny przepływ sterowania obejmujcy OCR, wstępne przetwarzanie tekstu, generowanie osadzeń i klasyfikacje umożliwia niezależną ocenę każdego komponentu. 
 Dane bazowe obejmują 26 zeskanowanych paragonów (292 produkty), ręcznie oznaczone w sześciu kategoriach produktowych. 
-W celu osiągnięcia lepszych wyników do zbioru treningowego dodano 163 syntetycznych wpisów wygenerowanych przez GPT-4.
-Porównano dwa podejścia do embeddingów: wstępnie wytrenowany Polish BERT (\texttt{dkleczek/bert-base-polish-uncased-v1}) użyty bez dalszego fine-tuningu 
-oraz mniejszy \texttt{all-MiniLM-L6-v2} (Sentence-BERT) dostrojony na danych z paragonów, z lub bez przykładów GPT.
-Klasyfikator XGBoost był osobno strojon y pod każdy rodzaj embeddings, wykorzystując stały podziałów na zbiórów. 
-Ewaluację przeprowadzono za pomocą dokładności oraz mikroważonego i makroważonego F\textsubscript{1}.
+W celu osiągnięcia lepszych wyników do zbioru treningowego dodano 163 syntetycznye wpisy wygenerowane przez GPT-4.
+Porównano dwa podejścia do osadzeń: wstępnie wytrenowany model Polish BERT (\texttt{dkleczek/bert-base-polish-uncased-v1}) użyty bez dalszego dotrenowywania
+oraz mniejszy \texttt{all-MiniLM-L6-v2} (Sentence-BERT) dostrojony na danych z paragonów, z~lub bez przykładów GPT.
+Klasyfikator XGBoost był osobno strojony pod każdy rodzaj osadzeń, wykorzystując stały podziałów na zbiórów. 
+Ewaluację przeprowadzono za pomocą dokładności oraz mikroważonej i makroważonej miary F1.
 Najlepsze rezultaty osiągnięto, gdy MiniLM dostrojono wyłącznie na prawdziwych wierszach paragonów, 
-a XGBoost trenowano na mieszance oryginalnych i danych wygenerowanych po zbalansowaniu klas. Ta konfiguracja uzyskała mikroważone F\textsubscript{1}=0,81 i dokładność 79,6 \%. 
-Fine-tuning na mieszanych danych podwyższył makroważone F\textsubscript{1} do 0,77, kosztem nieznacznego spadku accuracy.
-Model Polish BERT bez fine-tuningu uzyskał gorsze wyniki (mikro-F\textsubscript{1}=0,71) i charakteryzował się wolniejszą inferencją, 
-co podkreśla zalety dostosowania do domeny i wykorzystania lżejszych architektur.}
-{OCR, NLP, BERT, Sentence-BERT, XGBoost, Generowanie danych, Nierówność Klas}
+a XGBoost trenowano na mieszance oryginalnych i danych wygenerowanych po zbalansowaniu klas. Ta konfiguracja uzyskała mikroważone F1=0,81 i dokładność 79,6 \%. 
+Dotrenowywanie na mieszanych danych podwyższyło makroważone F1 do 0,77, kosztem nieznacznego spadku dokładności.
+Model Polish BERT bez dotrenowywania uzyskał gorsze wyniki (mikro-F1=0,71) i charakteryzował się wolniejszą inferencją, 
+co podkreśla zalety dostosowania do dziedziny i wykorzystania lżejszych architektur.}
+{OCR, NLP, BERT, Sentence-BERT, XGBoost, Powiększanie danych, Nierówność Klas}
 {End-to-End Extraction and Classification of Product Information from Polish Retail Receipts}
 {This thesis presents an end-to-end system for extracting and categorizing product information from Polish-language receipts. 
 The modular pipeline containing OCR, text preprocessing, embedding generation and classification, allows each component to be developed and evaluated independently. 
@@ -72,10 +66,10 @@ To address class imbalance, 163 synthetic entries generated by GPT-4 were added 
 Two embedding strategies were compared: a pretrained Polish BERT model (\texttt{dkleczek/bert-base-polish-uncased-v1}) used without fine-tuning, 
 and a smaller \texttt{all-MiniLM-L6-v2} Sentence-BERT model fine-tuned on receipt data (with or without GPT examples). 
 An XGBoost classifier was tuned separately for each embedding source using a fixed splits. 
-Performance was measured by accuracy and micro- and macro-averaged F\textsubscript{1} scores.
+Performance was measured by accuracy and micro- and macro-averaged F1 scores.
 The fine-tuned MiniLM encoder, trained on real receipts, combined with XGBoost on mixed real and GPT data after class balancing achieved the highest 
-micro-F\textsubscript{1} (0.81) and 79.6\,\% accuracy. Mixed-data fine-tuning improved macro-F\textsubscript{1} (0.77) but slightly lowered overall accuracy. 
-The out-of-the-box Polish BERT underperformed (micro-F\textsubscript{1} 0.71) and showed slower inference, 
+micro-F1 (0.81) and 79.6\,\% accuracy. Mixed-data fine-tuning improved macro-F1 (0.77) but slightly lowered overall accuracy. 
+The out-of-the-box Polish BERT underperformed (micro-F1 0.71) and showed slower inference, 
 demonstrating the advantage of domain-specific adaptation and compact architectures.}
 {OCR, NLP, BERT, Sentence-BERT, XGBoost, Data Augmentation, Class Imbalance}
 
@@ -121,7 +115,7 @@ from receipts while accommodating the linguistic complexity of Polish.
 
 \section{Objectives of the Study}
 
-This study has \textbf{three concrete objectives}, each derived from the challenges set out in the problem statement:
+This study has \textbf{three concrete objectives}, each derived from the challenges set out in the problem statement.
 
 \begin{enumerate}
   \item Extract products text from Polish-language receipts using Tesseract OCR combined with
@@ -186,7 +180,7 @@ Tesseract is a widely adopted, open-source engine maintained by Google.
 It supports more than 100 languages, including Polish, and can be fine-tuned on
 domain-specific data for higher accuracy.
 Since version 4.0 it has featured an LSTM-based recogniser, improving robustness on
-noisy or multilingual inputs~\cite{smith2007overview,smith2013history}.
+noisy or multilingual inputs~\cite{smith2007overview}.
 Tesseract exposes numerous configuration options—segmentation modes, character
 whitelists and custom language packs—allowing practitioners to tailor the engine to
 narrow formats such as Polish retail receipts.
@@ -262,7 +256,7 @@ Word2Vec is trained under one of two architectures:
   \item \textbf{Skip-Gram} – predicts surrounding context words from a single target word.
 \end{enumerate}
 Skip-Gram generally models rare words more faithfully, whereas CBOW offers greater computational
-efficiency and shorter training times \cite{mikolov2013distributed}.
+efficiency and shorter training times~\cite{mikolov2013distributed}.
 
 \textbf{BERT (Bidirectional Encoder Representations from Transformers)} is a deep-learning model introduced by Google that generates 
 \emph{contextualised} word embeddings by processing text simultaneously in both directions (left-to-right and right-to-left).
@@ -271,15 +265,15 @@ Unlike earlier models that produce static embeddings, BERT represents each word 
 
 The underlying transformer architecture employs self-attention to weight the contribution of each token relative to all others, allowing 
 the model to \emph{derive} complex semantic relationships.
-BERT is pre-trained in a two-part, self-supervised scheme:
+BERT is pre-trained in a two-part, self-supervised scheme which is shown in the left side of Figure~\ref{fig:bert_procedures} and described below:
 \begin{enumerate}
   \item \textbf{Masked Language Modelling (MLM)} – randomly masks a subset of input tokens and trains the network to predict the 
         masked words from their context.
   \item \textbf{Next-Sentence Prediction (NSP)} – learns to decide whether a given sentence \emph{immediately follows} another, 
         thereby improving the model’s grasp of sentence coherence.
 \end{enumerate}
-
-\begin{figure}[h]
+The right side of Figure~\ref{fig:bert_procedures} illustrates how the pre-trained Transformer can then be fine-tuned for specific tasks by adding lightweight heads—e.g. a CLS‐classification layer for sentence‐pair tasks or a span‐prediction layer for extractive QA.
+\begin{figure}
   \centering
   \includegraphics[height=5cm]{images/bert_procedures.png}
   \caption{Pre-training objectives of BERT: MLM and NSP~\cite{devlin2019bertpretrainingdeepbidirectional}.}
@@ -344,58 +338,54 @@ minimise the residual loss~\cite{natekin2013gradient}.
         further mitigating over-fitting and speeding up training.
 \end{enumerate}
 The final model is the sum of many shallow decision trees; each tree corrects the errors of the
-ensemble built so far, and their aggregated outputs yield the prediction.
+ensemble built so far, and their aggregated outputs yield the prediction. This aggregation mechanism
+can be mathematically described as:
 
-Mathematically, the ensemble prediction for an instance \(x_i\) is
+\begin{equation}
+  \hat{y}_i = \sum_{k=1}^{K} f_k(x_i).
+  \label{eq:ensemble_prediction}
+\end{equation}
 
-\begin{figure}[h!]
+The visual representation of this ensemble prediction for an instance \(x_i\) is shown in
+Figure~\ref{fig:tree_ensemble_model}.
+
+\begin{figure}
   \centering
-  \begin{minipage}[c]{0.40\textwidth}
-    \[
-      \hat{y}_i = \sum_{k=1}^{K} f_k(x_i) .
-    \]
-  \end{minipage}\hfill
-  \begin{minipage}[c]{0.55\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{images/tree_ensemble_model.png}
-    \caption{Tree-ensemble model~\cite{Chen_2016}.}\label{fig:tree_ensemble_model}
-  \end{minipage}
+  \includegraphics[width=0.7\linewidth]{images/tree_ensemble_model.png}
+  \caption{Tree-ensemble model architecture~\cite{Chen_2016}.}
+  \label{fig:tree_ensemble_model}
 \end{figure}
-\noindent During training, XGBoost optimises a second-order Taylor expansion of the loss, which
-determines the optimal structure and weights of the next tree.
-The per-iteration objective simplifies to
 
-\begin{figure}[h!]
+During training, XGBoost optimises a second-order Taylor expansion of the loss, which determines
+the optimal structure and weights of each successive tree (see Figure~\ref{fig:structure_score_calculation}). 
+The per-iteration objective simplifies to the Equation~\ref{eq:structure_score}
+
+\begin{equation}
+  \tilde{\mathcal{L}}^{(t)}(q) =
+  -\frac{1}{2}\sum_{j=1}^{T}
+  \frac{\bigl(\sum_{i \in I_j} g_i\bigr)^2}
+       {\sum_{i \in I_j} h_i + \lambda}
+  \;+\; \gamma T,
+  \label{eq:structure_score}
+\end{equation}
+\noindent where, \(g_i\) and \(h_i\) denote the first- and second-order gradient statistics of the loss
+with respect to the current prediction, while \(\gamma\) and \(\lambda\) are regularization
+hyperparameters that penalise overly complex trees to curb over-fitting.
+The whole list of
+XGBoost hyperparameters is shown in Table~\ref{tab:xgboost_hyperparameters}.
+\begin{figure}
   \centering
-  \begin{minipage}[c]{0.45\textwidth}
-    \[
-      \tilde{\mathcal{L}}^{(t)}(q) =
-      -\frac{1}{2}\sum_{j=1}^{T}
-      \frac{\bigl(\sum_{i \in I_j} g_i\bigr)^2}
-           {\sum_{i \in I_j} h_i + \lambda}
-      \;+\; \gamma T
-    \] 
-  \end{minipage}\hfill
-  \begin{minipage}[c]{0.55\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{images/structure_score_calculation.png}
-    \caption{Structure-score calculation~\cite{Chen_2016}.}
-    \label{fig:structure_score_calculation}
-  \end{minipage}
+  \includegraphics[width=0.7\linewidth]{images/structure_score_calculation.png}
+  \caption{Graphical illustration of the structure-score calculation for a candidate split~\cite{Chen_2016}.}
+  \label{fig:structure_score_calculation}
 \end{figure}
-\noindent where, \(g_i\) and \(h_i\) denote the first and second-order gradient statistics of the loss with
-respect to the current prediction, while \(\gamma\) and \(\lambda\) are hyperparameters that penalise
-complex trees and thus curb over-fitting.
-In XGBoost these hyperparameters~\ref{tab:xgboost_hyperparameters} govern the trade-off between model complexity and
-generalisation. Tuning these settings balances close fit to the training data against the need for a simpler,
-more generalisable model.
 
-\begin{table}[h]
+\begin{table}
   \centering
   \caption{Principal XGBoost hyperparameters and their effects}\label{tab:xgboost_hyperparameters}
   \begin{tabularx}{\textwidth}{@{}lX@{}}
     \toprule
-    \textbf{Hyper-parameter} & \textbf{Role and effect} \\ 
+    \textbf{Hyperparameter} & \textbf{Role and effect} \\ 
     \midrule
     \texttt{learning\_rate}    & Scales each tree’s contribution; lower values curb over-fitting but require more trees. \\ 
     \texttt{max\_depth}        & Upper bound on tree depth; deeper trees capture complex patterns yet risk over-fitting. \\ 
@@ -462,7 +452,7 @@ scalable and adaptable to future enhancements.
 The primary objective of this study is to develop and rigorously evaluate an end-to-end system for extracting and
 categorising product information from retail receipts.  To achieve this, I adopt a modular research design: each
 component—OCR, embedding generation, and classification—may be created and tested independently, yet still plugs into a
-single workflow.  This layout enables targeted assessment of individual modules and direct comparison between different
+single workflow (see Figure~\ref{fig:pipeline_flowchart_vertical}).  This layout enables targeted assessment of individual modules and direct comparison between different
 models and techniques.  Performance is examined in two experimental settings: an six-class categorisation task trained
 on the original data, and the same task trained on data augmented with GPT-4-generated lines.
 These settings probe robustness under varying levels of complexity and data composition while keeping all other inputs
@@ -470,21 +460,21 @@ fixed.
 
 The dataset is deliberately small: 26 scanned receipts yield 292 entries.  I first reserve 30 \% (88 entries)
 as a held-out test set.  From the remaining 70 \% (204 entries) I allocate 90 \% (184 entries) to training and 10 \%
-(20 entries) to validation during fine-tuning.
+(20 entries) to validation during finetuning.
 Polish text introduces extra challenges.  Diacritical marks such as “ł”, “ó”, “ą”, and “ę” are common and, if
 misrecognised by OCR, can hamper tokenisation and distort embeddings.  Receipts also contain many abbreviations or
 truncated names—for example “kg”, “ZIEL.”, or “KAJZ.”.  I therefore apply targeted preprocessing: regular expressions
 restore diacritics, expand frequent abbreviations, and remove superfluous whitespace, while robust embedding methods
 help reduce noise from OCR errors and lexical fragmentation.
 
-Model performance is evaluated with the micro-averaged F\textsubscript{1} score, which balances precision and recall
+Model performance is evaluated with the micro-averaged F1 score, which balances precision and recall
 over all classes.  As a baseline for tokenisation and embedding, I use the Polish BERT model
 \texttt{dkleczko/bert-base-polish-uncased-v1}~\cite{kleczek2020polbert},
 whose sub-word vocabulary is well suited to Polish diacritics and inflection.  The OCR stage remains PaddleOCR in every
 experiment. Comparing this BERT baseline with stronger embedding models and an XGBoost classifier quantifies the gains delivered by more advanced
 representations.
 
-\begin{figure}[h]
+\begin{figure}
   \centering
   \begin{tikzpicture}[
       box/.style={
@@ -564,7 +554,7 @@ Maintaining comparable distributions across all subsets ensures that the classif
 ratios, and that performance comparisons reflect genuine model capability rather than artefacts stemming from skewed or
 overly uniform training inputs.
 
-\begin{figure}[h]
+\begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{images/class_distribution.png}
   \caption{Original, GPT-augmented, and balanced class distributions.}
@@ -602,7 +592,7 @@ is applied, and the same train–validation split (defined with a fixed random s
 
 \textbf{Taxonomy and metrics.} Classification follows an six-class scheme. Training, validation and test splits remain
 identical across embedding types, ensuring fair comparison. Performance is reported with the
-F\textsubscript{1} score, which gives equal weight to every class and therefore counteracts the natural imbalance found
+F1 score, which gives equal weight to every class and therefore counteracts the natural imbalance found
 in real receipts.
 
 This setup isolates the impact of embedding choice and tailored hyper-parameter tuning while keeping all other factors
@@ -632,7 +622,7 @@ Combining the three embeddings with these dataset options yields twelve distinct
 XGBoost—learning rate, tree depth, number of estimators and regularisation—are optimised separately for every scenario
 using a fixed train–validation split created once with a deterministic seed.
 
-Accuracy and F\textsubscript{1} scores for most important runs are presented in Chapter~V.
+Accuracy and F1 scores for most important runs are presented in Chapter~V.
 
 \section{Summary}
 The methodology outlined in this chapter links OCR text extraction, manual annotation, targeted preprocessing and
@@ -701,7 +691,7 @@ the processing pipeline:
   \item \textbf{Embedding module} – converts normalised text into numerical vectors using either Polish BERT or the
         fine-tuned Sentence-BERT model.
   \item \textbf{Classification module} – assigns each line item to a predefined expense class with XGBoost.
-  \item \textbf{Evaluation module} – reports accuracy and F\textsubscript{1} scores.
+  \item \textbf{Evaluation module} – reports accuracy and F1 scores.
 \end{itemize}
 
 This structure allows any component to be developed, replaced or extended without affecting the others, making it
@@ -747,7 +737,7 @@ The training pipeline applies XGBoost for supervised categorisation of receipt l
         exactly reproduced in every run.
 \end{itemize}
 
-The evaluation stage reports accuracy and the F\textsubscript{1} score, providing a consistent basis for
+The evaluation stage reports accuracy and the F1 score, providing a consistent basis for
 comparing different embedding methods and experiment configurations.
 
 
@@ -902,7 +892,7 @@ supports well-structured comparisons across experimental setups.
 \chapter{Evaluation and Results}
 \section{Experimental Setup}
 Model performance was optimised with Optuna using \textbf{1 000 trials}. The TPE sampler (seed = 42) explored a wide
-hyper-parameter space, aiming to maximise the micro-averaged F\textsubscript{1} score on the held-out validation split.
+hyper-parameter space, aiming to maximise the micro-averaged F1 score on the held-out validation split.
 The search covered key XGBoost settings and categorical flags that switch embedding models and data options:
 
 \begin{itemize}
@@ -928,16 +918,16 @@ performance over untuned baselines.
 
 \section{Evaluation Metrics}
 Model performance is reported with four standard measures: accuracy, precision, recall and the
-F\textsubscript{1}\, score. Accuracy shows the proportion of correct predictions across all classes, but it can be
+F1\, score. Accuracy shows the proportion of correct predictions across all classes, but it can be
 misleading when data are imbalanced. Precision measures the fraction of positive predictions that are correct, whereas
 recall captures the fraction of actual positives retrieved by the model.
 
-The principal metric in this study is the \emph{micro-averaged} F\textsubscript{1} score. It pools true positives,
+The principal metric in this study is the \emph{micro-averaged} F1 score. It pools true positives,
 false positives and false negatives over all classes and is therefore well suited to imbalanced data, providing a
 single figure that reflects overall effectiveness.
 
-Alongside this, the \emph{macro-averaged} F\textsubscript{1} score is also reported. It computes an
-F\textsubscript{1} value for each class and then averages them, giving equal weight to both frequent and rare
+Alongside this, the \emph{macro-averaged} F1 score is also reported. It computes an
+F1 value for each class and then averages them, giving equal weight to both frequent and rare
 categories. Reporting both micro and macro scores offers a balanced view: the former summarises global performance,
 while the latter reveals how well the classifier handles minority classes.
 
@@ -947,8 +937,8 @@ while the latter reveals how well the classifier handles minority classes.
 The strongest results were obtained with the \texttt{all-MiniLM-L6-v2} Sentence-BERT encoder, fine-tuned solely on real
 receipt lines.
 Classification was carried out by XGBoost trained on a mix of real and GPT-augmented data, the latter resampled to
-equalise class counts. This setting reached 79.55 \% accuracy, a micro-averaged F\textsubscript{1} of 0.8053 and a
-macro F\textsubscript{1} of 0.70, indicating robust performance across both frequent and rare classes.
+equalise class counts. This setting reached 79.55 \% accuracy, a micro-averaged F1 of 0.8053 and a
+macro F1 of 0.70, indicating robust performance across both frequent and rare classes.
 
 \subsubsection*{Model configuration}
 \begin{itemize}
@@ -962,7 +952,7 @@ macro F\textsubscript{1} of 0.70, indicating robust performance across both freq
 Table~\ref{tab:best_model_summary} summarises the aggregate metrics. The combination of domain-specific fine-tuning and
 GPT-balanced training data delivers the most even performance among all configurations.
 
-\begin{table}[h]
+\begin{table}
   \centering
   \caption{Overall performance—\texttt{all-MiniLM-L6-v2} fine-tuned on real data, XGBoost trained on real\,+\,GPT-balanced data}
   \label{tab:best_model_summary}
@@ -981,10 +971,10 @@ GPT-balanced training data delivers the most even performance among all configur
 
 \subsubsection*{Class-level performance}
 Table~\ref{tab:best_model_report} lists per-class metrics.
-High F\textsubscript{1} scores for \emph{Food} (0.88), \emph{Discount} (0.91) and \emph{Beverage} (0.83) reflect either
+High F1 scores for \emph{Food} (0.88), \emph{Discount} (0.91) and \emph{Beverage} (0.83) reflect either
 ample support or distinctive lexical patterns, whereas \emph{Housing} and \emph{Healthcare} remain challenging.
 
-\begin{table}[h]
+\begin{table}
   \centering
   \caption{Detailed classification report—best model}
   \label{tab:best_model_report}
@@ -1013,12 +1003,12 @@ for class imbalance, together setting a solid benchmark for future work on recei
 
 \subsection{Sentence-BERT Fine-tuned on Mixed Data}
 The \texttt{all-MiniLM-L6-v2} encoder was fine-tuned on a mixture of real and GPT-augmented receipt lines, whereas the
-XGBoost classifier used embeddings from this encoder but was trained solely on real data. This set-up reached
-78.41 \% accuracy, a weighted F\textsubscript{1} of 0.80 and a macro F\textsubscript{1} of 0.77. The overall
-(micro-averaged) F\textsubscript{1} score was 0.7967, slightly below the best model, yet the higher macro figure
+XGBoost classifier used embeddings from this encoder but was trained solely on real data. As shown in Table~\ref{finetuned_st_real_clf_report} tabhis set-up reached
+78.41 \% accuracy, a weighted F1 of 0.80 and a macro F1 of 0.77. The overall
+(micro-averaged) F1 score was 0.7967, slightly below the best model, yet the higher macro figure
 indicates more even class-wise performance—mainly an improvement for the \emph{Healthcare} category.
 
-\begin{table}[h]
+\begin{table}
   \centering
   \caption{Classification report—MiniLM fine-tuned on mixed data, XGBoost trained on real data}
   \label{tab:finetuned_st_real_clf_report}
@@ -1049,11 +1039,11 @@ could explore regularisation or domain-adversarial training to reduce sensitivit
 This experiment evaluates the pretrained Polish BERT model without any task-specific fine-tuning. Despite its larger size, it delivers lower performance across key metrics and exhibits slower inference, making it
 less practical here.
 
-The model achieved an accuracy of 72.73\,\% and a weighted F\textsubscript{1} score of 0.7073. However, the
-macro-averaged F\textsubscript{1} dropped to 0.51, substantially below other configurations. This decline indicates poor
+The model achieved an accuracy of 72.73\,\% and a weighted F1 score of 0.7073. However, the
+macro-averaged F1 dropped to 0.51, substantially below other configurations. This decline indicates poor
 generalisation across classes, especially those with limited support or greater semantic variability.
-For instance, the \emph{Food} class still shows strong recall (0.89) and F\textsubscript{1} (0.83), but other categories
-perform poorly. The \emph{Beverage} class attains only 0.18 F\textsubscript{1}, and \emph{Housing} receives no correct
+For instance, the \emph{Food} class still shows strong recall (0.89) and F1 (0.83), but other categories
+perform poorly. The \emph{Beverage} class attains only 0.18 F1, and \emph{Housing} receives no correct
 predictions. Such disparities confirm that the model favours majority classes and struggles with underrepresented labels.
 
 Moreover, BERT’s large architecture increases inference time without improving accuracy. In contrast, the smaller
@@ -1066,19 +1056,19 @@ A detailed classification report for this BERT configuration is provided in Appe
 \section{Interpretation of Results}
 Table~\ref{tab:results_comparison} compares the three model configurations evaluated in this study. The strongest
 pipeline uses \texttt{all-MiniLM-L6-v2}, fine-tuned on real receipt lines, and an XGBoost classifier trained on a
-combination of real and GPT-augmented samples. This configuration achieves a micro-averaged F\textsubscript{1} of 0.81
+combination of real and GPT-augmented samples. This configuration achieves a micro-averaged F1 of 0.81
 and 80\,\% accuracy. GPT augmentation appears to improve recall for under-represented classes.
 
 Fine-tuning MiniLM on mixed real and GPT data, with XGBoost trained on real lines only, yields a slightly lower
-micro-averaged F\textsubscript{1} of 0.80 but a higher macro-averaged F\textsubscript{1} of 0.77. The improved macro
+micro-averaged F1 of 0.80 but a higher macro-averaged F1 of 0.77. The improved macro
 score indicates more balanced performance across all categories, especially a marked gain for \emph{Healthcare}.
 
 The pretrained Polish BERT (\texttt{dkleczek/bert-base-polish-uncased-v1}) used out of the box with XGBoost on real
-data produces 0.71 micro-averaged F\textsubscript{1} and a macro-averaged F\textsubscript{1} of 0.51, reflecting poor
+data produces 0.71 micro-averaged F1 and a macro-averaged F1 of 0.51, reflecting poor
 generalisation to less frequent classes. In addition, inference time is substantially higher, making this option
 impractical for real-time receipt processing.
 
-\begin{table}[h]
+\begin{table}
   \centering
   \caption{Performance comparison of evaluated model pipelines}
   \label{tab:results_comparison}
@@ -1115,8 +1105,8 @@ Differences between augmentation strategies suggest distinct effects:
 
 
 \subsection{Comparison of micro and macro metrics}
-The optimal configuration achieves the highest micro-averaged F\textsubscript{1}, reflecting accurate predictions in line
-with user-visible performance. The mixed-data fine-tuning setup leads in macro-averaged F\textsubscript{1}, indicating
+The optimal configuration achieves the highest micro-averaged F1, reflecting accurate predictions in line
+with user-visible performance. The mixed-data fine-tuning setup leads in macro-averaged F1, indicating
 more balanced classification across all categories but may lead to worse generalization.
 
 \subsection{Practical Implications}
@@ -1153,15 +1143,15 @@ synthetic data generation, and evaluating on multilingual data—would enhance m
 \section{Summary of Findings}
 This research highlights key insights into embedding methods and data augmentation for receipt classification.
 Fine-tuning the Sentence-Transformer model exclusively on real receipt data achieved
-the highest micro-averaged F\textsubscript{1} score of 0.81, underlining the value of domain-specific embedding
+the highest micro-averaged F1 score of 0.81, underlining the value of domain-specific embedding
 adaptation. Incorporating GPT-generated synthetic lines during classifier training improved generalisation and
 notably enhanced performance for minority classes. However, fine-tuning embeddings on a mix of GPT and real data
-slightly reduced overall accuracy while increasing class-wise balance (macro-averaged F\textsubscript{1} of 0.77).
+slightly reduced overall accuracy while increasing class-wise balance (macro-averaged F1 of 0.77).
 
 Despite its larger size, the pretrained Polish BERT model used
 without task-specific fine-tuning underperformed in all metrics. This finding emphasises the necessity of targeted,
 domain-specific adaptation rather than relying on raw model size. Class imbalance persisted: the dominant
-\emph{Food} category consistently achieved high F\textsubscript{1} scores (up to 0.88), whereas minority classes
+\emph{Food} category consistently achieved high F1 scores (up to 0.88), whereas minority classes
 such as \emph{Housing} and \emph{Healthcare} improved with GPT augmentation but remained difficult due to semantic
 variability and limited examples.
 
@@ -1184,14 +1174,17 @@ thesis provides a comparative analysis and establishes performance benchmarks fo
 evaluating computational efficiency and inference speed, the study delivers recommendations for practical,
 real-world implementations of NLP-based categorisation systems.
 
+\newpage
+\bibliographystyle{smgv}
+\bibliography{references}
 
+\appendix
 \chapter{Appendices}
-
 \section{Example Receipt and Annotation}
 
 Figure~\ref{fig:sample_receipt} presents an example receipt image used as an input for the OCR and annotation process.
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth]{images/sample_receipt.jpg}
     \caption{Sample receipt image}
@@ -1253,7 +1246,7 @@ class OCR:
                 cost = preprocess_cost(word_info[1][0])
                 preprocessed.append((text, cost))
         return preprocessed
-\end{lstlisting}
+      \end{lstlisting}
 \label{code:ocr_pipeline_example}
 \noindent This OCR pipeline leverages PaddleOCR to extract textual content from images, applying preprocessing steps to ensure high-quality inputs for further analysis.
 
@@ -1336,7 +1329,7 @@ reg_alpha: 0.0
 reg_lambda: 0.0
 \end{lstlisting}
 
-\begin{table}[h]
+\begin{table}
   \centering
   \caption{Full classification report – BERT model (out-of-the-box, no fine-tuning)}
   \label{appendix:bert-report-outofbox}
@@ -1358,8 +1351,6 @@ reg_lambda: 0.0
     \bottomrule
   \end{tabularx}
 \end{table}
-
-\printbibliography
 
 \beforelastpage
 
