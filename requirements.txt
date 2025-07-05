@@ -1,0 +1,5 @@
+# Core dependencies
+# No core dependencies needed for markdown generation
+
+# Optional dependencies for PDF generation
+# reportlab==4.0.4 

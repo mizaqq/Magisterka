@@ -1,0 +1,60 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+### **Cursor-Based Generation Rules for Thesis Answers**
+
+1. **Cursor Scope: One Answer Per Cursor Movement**
+
+   * Each cursor instance generates a complete answer to **one thesis-related question**.
+   * The answer must not exceed **10 sentences**.
+
+2. **Voice and Tone**
+
+   * Maintain a **professional and academic tone**.
+   * Use **clear, formal language** with minimal jargon.
+   * Explanations should be **accessible to an educated reader**, not just specialists.
+
+3. **Disciplinary Context**
+
+   * Treat the speaker as a **Big Data Analytics Master’s student**.
+   * Ground answers in **economics**, **mathematics**, **programming**, or **statistics** as relevant.
+   * Mention course-derived knowledge, methods, or tools where appropriate (e.g., regression, clustering, Python, SQL, optimization).
+
+4. **Structure of Answer**
+
+   * Start with a **brief introductory sentence** rephrasing the question.
+   * Follow with **2–4 core points** that explain reasoning, approaches, or insights.
+   * End with a **summary or concluding insight** if needed.
+
+5. **Clarity and Relevance**
+
+   * Focus only on **directly answering the question**; avoid unrelated tangents.
+   * Prefer **concrete examples** over abstract generalizations, especially for technical or applied topics.
+   * If referencing specific tools or models (e.g., linear regression, K-means), ensure they are introduced clearly.
+
+6. **Length Constraint**
+
+   * Use a hard limit of **10 sentences maximum**.
+   * Prioritize **clarity and completeness** over brevity, but do not exceed the limit.
+
+7. **Repeatable Format**
+
+   * Format should allow for easy repetition across a list of thesis questions.
+   * Each response should be **standalone**, requiring no context from previous answers.
+
+
+8. **End steps**
+    * Generate .json with format 
+        {
+          "question_number": 1,
+          "question_text": "Full question text from questions.md",
+          "answer_text": "Generated answer following general_rules.mdc format",
+          "status": "completed|draft|pending",
+          "word_count": 85,
+          "generated_at": "2024-01-15T10:30:00Z"
+        }
+    containing your answer
+    * Run script generate_markdown.py
+9. **Mark the question as done**
